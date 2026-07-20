@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+reports/latest-report.json
+reports/latest-report.md
+npm-debug.log*
+

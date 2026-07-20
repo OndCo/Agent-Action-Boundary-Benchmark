@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osuite.ai/schemas/action-boundary-case.schema.json",
+  "title": "Agent Action Boundary Benchmark Case",
+  "type": "object",
+  "required": ["id", "title", "runtime", "approved_action", "executed_action", "policy", "expected"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8
+    },
+    "runtime": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "approved_action": {
+      "$ref": "#/$defs/action"
+    },
+    "executed_action": {
+      "$ref": "#/$defs/action"
+    },
+    "policy": {
+      "type": "object",
+      "required": ["policy_id", "allowed_effects", "allowed_destinations"],
+      "properties": {
+        "policy_id": { "type": "string" },
+        "allowed_effects": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "allowed_destinations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "allowed_resource_prefixes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "approval_required": { "type": "boolean" },
+        "rollback_required": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "expected": {
+      "type": "object",
+      "required": ["drift", "control"],
+      "properties": {
+        "drift": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "none",
+              "parameter_drift",
+              "resource_drift",
+              "boundary_drift",
+              "effect_drift",
+              "identity_drift",
+              "policy_drift"
+            ]
+          }
+        },
+        "control": {
+          "enum": ["allow", "require_review", "block"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "action": {
+      "type": "object",
+      "required": ["runtime", "operation", "resource", "effect", "destination", "identity"],
+      "properties": {
+        "runtime": { "type": "string" },
+        "operation": { "type": "string" },
+        "resource": { "type": "string" },
+        "effect": {
+          "enum": ["read", "write", "publish", "delete", "transfer", "execute", "approve", "notify"]
+        },
+        "destination": { "type": "string" },
+        "identity": { "type": "string" },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "rollback": {
+          "type": "object",
+          "properties": {
+            "available": { "type": "boolean" },
+            "method": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

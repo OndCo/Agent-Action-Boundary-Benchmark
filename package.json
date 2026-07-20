@@ -1,0 +1,34 @@
+{
+  "name": "agent-action-boundary-benchmark",
+  "version": "0.1.0",
+  "description": "Open benchmark and reference demos for detecting approval-execution drift in AI agent actions.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "benchmark": "node scripts/run-benchmark.mjs",
+    "report": "node scripts/run-benchmark.mjs --write-report",
+    "test": "node scripts/run-benchmark.mjs --strict"
+  },
+  "keywords": [
+    "agentic-ai",
+    "ai-security",
+    "agent-governance",
+    "approval-execution-drift",
+    "runtime-security",
+    "owasp",
+    "blackhat-arsenal"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/OndCo/Agent-Action-Boundary-Benchmark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OndCo/Agent-Action-Boundary-Benchmark/issues"
+  },
+  "homepage": "https://github.com/OndCo/Agent-Action-Boundary-Benchmark#readme"
+}
+
