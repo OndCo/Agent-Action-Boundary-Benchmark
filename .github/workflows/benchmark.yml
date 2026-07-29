@@ -23,3 +23,8 @@ jobs:
       - name: Run benchmark
         run: npm test
 
+      - name: Generate runtime boundary corpus
+        run: npm run generate:runtime
+
+      - name: Run runtime boundary benchmark
+        run: npm run report:runtime

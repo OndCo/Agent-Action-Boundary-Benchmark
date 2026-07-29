@@ -16,6 +16,18 @@
     "runtime": {
       "type": "string"
     },
+    "family": {
+      "type": "string"
+    },
+    "severity": {
+      "enum": ["baseline", "low", "medium", "high", "critical"]
+    },
+    "locale": {
+      "type": "string"
+    },
+    "obfuscation": {
+      "type": "string"
+    },
     "description": {
       "type": "string"
     },
@@ -43,7 +55,13 @@
           "items": { "type": "string" }
         },
         "approval_required": { "type": "boolean" },
-        "rollback_required": { "type": "boolean" }
+        "dual_approval_required": { "type": "boolean" },
+        "rollback_required": { "type": "boolean" },
+        "risk_level": { "type": "number" },
+        "allowed_identities": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
       },
       "additionalProperties": true
     },
@@ -66,10 +84,14 @@
           }
         },
         "control": {
-          "enum": ["allow", "require_review", "block"]
+          "enum": ["allow", "require_review", "require_dual_approval", "block"]
         }
       },
       "additionalProperties": false
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": true
     }
   },
   "$defs": {

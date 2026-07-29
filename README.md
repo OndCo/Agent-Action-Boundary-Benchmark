@@ -1,6 +1,6 @@
 # Agent Action Boundary Benchmark
 
-Open benchmark and reference demos for detecting approval-execution drift in AI agent actions.
+Open benchmark and reference demos for agent runtime boundary evaluation.
 
 This repository is a public test range for a narrow but increasingly important problem:
 
@@ -27,6 +27,35 @@ The security question is different:
 - Can the proof be replayed later without trusting a transcript?
 
 This benchmark gives security teams, researchers, and tool builders a compact way to test those questions against agent actions.
+
+## Runtime Boundary Benchmark
+
+The repository now includes a larger synthetic stress corpus for evaluating whether an action-boundary runner can separate safe baselines, review-bound drift, dual-approval actions, and blocked runtime boundary violations.
+
+Current public corpus:
+
+| Metric | Value |
+| --- | ---: |
+| Total records | 6,000 |
+| Safe baseline records | 1,000 |
+| Risky records | 5,000 |
+| Runtime surfaces | 18 |
+| Scenario families | 38 |
+| Locales | 6 |
+| Obfuscation styles | 10 |
+| Critical-risk records | 2,160 |
+
+The generated report compares the reference boundary runner against deliberately simple baselines:
+
+| Model | Exact match | Risky protection | Safe baseline allow |
+| --- | ---: | ---: | ---: |
+| Reference boundary runner | 100.0% | 100.0% | 100.0% |
+| Runtime-label baseline | 16.7% | 0.0% | 100.0% |
+| Operation-only baseline | 87.4% | 84.9% | 100.0% |
+| Effect/destination baseline | 69.9% | 63.9% | 100.0% |
+| Resource/effect/destination baseline | 82.6% | 81.9% | 100.0% |
+
+The point of this table is not that a reference runner beats its own generated labels. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
 
 ## Repository Status
 
@@ -61,6 +90,25 @@ reports/latest-report.md
 reports/latest-report.json
 ```
 
+Generate and run the larger runtime-boundary corpus:
+
+```bash
+npm run generate:runtime
+npm run report:runtime
+```
+
+The runtime report is written to:
+
+```text
+benchmarks/runtime-boundary-corpus.jsonl
+benchmarks/runtime-boundary-corpus.metadata.json
+reports/runtime-boundary-benchmark.md
+reports/runtime-boundary-benchmark.json
+reports/runtime-boundary-benchmark.baselines.csv
+reports/runtime-boundary-benchmark.runtimes.csv
+reports/runtime-boundary-benchmark.families.csv
+```
+
 ## What The Benchmark Checks
 
 Each case contains:
@@ -86,7 +134,42 @@ Control outcomes:
 
 - `allow`: no material drift detected.
 - `require_review`: drift exists but appears bounded and reversible.
+- `require_dual_approval`: the action remains in scope but carries a critical approval boundary.
 - `block`: execution diverged from the approved boundary in a material way.
+
+## What The Larger Corpus Covers
+
+The runtime-boundary corpus includes representative families such as:
+
+- credential material access
+- raw secret exposure
+- cloud metadata token exfiltration
+- Key Vault secret reads
+- public persistent egress
+- external webhook export
+- public dataset upload
+- signed URL sharing
+- remote model-code execution
+- unsafe deserialization
+- package lifecycle script execution
+- CI/CD token pivoting
+- container escape attempts
+- Kubernetes namespace pivoting
+- IAM scope expansion
+- tenant boundary crossing
+- vector-store cross-boundary export
+- browser customer-message sending
+- email public forwarding
+- MCP silent sink export
+- workflow sink risk
+- prompt rule tampering
+- anti-forensics log deletion
+- governance bypass headers
+- database direct-answer access
+- payment ledger transfer
+- on-chain irreversible action
+- stale external verifier proof
+- multilingual hidden instruction
 
 ## Example
 
@@ -144,6 +227,8 @@ It tests one operational control problem:
 > Did the action that executed remain inside the boundary of the action that was approved?
 
 That boundary is small enough to test, useful enough to matter, and concrete enough to show in a live security demo.
+
+The 6,000-record corpus is synthetic and intentionally adversarial. It is designed to stress the action-boundary model, not to claim full coverage of every real-world agent failure mode.
 
 ## License
 

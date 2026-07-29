@@ -3,12 +3,12 @@
 Working title:
 
 ```text
-CAVA Action Boundary Benchmark: Detecting Approval-Execution Drift in AI Agent Actions
+OSuite Runtime Boundary Benchmark: Testing Action Boundaries for AI Agent Runtimes
 ```
 
 ## One-Sentence Abstract
 
-An open-source benchmark and runner that detects when an AI agent executes a different action than the one approved, recorded, or policy-checked.
+An open-source benchmark and runner for testing whether AI agent runtime actions stay inside the boundary that was approved, recorded, or policy-checked.
 
 ## Why Arsenal
 
@@ -39,7 +39,8 @@ Explain the difference between transcript replay and action-boundary replay.
 ```bash
 npm install
 npm test
-npm run report
+npm run generate:runtime
+npm run report:runtime
 ```
 
 Show the drift classes:
@@ -54,6 +55,7 @@ policy_drift
 ### 3. Show Fingerprints
 
 Open `reports/latest-report.md`.
+Open `reports/runtime-boundary-benchmark.md`.
 
 Highlight:
 
@@ -61,6 +63,8 @@ Highlight:
 - executed action fingerprint
 - whether fingerprints match
 - control outcome
+- baseline comparison
+- runtime and family coverage
 
 ### 4. Walk Through Three Runtimes
 
@@ -69,6 +73,8 @@ Recommended live cases:
 1. Codex recorded workflow: read-only summary becomes public publish.
 2. MCP tool call: demo customer lookup becomes production customer lookup.
 3. n8n marketplace workflow: refund recommendation becomes ledger mutation.
+4. Payment agent: action remains in scope but requires dual approval.
+5. External verifier: stale state hash requires review.
 
 ### 5. Show External Verifier Case
 
@@ -83,8 +89,9 @@ git clone https://github.com/OndCo/Agent-Action-Boundary-Benchmark.git
 cd Agent-Action-Boundary-Benchmark
 npm install
 npm test
-npm run report
-open reports/latest-report.md
+npm run generate:runtime
+npm run report:runtime
+open reports/runtime-boundary-benchmark.md
 ```
 
 ## Submission Notes
@@ -132,14 +139,15 @@ AI agents are becoming good at repeating work. But repeating work safely require
 
 This benchmark gives us a small, testable object: the action boundary.
 
-Each case has an approved action and an executed action. The runner canonicalizes both, computes fingerprints, compares material fields, classifies drift, and recommends allow, review, or block.
+Each case has an approved action and an executed action. The runner canonicalizes both, computes fingerprints, compares material fields, classifies drift, and recommends allow, review, dual approval, or block.
 
 Here is a Codex-style recorded workflow. It was approved to read and summarize a report locally. The executed action publishes that same report publicly. A transcript might describe both as working with the report. The action boundary says they are different actions.
 
-Now we run the benchmark. The runner detects effect drift, boundary drift, parameter drift, and policy drift. The control outcome is block.
+Now we run the benchmark. The small hand-written corpus is useful for walking through fingerprints by hand. The larger runtime corpus gives us scale: 6,000 synthetic action records, 1,000 safe baselines, 5,000 risky records, 18 runtime surfaces, 38 scenario families, and 10 obfuscation styles.
+
+The runner detects effect drift, boundary drift, parameter drift, identity drift, resource drift, and policy drift. It does not simply block everything. It separates allow, review, dual approval, and block.
 
 The same pattern applies to MCP tool calls, browser agents, n8n workflows, Dify workflows, and external verifier proofs.
 
-The goal is not to replace IAM or SIEM. The goal is to create a stable runtime object that those systems can reason about: what exact action was approved, what exact action ran, and whether the proof can be replayed later.
+The goal is not to replace IAM or SIEM. The goal is to create a stable runtime object that those systems can reason about: what exact action was approved, what exact action ran, who owned the boundary, and whether the proof can be replayed later.
 ```
-

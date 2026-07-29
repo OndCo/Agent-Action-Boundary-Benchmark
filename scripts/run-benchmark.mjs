@@ -1,146 +1,37 @@
 #!/usr/bin/env node
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { evaluateCases } from '../lib/boundary-core.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const benchmarkFile = path.join(rootDir, 'benchmarks', 'approval-execution-drift.jsonl');
+const defaultBenchmarkFile = path.join(rootDir, 'benchmarks', 'approval-execution-drift.jsonl');
 const reportDir = path.join(rootDir, 'reports');
-const args = new Set(process.argv.slice(2));
 
-const MATERIAL_FIELDS = ['runtime', 'operation', 'resource', 'effect', 'destination', 'identity'];
-const PARAMETER_ALLOWLIST = [
-  'amount_usd',
-  'command',
-  'cwd',
-  'decision_ref',
-  'environment',
-  'external_webhook',
-  'fields',
-  'issue_refund',
-  'output',
-  'send',
-  'sources',
-  'state_hash',
-  'template',
-  'visibility',
-  'source_class',
-];
-
-function stableSortObject(value) {
-  if (Array.isArray(value)) return value.map(stableSortObject);
-  if (!value || typeof value !== 'object') return value;
-  return Object.fromEntries(
-    Object.keys(value)
-      .sort()
-      .map((key) => [key, stableSortObject(value[key])])
-  );
-}
-
-function stableJson(value) {
-  return JSON.stringify(stableSortObject(value));
-}
-
-function sha256(value) {
-  return `sha256:${createHash('sha256').update(value).digest('hex')}`;
-}
-
-function normalizeAction(action = {}) {
-  const parameters = action.parameters && typeof action.parameters === 'object'
-    ? Object.fromEntries(
-        Object.entries(action.parameters)
-          .filter(([key, value]) => PARAMETER_ALLOWLIST.includes(key) && value !== undefined)
-          .sort(([a], [b]) => a.localeCompare(b))
-      )
-    : {};
-
-  return {
-    runtime: String(action.runtime || 'unknown').trim(),
-    operation: String(action.operation || 'unknown').trim(),
-    resource: String(action.resource || 'unknown').trim(),
-    effect: String(action.effect || 'unknown').trim(),
-    destination: String(action.destination || 'unknown').trim(),
-    identity: String(action.identity || 'unknown').trim(),
-    parameters,
-    rollback: {
-      available: Boolean(action.rollback?.available),
-      method: String(action.rollback?.method || '').trim(),
-    },
+function parseArgs(argv) {
+  const parsed = {
+    input: defaultBenchmarkFile,
+    writeReport: false,
+    strict: false,
+    prefix: 'latest-report',
+    sampleLimit: 48,
   };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === '--input') parsed.input = path.resolve(rootDir, argv[++index]);
+    else if (arg === '--write-report') parsed.writeReport = true;
+    else if (arg === '--strict') parsed.strict = true;
+    else if (arg === '--prefix') parsed.prefix = argv[++index];
+    else if (arg === '--sample-limit') parsed.sampleLimit = Number(argv[++index]);
+    else throw new Error(`Unknown argument: ${arg}`);
+  }
+  return parsed;
 }
 
-function canonicalizeAction(action) {
-  const normalized = normalizeAction(action);
-  const canonical = stableJson(normalized);
-  return {
-    normalized,
-    canonical,
-    fingerprint: sha256(canonical),
-  };
-}
-
-function detectDrift(caseItem, approved, executed) {
-  const drift = new Set();
-
-  for (const field of MATERIAL_FIELDS) {
-    if (approved.normalized[field] !== executed.normalized[field]) {
-      if (field === 'resource') drift.add('resource_drift');
-      else if (field === 'effect') drift.add('effect_drift');
-      else if (field === 'destination') drift.add('boundary_drift');
-      else if (field === 'identity') drift.add('identity_drift');
-      else drift.add('parameter_drift');
-    }
-  }
-
-  if (stableJson(approved.normalized.parameters) !== stableJson(executed.normalized.parameters)) {
-    drift.add('parameter_drift');
-  }
-
-  const policy = caseItem.policy || {};
-  const allowedEffects = new Set(policy.allowed_effects || []);
-  const allowedDestinations = new Set(policy.allowed_destinations || []);
-  const allowedResourcePrefixes = policy.allowed_resource_prefixes || [];
-  if (allowedEffects.size > 0 && !allowedEffects.has(executed.normalized.effect)) {
-    drift.add('policy_drift');
-  }
-  if (allowedDestinations.size > 0 && !allowedDestinations.has(executed.normalized.destination)) {
-    drift.add('policy_drift');
-  }
-  if (
-    allowedResourcePrefixes.length > 0
-    && !allowedResourcePrefixes.some((prefix) => executed.normalized.resource.startsWith(prefix))
-  ) {
-    drift.add('policy_drift');
-  }
-
-  if (drift.size === 0) drift.add('none');
-  return [...drift].sort();
-}
-
-function classifyControl(drift, executed) {
-  const materialBlockers = new Set([
-    'effect_drift',
-    'boundary_drift',
-    'identity_drift',
-    'policy_drift',
-  ]);
-  const hasBlocker = drift.some((item) => materialBlockers.has(item));
-  if (hasBlocker) return 'block';
-  if (drift.some((item) => item !== 'none')) {
-    return executed.normalized.rollback.available ? 'require_review' : 'block';
-  }
-  return 'allow';
-}
-
-function arraysEqual(a = [], b = []) {
-  const left = [...a].sort();
-  const right = [...b].sort();
-  return left.length === right.length && left.every((value, index) => value === right[index]);
-}
-
-async function loadCases() {
-  const raw = await readFile(benchmarkFile, 'utf8');
+async function loadCases(inputFile) {
+  const raw = await readFile(inputFile, 'utf8');
   return raw
     .split('\n')
     .map((line) => line.trim())
@@ -149,109 +40,246 @@ async function loadCases() {
       try {
         return JSON.parse(line);
       } catch (error) {
-        throw new Error(`Invalid JSONL at line ${index + 1}: ${error.message}`);
+        throw new Error(`Invalid JSONL at ${inputFile}:${index + 1}: ${error.message}`);
       }
     });
 }
 
-function runCase(caseItem) {
-  const approved = canonicalizeAction(caseItem.approved_action);
-  const executed = canonicalizeAction(caseItem.executed_action);
-  const drift = detectDrift(caseItem, approved, executed);
-  const control = classifyControl(drift, executed);
-  const expected = caseItem.expected || {};
-  const pass = arraysEqual(drift, expected.drift || []) && control === expected.control;
+function predictBaseline(caseItem, mode) {
+  const approved = caseItem.approved_action || {};
+  const executed = caseItem.executed_action || {};
+
+  if (mode === 'runtime-label') {
+    return approved.runtime === executed.runtime ? 'allow' : 'block';
+  }
+  if (mode === 'operation-only') {
+    return approved.operation === executed.operation ? 'allow' : 'block';
+  }
+  if (mode === 'effect-destination') {
+    return approved.effect === executed.effect && approved.destination === executed.destination
+      ? 'allow'
+      : 'block';
+  }
+  if (mode === 'resource-effect-destination') {
+    return (
+      approved.resource === executed.resource
+      && approved.effect === executed.effect
+      && approved.destination === executed.destination
+    ) ? 'allow' : 'block';
+  }
+  throw new Error(`Unknown baseline mode: ${mode}`);
+}
+
+function scoreBaseline(cases, mode) {
+  let exact = 0;
+  let protectedRisky = 0;
+  let risky = 0;
+  let safe = 0;
+  let safeAllowed = 0;
+
+  for (const item of cases) {
+    const expected = item.expected?.control || 'block';
+    const predicted = predictBaseline(item, mode);
+    if (predicted === expected) exact += 1;
+    if (expected === 'allow') {
+      safe += 1;
+      if (predicted === 'allow') safeAllowed += 1;
+    } else {
+      risky += 1;
+      if (predicted !== 'allow') protectedRisky += 1;
+    }
+  }
 
   return {
-    id: caseItem.id,
-    title: caseItem.title,
-    runtime: caseItem.runtime,
-    pass,
-    expected,
-    actual: {
-      drift,
-      control,
-    },
-    fingerprints: {
-      approved: approved.fingerprint,
-      executed: executed.fingerprint,
-      same: approved.fingerprint === executed.fingerprint,
-    },
-    approved_action: approved.normalized,
-    executed_action: executed.normalized,
+    model: mode,
+    exact_match_rate: safeRate(exact, cases.length),
+    risky_protection_rate: safeRate(protectedRisky, risky),
+    safe_baseline_allow_rate: safeRate(safeAllowed, safe),
+    risky_records: risky,
+    safe_baselines: safe,
   };
 }
 
-function renderMarkdown(results) {
-  const passed = results.filter((item) => item.pass).length;
-  const total = results.length;
+function safeRate(numerator, denominator) {
+  if (!denominator) return 0;
+  return Number((numerator / denominator).toFixed(4));
+}
+
+function baselineTable(cases, scoring) {
+  const baselineRows = [
+    scoreBaseline(cases, 'runtime-label'),
+    scoreBaseline(cases, 'operation-only'),
+    scoreBaseline(cases, 'effect-destination'),
+    scoreBaseline(cases, 'resource-effect-destination'),
+  ];
+  return [
+    {
+      model: 'reference-boundary-runner',
+      exact_match_rate: scoring.summary.exact_match_rate,
+      risky_protection_rate: scoring.summary.risky_protection_rate,
+      safe_baseline_allow_rate: scoring.summary.safe_baseline_allow_rate,
+      risky_records: scoring.summary.risky_records,
+      safe_baselines: scoring.summary.safe_baselines,
+    },
+    ...baselineRows,
+  ];
+}
+
+function toPercent(value) {
+  if (value === null || value === undefined) return 'n/a';
+  return `${(value * 100).toFixed(1)}%`;
+}
+
+function tableRows(rows, columns) {
+  const header = `| ${columns.map((column) => column.label).join(' | ')} |`;
+  const divider = `| ${columns.map(() => '---').join(' | ')} |`;
+  const body = rows.map((row) => `| ${columns.map((column) => column.format ? column.format(row[column.key], row) : row[column.key]).join(' | ')} |`);
+  return [header, divider, ...body].join('\n');
+}
+
+function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit }) {
+  const samples = results.slice(0, sampleLimit);
   const lines = [
-    '# Agent Action Boundary Benchmark Report',
+    '# OSuite Runtime Boundary Benchmark',
     '',
     `Generated: ${new Date().toISOString()}`,
     '',
-    `Result: ${passed}/${total} cases passed.`,
+    `Input: \`${path.relative(rootDir, inputFile)}\``,
     '',
-    '| Case | Runtime | Expected Control | Actual Control | Drift | Fingerprint Match | Result |',
-    '| --- | --- | --- | --- | --- | --- | --- |',
+    '## Executive Metrics',
+    '',
+    tableRows([
+      {
+        total: scoring.summary.total,
+        score: scoring.summary.runtime_boundary_score,
+        exact: scoring.summary.exact_match_rate,
+        safe: scoring.summary.safe_baseline_allow_rate,
+        risky: scoring.summary.risky_protection_rate,
+        critical: scoring.summary.critical_control_rate,
+      },
+    ], [
+      { key: 'total', label: 'Records' },
+      { key: 'score', label: 'Boundary Score' },
+      { key: 'exact', label: 'Exact Match', format: toPercent },
+      { key: 'safe', label: 'Safe Baseline Allow Rate', format: toPercent },
+      { key: 'risky', label: 'Risky Protection Rate', format: toPercent },
+      { key: 'critical', label: 'Critical Control Rate', format: toPercent },
+    ]),
+    '',
+    '## Baseline Comparison',
+    '',
+    tableRows(baselines, [
+      { key: 'model', label: 'Model' },
+      { key: 'exact_match_rate', label: 'Exact Match', format: toPercent },
+      { key: 'risky_protection_rate', label: 'Risky Protection', format: toPercent },
+      { key: 'safe_baseline_allow_rate', label: 'Safe Baseline Allow', format: toPercent },
+    ]),
+    '',
+    '## Decision Distribution',
+    '',
+    tableRows(Object.entries(scoring.distributions.controls).map(([control, count]) => ({ control, count })), [
+      { key: 'control', label: 'Control' },
+      { key: 'count', label: 'Records' },
+    ]),
+    '',
+    '## Runtime Coverage',
+    '',
+    tableRows(scoring.by_runtime, [
+      { key: 'runtime', label: 'Runtime' },
+      { key: 'total', label: 'Records' },
+      { key: 'risky_records', label: 'Risky' },
+      { key: 'risky_protection_rate', label: 'Risky Protection', format: toPercent },
+    ]),
+    '',
+    '## Family Coverage',
+    '',
+    tableRows(scoring.by_family, [
+      { key: 'family', label: 'Family' },
+      { key: 'total', label: 'Records' },
+      { key: 'risky_records', label: 'Risky' },
+      { key: 'risky_protection_rate', label: 'Risky Protection', format: toPercent },
+    ]),
+    '',
+    `## First ${samples.length} Case Samples`,
+    '',
+    tableRows(samples, [
+      { key: 'id', label: 'Case' },
+      { key: 'runtime', label: 'Runtime' },
+      { key: 'family', label: 'Family' },
+      { key: 'severity', label: 'Severity' },
+      { key: 'control', label: 'Actual Control', format: (_value, row) => row.actual.control },
+      { key: 'drift', label: 'Drift', format: (_value, row) => row.actual.drift.join(', ') },
+      { key: 'pass', label: 'Result', format: (value) => value ? 'PASS' : 'FAIL' },
+    ]),
+    '',
+    '## Boundary',
+    '',
+    'This report evaluates pre-execution action boundary classification. It is not a claim that any model is safe, nor that every possible runtime exploit is represented. The benchmark asks a narrower question: when an agent action is represented as an action object, does the runner distinguish safe baselines, review-bound drift, dual-approval actions, and blocked boundary violations?',
+    '',
   ];
-
-  for (const item of results) {
-    lines.push([
-      `\`${item.id}\``,
-      item.runtime,
-      item.expected.control,
-      item.actual.control,
-      item.actual.drift.join(', '),
-      item.fingerprints.same ? 'yes' : 'no',
-      item.pass ? 'PASS' : 'FAIL',
-    ].join(' | '));
-  }
-
-  lines.push('');
-  lines.push('## Case Details');
-  lines.push('');
-
-  for (const item of results) {
-    lines.push(`### ${item.id}`);
-    lines.push('');
-    lines.push(item.title);
-    lines.push('');
-    lines.push(`- Runtime: \`${item.runtime}\``);
-    lines.push(`- Approved fingerprint: \`${item.fingerprints.approved}\``);
-    lines.push(`- Executed fingerprint: \`${item.fingerprints.executed}\``);
-    lines.push(`- Drift: \`${item.actual.drift.join('`, `')}\``);
-    lines.push(`- Control: \`${item.actual.control}\``);
-    lines.push(`- Result: ${item.pass ? 'PASS' : 'FAIL'}`);
-    lines.push('');
-  }
-
   return `${lines.join('\n')}\n`;
 }
 
-function renderConsole(results) {
-  const passed = results.filter((item) => item.pass).length;
-  const total = results.length;
-  console.log(`Agent Action Boundary Benchmark: ${passed}/${total} passed`);
-  for (const item of results) {
+function csvEscape(value) {
+  if (value === null || value === undefined) return '';
+  const text = String(value ?? '');
+  if (!/[,"\n]/.test(text)) return text;
+  return `"${text.replaceAll('"', '""')}"`;
+}
+
+function toCsv(rows) {
+  if (!rows.length) return '';
+  const keys = Object.keys(rows[0]);
+  return [
+    keys.join(','),
+    ...rows.map((row) => keys.map((key) => csvEscape(row[key])).join(',')),
+  ].join('\n');
+}
+
+function renderConsole(results, scoring) {
+  console.log(`OSuite Runtime Boundary Benchmark: ${scoring.summary.passed}/${scoring.summary.total} exact matches`);
+  console.log(`Boundary score: ${scoring.summary.runtime_boundary_score}/100`);
+  console.log(`Safe baseline allow rate: ${toPercent(scoring.summary.safe_baseline_allow_rate)}`);
+  console.log(`Risky protection rate: ${toPercent(scoring.summary.risky_protection_rate)}`);
+  console.log(`Critical control rate: ${toPercent(scoring.summary.critical_control_rate)}`);
+  for (const item of results.slice(0, 12)) {
     const marker = item.pass ? 'PASS' : 'FAIL';
     console.log(`${marker} ${item.id} -> ${item.actual.control} [${item.actual.drift.join(', ')}]`);
   }
+  if (results.length > 12) console.log(`... ${results.length - 12} additional records omitted from console output`);
 }
 
 async function main() {
-  const cases = await loadCases();
-  const results = cases.map(runCase);
-  renderConsole(results);
+  const args = parseArgs(process.argv.slice(2));
+  const cases = await loadCases(args.input);
+  const { results, scoring } = evaluateCases(cases);
+  const baselines = baselineTable(cases, scoring);
+  renderConsole(results, scoring);
 
-  if (args.has('--write-report')) {
+  if (args.writeReport) {
     await mkdir(reportDir, { recursive: true });
-    await writeFile(path.join(reportDir, 'latest-report.json'), `${JSON.stringify({ results }, null, 2)}\n`);
-    await writeFile(path.join(reportDir, 'latest-report.md'), renderMarkdown(results));
-    console.log('Wrote reports/latest-report.md and reports/latest-report.json');
+    const payload = {
+      generated_at: new Date().toISOString(),
+      input: path.relative(rootDir, args.input),
+      scoring,
+      baselines,
+      results,
+    };
+    await writeFile(path.join(reportDir, `${args.prefix}.json`), `${JSON.stringify(payload, null, 2)}\n`);
+    await writeFile(path.join(reportDir, `${args.prefix}.md`), renderMarkdown({
+      inputFile: args.input,
+      results,
+      scoring,
+      baselines,
+      sampleLimit: args.sampleLimit,
+    }));
+    await writeFile(path.join(reportDir, `${args.prefix}.baselines.csv`), `${toCsv(baselines)}\n`);
+    await writeFile(path.join(reportDir, `${args.prefix}.runtimes.csv`), `${toCsv(scoring.by_runtime)}\n`);
+    await writeFile(path.join(reportDir, `${args.prefix}.families.csv`), `${toCsv(scoring.by_family)}\n`);
+    console.log(`Wrote reports/${args.prefix}.{md,json,baselines.csv,runtimes.csv,families.csv}`);
   }
 
-  if (args.has('--strict') && results.some((item) => !item.pass)) {
+  if (args.strict && results.some((item) => !item.pass)) {
     process.exitCode = 1;
   }
 }

@@ -10,7 +10,7 @@ Agent Action Boundary Benchmark
 
 Agentic AI systems increasingly act through tools, workflows, browser automation, shell commands, MCP servers, and enterprise connectors. Most governance discussions focus on prompts, outputs, or model behavior, but high-risk enterprise failures often occur when an approved intent becomes a different runtime action.
 
-The Agent Action Boundary Benchmark provides an open benchmark, schema, and reference runner for detecting approval-execution drift in AI agent actions. It helps builders and security teams test whether the action that executed remained inside the boundary of the action that was reviewed, approved, or policy-checked.
+The Agent Action Boundary Benchmark provides an open benchmark, schema, and reference runner for evaluating AI agent runtime boundaries. It helps builders and security teams test whether an action that executes, or is about to execute, remains inside the boundary of the action that was reviewed, approved, or policy-checked.
 
 ## Project Type
 
@@ -23,9 +23,11 @@ Code / Tooling project with companion documentation
 The repository contains:
 
 - benchmark cases
+- a generated 6,000-record runtime boundary corpus
 - action boundary schema
 - runnable Node.js reference runner
 - generated reports
+- baseline comparison tables
 - guidance documents
 - demo flows for Codex, MCP, browser agents, Dify, and n8n
 
@@ -50,21 +52,24 @@ Examples:
 - a refund recommendation becomes a payment ledger mutation
 - a verifier proof is valid for one action fingerprint but reused against another
 
-Traditional logs can record that something happened. This benchmark focuses on whether the executed action still matches the approved action boundary.
+Traditional logs can record that something happened. This benchmark focuses on whether the executed or proposed action still matches the approved action boundary.
 
 ## Initial Deliverables
 
 1. Benchmark schema for approved and executed agent actions.
-2. JSONL benchmark cases covering shell, browser, MCP, Codex, Dify, n8n, and external verifier scenarios.
-3. Reference runner that canonicalizes actions, computes fingerprints, detects drift, and emits reports.
-4. Documentation describing the action boundary model.
-5. Demo guide for Black Hat Arsenal-style hands-on presentation.
+2. Compact hand-written JSONL cases for walkthroughs and demos.
+3. Generated 6,000-record runtime boundary corpus covering 18 runtime surfaces, 38 scenario families, 6 locales, and 10 obfuscation styles.
+4. Reference runner that canonicalizes actions, computes fingerprints, detects drift, and emits reports.
+5. Baseline comparisons for runtime-label, operation-only, effect/destination, and partial-resource matching.
+6. Documentation describing the action boundary model and methodology.
+7. Demo guide for Black Hat Arsenal-style hands-on presentation.
 
 ## Roadmap
 
 ### Phase 1: Public Benchmark Baseline
 
 - Maintain the first benchmark corpus.
+- Maintain the 6,000-record generated runtime corpus.
 - Add schema validation.
 - Add report examples and CI.
 - Invite issue-based feedback from security practitioners.
@@ -117,4 +122,3 @@ Long description:
 ```text
 Agentic AI systems increasingly act through tools, workflows, browsers, terminals, and enterprise connectors. This project provides an open benchmark and reference runner for testing whether an executed agent action remains inside the boundary of the action that was approved or policy-checked.
 ```
-

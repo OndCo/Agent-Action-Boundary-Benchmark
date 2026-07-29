@@ -1,0 +1,6 @@
+model,exact_match_rate,risky_protection_rate,safe_baseline_allow_rate,risky_records,safe_baselines
+reference-boundary-runner,1,1,1,5000,1000
+runtime-label,0.1667,0,1,5000,1000
+operation-only,0.8742,0.849,1,5000,1000
+effect-destination,0.699,0.6388,1,5000,1000
+resource-effect-destination,0.8263,0.8194,1,5000,1000

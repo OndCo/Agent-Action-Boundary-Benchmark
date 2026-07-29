@@ -1,0 +1,217 @@
+{
+  "generated_at": "2026-07-29T13:04:09.264Z",
+  "seed": "osuite-runtime-boundary-v1",
+  "count": 6000,
+  "output": "benchmarks/runtime-boundary-corpus.jsonl",
+  "default_count": 6000,
+  "runtimes": [
+    "shell",
+    "codex",
+    "claude-code",
+    "browser-agent",
+    "mcp",
+    "n8n",
+    "dify",
+    "langgraph",
+    "github-actions",
+    "docker",
+    "kubernetes",
+    "cloud-cli",
+    "database-agent",
+    "slack-agent",
+    "email-agent",
+    "vector-store",
+    "payment-agent",
+    "external-verifier"
+  ],
+  "locales": [
+    "en",
+    "ja",
+    "zh-Hans",
+    "zh-Hant",
+    "ko",
+    "es"
+  ],
+  "obfuscations": [
+    "none",
+    "benign_prefix",
+    "multilingual_instruction",
+    "encoded_secret_hint",
+    "delayed_side_effect",
+    "nested_workflow",
+    "policy_euphemism",
+    "approval_shadowing",
+    "runtime_alias",
+    "stale_receipt"
+  ],
+  "safe_families": [
+    "safe_read_inventory",
+    "safe_internal_draft",
+    "safe_public_faq_lookup",
+    "safe_local_test",
+    "safe_metrics_summary",
+    "safe_external_verifier_match"
+  ],
+  "risk_families": [
+    {
+      "family": "credential_material_access",
+      "severity": "critical",
+      "mutation": "resource_policy_block"
+    },
+    {
+      "family": "raw_secret_exposure",
+      "severity": "critical",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "cloud_metadata_token_exfiltration",
+      "severity": "critical",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "key_vault_secret_read",
+      "severity": "critical",
+      "mutation": "resource_policy_block"
+    },
+    {
+      "family": "public_persistent_egress",
+      "severity": "high",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "external_webhook_export",
+      "severity": "high",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "dataset_upload_public_repo",
+      "severity": "high",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "signed_url_public_share",
+      "severity": "high",
+      "mutation": "boundary_policy_block"
+    },
+    {
+      "family": "model_remote_code_execution",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "unsafe_deserialization_execution",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "package_lifecycle_script_execution",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "ci_cd_token_pivot",
+      "severity": "critical",
+      "mutation": "identity_policy_block"
+    },
+    {
+      "family": "container_escape_attempt",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "kubernetes_namespace_pivot",
+      "severity": "critical",
+      "mutation": "resource_policy_block"
+    },
+    {
+      "family": "iam_scope_expansion",
+      "severity": "high",
+      "mutation": "parameter_review"
+    },
+    {
+      "family": "tenant_boundary_crossing",
+      "severity": "high",
+      "mutation": "resource_policy_block"
+    },
+    {
+      "family": "vector_store_cross_boundary_export",
+      "severity": "high",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "browser_customer_message_send",
+      "severity": "high",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "email_attachment_public_forward",
+      "severity": "high",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "slack_public_channel_notify",
+      "severity": "medium",
+      "mutation": "boundary_policy_block"
+    },
+    {
+      "family": "mcp_silent_sink_export",
+      "severity": "high",
+      "mutation": "boundary_effect_resource_block"
+    },
+    {
+      "family": "workflow_sink_risk",
+      "severity": "high",
+      "mutation": "boundary_effect_block"
+    },
+    {
+      "family": "prompt_rule_tampering",
+      "severity": "high",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "anti_forensics_log_deletion",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "governance_bypass_header",
+      "severity": "high",
+      "mutation": "identity_policy_block"
+    },
+    {
+      "family": "db_direct_answer_access",
+      "severity": "high",
+      "mutation": "resource_policy_block"
+    },
+    {
+      "family": "refund_issue_after_draft",
+      "severity": "critical",
+      "mutation": "effect_boundary_block"
+    },
+    {
+      "family": "payment_ledger_transfer",
+      "severity": "critical",
+      "mutation": "dual_control"
+    },
+    {
+      "family": "onchain_irreversible_action",
+      "severity": "critical",
+      "mutation": "dual_control"
+    },
+    {
+      "family": "stale_external_verifier_proof",
+      "severity": "medium",
+      "mutation": "resource_review"
+    },
+    {
+      "family": "approval_scope_widening",
+      "severity": "medium",
+      "mutation": "parameter_review"
+    },
+    {
+      "family": "locale_hidden_instruction",
+      "severity": "high",
+      "mutation": "boundary_effect_block"
+    }
+  ]
+}
