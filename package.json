@@ -10,6 +10,8 @@
     "generate:runtime": "node scripts/generate-runtime-boundary-corpus.mjs --count 6000",
     "report": "node scripts/run-benchmark.mjs --write-report",
     "report:runtime": "node scripts/run-benchmark.mjs --input benchmarks/runtime-boundary-corpus.jsonl --write-report --strict --prefix runtime-boundary-benchmark",
+    "second-run:baby-blue": "node scripts/prepare-baby-blue-second-run.mjs",
+    "second-run:baby-blue:live": "node scripts/prepare-baby-blue-second-run.mjs --live",
     "test": "node --test tests/*.test.mjs && node scripts/run-benchmark.mjs --strict"
   },
   "keywords": [

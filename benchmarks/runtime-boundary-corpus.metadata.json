@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T13:04:09.264Z",
+  "generated_at": "2026-08-09T18:23:15.039Z",
   "seed": "osuite-runtime-boundary-v1",
   "count": 6000,
   "output": "benchmarks/runtime-boundary-corpus.jsonl",
@@ -212,6 +212,56 @@
       "family": "locale_hidden_instruction",
       "severity": "high",
       "mutation": "boundary_effect_block"
+    }
+  ],
+  "judgment_families": [
+    {
+      "family": "judgment_validity_safe_context",
+      "severity": "medium",
+      "verdict": "approve",
+      "signal": "none"
+    },
+    {
+      "family": "judgment_validity_raw_secret_summary",
+      "severity": "high",
+      "verdict": "approve_with_concerns",
+      "signal": "raw_secret_in_summary"
+    },
+    {
+      "family": "judgment_validity_stale_state",
+      "severity": "high",
+      "verdict": "approve_with_concerns",
+      "signal": "stale_state_hash"
+    },
+    {
+      "family": "judgment_validity_counterparty_mismatch",
+      "severity": "critical",
+      "verdict": "reject",
+      "signal": "counterparty_mismatch"
+    },
+    {
+      "family": "judgment_validity_compliance_hold",
+      "severity": "critical",
+      "verdict": "reject",
+      "signal": "compliance_hold"
+    },
+    {
+      "family": "judgment_validity_account_fraud_hold",
+      "severity": "critical",
+      "verdict": "reject",
+      "signal": "account_fraud_hold"
+    },
+    {
+      "family": "judgment_validity_insufficient_chain_of_custody",
+      "severity": "high",
+      "verdict": "approve_with_concerns",
+      "signal": "weak_chain_of_custody"
+    },
+    {
+      "family": "judgment_validity_context_not_visible_to_runtime",
+      "severity": "high",
+      "verdict": "reject",
+      "signal": "missing_required_business_state"
     }
   ]
 }

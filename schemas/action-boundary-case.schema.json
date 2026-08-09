@@ -65,6 +65,24 @@
       },
       "additionalProperties": true
     },
+    "judgment_context": {
+      "type": "object",
+      "properties": {
+        "requires_independent_judgment": { "type": "boolean" },
+        "business_state": { "type": "string" },
+        "evidence_quality": { "type": "string" },
+        "hard_block_signals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "concern_signals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reviewer_note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
     "expected": {
       "type": "object",
       "required": ["drift", "control"],
@@ -85,6 +103,9 @@
         },
         "control": {
           "enum": ["allow", "require_review", "require_dual_approval", "block"]
+        },
+        "judgment": {
+          "enum": ["approve", "approve_with_concerns", "reject"]
         }
       },
       "additionalProperties": false

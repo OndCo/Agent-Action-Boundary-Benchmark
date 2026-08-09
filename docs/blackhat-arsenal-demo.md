@@ -143,9 +143,9 @@ Each case has an approved action and an executed action. The runner canonicalize
 
 Here is a Codex-style recorded workflow. It was approved to read and summarize a report locally. The executed action publishes that same report publicly. A transcript might describe both as working with the report. The action boundary says they are different actions.
 
-Now we run the benchmark. The small hand-written corpus is useful for walking through fingerprints by hand. The larger runtime corpus gives us scale: 6,000 synthetic action records, 1,000 safe baselines, 5,000 risky records, 18 runtime surfaces, 38 scenario families, and 10 obfuscation styles.
+Now we run the benchmark. The small hand-written corpus is useful for walking through fingerprints by hand. The larger runtime corpus gives us scale: 6,000 synthetic action records, 1,000 safe baselines, 5,000 risky records, 18 runtime surfaces, 46 scenario families, 750 judgment-validity records, and 10 obfuscation styles.
 
-The runner detects effect drift, boundary drift, parameter drift, identity drift, resource drift, and policy drift. It does not simply block everything. It separates allow, review, dual approval, and block.
+The runner detects effect drift, boundary drift, parameter drift, identity drift, resource drift, and policy drift. It also separates boundary-valid actions that still need contextual judgment. It does not simply block everything. It separates allow, review, dual approval, block, and independent judgment signals.
 
 The same pattern applies to MCP tool calls, browser agents, n8n workflows, Dify workflows, and external verifier proofs.
 

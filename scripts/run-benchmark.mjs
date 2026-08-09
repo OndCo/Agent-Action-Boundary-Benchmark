@@ -156,6 +156,8 @@ function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit })
         safe: scoring.summary.safe_baseline_allow_rate,
         risky: scoring.summary.risky_protection_rate,
         critical: scoring.summary.critical_control_rate,
+        judgment: scoring.summary.judgment_exact_match_rate,
+        contextual: scoring.summary.contextual_risk_detection_rate,
       },
     ], [
       { key: 'total', label: 'Records' },
@@ -164,6 +166,8 @@ function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit })
       { key: 'safe', label: 'Safe Baseline Allow Rate', format: toPercent },
       { key: 'risky', label: 'Risky Protection Rate', format: toPercent },
       { key: 'critical', label: 'Critical Control Rate', format: toPercent },
+      { key: 'judgment', label: 'Judgment Exact Match', format: toPercent },
+      { key: 'contextual', label: 'Contextual Risk Detection', format: toPercent },
     ]),
     '',
     '## Baseline Comparison',
@@ -179,6 +183,13 @@ function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit })
     '',
     tableRows(Object.entries(scoring.distributions.controls).map(([control, count]) => ({ control, count })), [
       { key: 'control', label: 'Control' },
+      { key: 'count', label: 'Records' },
+    ]),
+    '',
+    '## Judgment Validity Distribution',
+    '',
+    tableRows(Object.entries(scoring.distributions.expected_judgments).map(([judgment, count]) => ({ judgment, count })), [
+      { key: 'judgment', label: 'Expected Judgment' },
       { key: 'count', label: 'Records' },
     ]),
     '',
@@ -208,6 +219,7 @@ function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit })
       { key: 'family', label: 'Family' },
       { key: 'severity', label: 'Severity' },
       { key: 'control', label: 'Actual Control', format: (_value, row) => row.actual.control },
+      { key: 'judgment', label: 'Judgment', format: (_value, row) => row.actual.judgment?.verdict || 'not_applicable' },
       { key: 'drift', label: 'Drift', format: (_value, row) => row.actual.drift.join(', ') },
       { key: 'pass', label: 'Result', format: (value) => value ? 'PASS' : 'FAIL' },
     ]),
@@ -242,6 +254,8 @@ function renderConsole(results, scoring) {
   console.log(`Safe baseline allow rate: ${toPercent(scoring.summary.safe_baseline_allow_rate)}`);
   console.log(`Risky protection rate: ${toPercent(scoring.summary.risky_protection_rate)}`);
   console.log(`Critical control rate: ${toPercent(scoring.summary.critical_control_rate)}`);
+  console.log(`Judgment exact match rate: ${toPercent(scoring.summary.judgment_exact_match_rate)}`);
+  console.log(`Contextual risk detection rate: ${toPercent(scoring.summary.contextual_risk_detection_rate)}`);
   for (const item of results.slice(0, 12)) {
     const marker = item.pass ? 'PASS' : 'FAIL';
     console.log(`${marker} ${item.id} -> ${item.actual.control} [${item.actual.drift.join(', ')}]`);

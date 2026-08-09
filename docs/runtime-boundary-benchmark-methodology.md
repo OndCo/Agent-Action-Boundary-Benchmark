@@ -26,9 +26,11 @@ Default configuration:
 | Safe baselines | 1,000 |
 | Risky records | 5,000 |
 | Runtime surfaces | 18 |
-| Scenario families | 38 |
+| Scenario families | 46 |
 | Locales | 6 |
 | Obfuscation styles | 10 |
+| Judgment-validity records | 750 |
+| Contextual-risk records | 637 |
 
 The generator is deterministic for a given seed. The default seed is:
 
@@ -50,6 +52,7 @@ Each record contains:
 - `executed_action`: the action that would execute.
 - `policy`: allowed effects, destinations, resource prefixes, identities, and approval posture.
 - `expected`: the expected drift class and control result.
+- `judgment_context`: optional independent-judgment inputs for cases where the boundary is valid but the action may still be contextually wrong.
 - `family`, `severity`, `locale`, and `obfuscation`: metadata for analysis.
 
 ## Control Labels
@@ -72,6 +75,28 @@ Each record contains:
 | `effect_drift` | Side effect changed. |
 | `identity_drift` | Acting identity changed. |
 | `policy_drift` | Execution no longer matches the policy checked. |
+
+## Judgment-Validity Lane
+
+Runtime firewalls and action-boundary proofs answer important but bounded questions:
+
+- Is this action shape known to be unsafe?
+- Did the executed action match the approved action?
+- Was the approval reused outside its intended scope?
+
+They do not always answer a separate question:
+
+> Is this exact action, in this exact business context, still a sound action to take?
+
+The judgment-validity lane covers cases where `approved_action` and `executed_action` remain fingerprint-identical, but the business context should produce an external verdict:
+
+| Verdict | Meaning |
+| --- | --- |
+| `approve` | Boundary and context are acceptable. |
+| `approve_with_concerns` | Boundary holds, but the evidence has concerns such as stale state, weak chain of custody, or possible raw-secret exposure. |
+| `reject` | Boundary holds, but context creates a hard blocker such as account fraud hold, compliance hold, counterparty mismatch, or missing required business state. |
+
+This lane is designed to model the seam between OSuite/CAVA-style action identity and an independent verifier such as Baby Blue / invinoveritas. It keeps boundary proof and contextual judgment separate so evaluators can decide which layer should own each failure mode.
 
 ## Scoring
 
@@ -98,6 +123,12 @@ The headline score combines:
 - safe-baseline allow rate
 - critical-control rate
 - drift-detection rate
+
+The report also emits judgment-specific metrics:
+
+- judgment exact-match rate
+- contextual-risk detection rate
+- expected judgment distribution
 
 ## Baselines
 

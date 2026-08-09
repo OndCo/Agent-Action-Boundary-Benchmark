@@ -58,7 +58,7 @@ Traditional logs can record that something happened. This benchmark focuses on w
 
 1. Benchmark schema for approved and executed agent actions.
 2. Compact hand-written JSONL cases for walkthroughs and demos.
-3. Generated 6,000-record runtime boundary corpus covering 18 runtime surfaces, 38 scenario families, 6 locales, and 10 obfuscation styles.
+3. Generated 6,000-record runtime boundary corpus covering 18 runtime surfaces, 46 scenario families, 6 locales, 10 obfuscation styles, and 750 judgment-validity records.
 4. Reference runner that canonicalizes actions, computes fingerprints, detects drift, and emits reports.
 5. Baseline comparisons for runtime-label, operation-only, effect/destination, and partial-resource matching.
 6. Documentation describing the action boundary model and methodology.
@@ -72,6 +72,7 @@ Traditional logs can record that something happened. This benchmark focuses on w
 - Maintain the 6,000-record generated runtime corpus.
 - Add schema validation.
 - Add report examples and CI.
+- Maintain the judgment-validity lane for boundary-valid but contextually unsafe actions.
 - Invite issue-based feedback from security practitioners.
 
 ### Phase 2: Runtime Adapters

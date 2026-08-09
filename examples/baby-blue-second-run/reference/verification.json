@@ -1,0 +1,10 @@
+{
+  "valid": true,
+  "failures": [],
+  "recomputed": {
+    "action_fingerprint": "sha256:a53a4fe86f24c4d0e09a6f0fd38b4344718251a9083ca4491501e508546e9ffa",
+    "executed_fingerprint": "sha256:a53a4fe86f24c4d0e09a6f0fd38b4344718251a9083ca4491501e508546e9ffa",
+    "artifact_hash": "sha256:a87243d2dcedaaf214fec50c9671ddc5edf67a9172716433a9652a525ba4006f",
+    "judgment_verdict": "reject"
+  }
+}

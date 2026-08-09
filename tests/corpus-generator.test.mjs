@@ -12,8 +12,10 @@ test('generateRuntimeBoundaryCorpus creates requested records with baselines and
 
   const safe = cases.filter((item) => item.expected.control === 'allow');
   const risky = cases.filter((item) => item.expected.control !== 'allow');
+  const judgment = cases.filter((item) => item.generator?.lane === 'judgment-validity');
   assert.ok(safe.length >= 80, `expected at least 80 safe baselines, got ${safe.length}`);
   assert.ok(risky.length >= 450, `expected at least 450 risky records, got ${risky.length}`);
+  assert.ok(judgment.length >= 40, `expected judgment-validity lane coverage, got ${judgment.length}`);
 
   const runtimes = new Set(cases.map((item) => item.runtime));
   const families = new Set(cases.map((item) => item.family));
