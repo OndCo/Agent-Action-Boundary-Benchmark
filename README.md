@@ -286,6 +286,12 @@ BABYBLUE_API_KEY=... npm run second-run:baby-blue:github:live -- --submit-ledger
 
 This is the stronger product demonstration: OSuite is not only storing an external verifier result; it can carry the verifier event through review, public ledger submission, SaaS execution, and outcome replay.
 
+The first live packet is available at:
+
+- [live packet, 2026-08-11](examples/baby-blue-github-saas-run/live-2026-08-11/packet.json)
+- [Baby Blue ledger entry 243](https://api.babyblueviper.com/ledger/243)
+- [GitHub issue outcome](https://github.com/OndCo/Agent-Action-Boundary-Benchmark/issues/1)
+
 ## Project Boundary
 
 This repository does not claim to solve model alignment, model weight safety, or all AI governance problems.

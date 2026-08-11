@@ -1,0 +1,13 @@
+{
+  "status": "published",
+  "submission_id": 9,
+  "entry": 243,
+  "ledger_url": "https://api.babyblueviper.com/ledger/243",
+  "nostr_relays": [
+    "relay.damus.io",
+    "nos.lol",
+    "relay.primal.net"
+  ],
+  "paid_sats": 196,
+  "bitcoin_anchor": "Not yet -- ots-stamp.timer (generic, no type filtering) anchors this entry's event_id to Bitcoin proof-of-work via OpenTimestamps within ~15 minutes, same as every other /ledger entry. Check https://api.babyblueviper.com/ledger/243/ots once it's had a few minutes."
+}
