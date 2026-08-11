@@ -1,0 +1,5 @@
+{
+  "status": "not_available_without_live_review",
+  "verify_url": "https://api.babyblueviper.com/verify-proof",
+  "reason": "Run scripts/prepare-baby-blue-github-saas-run.mjs with --live and a Baby Blue API key to capture a signed verifier proof."
+}

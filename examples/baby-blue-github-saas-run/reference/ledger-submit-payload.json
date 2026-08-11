@@ -1,0 +1,4 @@
+{
+  "status": "not_available_without_signed_event",
+  "reason": "Baby Blue /ledger/submit requires a signed proof.event from /review(sign=true)."
+}

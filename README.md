@@ -261,6 +261,31 @@ BABYBLUE_IVV_BEARER=... npm run second-run:baby-blue:live
 
 Live verifier output is written under `runs/` and is not committed by default.
 
+## OSuite + Baby Blue GitHub SaaS Reference Run
+
+The repository also includes a second reference packet for a real but controlled SaaS side effect:
+
+```bash
+npm run second-run:baby-blue:github -- --output examples/baby-blue-github-saas-run/reference
+```
+
+The example models an approval-bound GitHub issue creation where:
+
+- OSuite represents the public GitHub write as a CAVA action artifact;
+- Baby Blue `/review(sign=true)` can issue a signed external verifier verdict before execution;
+- OSuite can self-submit the signed verifier event to Baby Blue `/ledger/submit`;
+- the final GitHub issue outcome can be bound back into the OSuite packet and checked for approval/execution divergence.
+
+Live mode requires a Baby Blue API key. The GitHub side effect is never executed unless `--execute-github` is explicitly provided together with `--live`:
+
+```bash
+BABYBLUE_API_KEY=... npm run second-run:baby-blue:github:live
+BABYBLUE_API_KEY=... npm run second-run:baby-blue:github:live -- --submit-ledger
+BABYBLUE_API_KEY=... npm run second-run:baby-blue:github:live -- --submit-ledger --execute-github
+```
+
+This is the stronger product demonstration: OSuite is not only storing an external verifier result; it can carry the verifier event through review, public ledger submission, SaaS execution, and outcome replay.
+
 ## Project Boundary
 
 This repository does not claim to solve model alignment, model weight safety, or all AI governance problems.
