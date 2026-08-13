@@ -6,7 +6,7 @@ This repository is a public test range for a narrow but increasingly important p
 
 > A workflow may be recorded, replayed, or delegated to an AI agent, but the enterprise still needs to know whether the exact approved action is the action that actually ran.
 
-The benchmark focuses on the moment where intent becomes a side effect: shell commands, browser actions, MCP tool calls, workflow automations, customer-support operations, and other runtime actions that can affect systems outside the model transcript.
+The benchmark focuses on the moment where intent becomes a side effect: shell commands, browser actions, MCP tool calls, agent harness tool pipelines, workflow automations, customer-support operations, and other runtime actions that can affect systems outside the model transcript.
 
 ## Why This Exists
 
@@ -39,7 +39,7 @@ Current public corpus:
 | Total records | 6,000 |
 | Safe baseline records | 1,000 |
 | Risky records | 5,000 |
-| Runtime surfaces | 18 |
+| Runtime surfaces | 19 |
 | Scenario families | 46 |
 | Locales | 6 |
 | Obfuscation styles | 10 |
@@ -58,6 +58,8 @@ The generated report compares the reference boundary runner against deliberately
 | Resource/effect/destination baseline | 71.9% | 68.8% | 100.0% |
 
 The point of this table is not that a reference runner beats its own generated labels. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
+
+The corpus now includes DeepSeek Harness as a target runtime lane. That does not mean OSuite is claiming a production DeepSeek Harness adapter is ready. It means the benchmark can already model the pre-tool and post-tool action boundary that a future `osuite-governance-plugin` should preserve.
 
 ## Repository Status
 

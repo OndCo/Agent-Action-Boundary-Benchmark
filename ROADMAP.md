@@ -13,6 +13,7 @@
 
 - Import MCP tool-call records.
 - Import browser automation traces.
+- Import DeepSeek Harness Cordis tool pipeline records from `tools/pre-execute`, `tools/post-execute`, and immutable `tools/result` events.
 - Import n8n workflow execution records.
 - Import Dify workflow/tool-call records.
 - Import local agent hook records.

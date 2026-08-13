@@ -8,7 +8,7 @@ OSuite Runtime Boundary Benchmark
 
 Subtitle:
 
-6,000 agent action records across 18 runtime surfaces, 46 scenario families, 750 judgment-validity records, and 10 obfuscation styles.
+6,000 agent action records across 19 runtime surfaces, 46 scenario families, 750 judgment-validity records, and 10 obfuscation styles.
 
 ## One-Paragraph Positioning
 
@@ -338,7 +338,7 @@ Short body:
 
 We built the OSuite Runtime Boundary Benchmark to test a concrete enterprise question: when an AI agent is about to act, can the system tell whether the action is still inside the boundary that was approved?
 
-The first public corpus contains 6,000 synthetic action records across 18 runtime surfaces, 46 scenario families, 6 locales, and 10 obfuscation styles. It includes 1,000 safe baselines, 5,000 risky records, and 750 judgment-validity records spanning credential access, public egress, model-code execution, package lifecycle execution, CI/CD token pivoting, workflow sinks, stale verifier proofs, payment actions, and contextually unsafe but boundary-valid actions.
+The first public corpus contains 6,000 synthetic action records across 19 runtime surfaces, 46 scenario families, 6 locales, and 10 obfuscation styles. It includes 1,000 safe baselines, 5,000 risky records, and 750 judgment-validity records spanning credential access, public egress, model-code execution, package lifecycle execution, CI/CD token pivoting, workflow sinks, stale verifier proofs, payment actions, and contextually unsafe but boundary-valid actions.
 
 The reference boundary runner classified all 6,000 records correctly. More importantly, simple baselines failed in predictable ways. A runtime-label baseline protected none of the risky records. Operation-only and partial resource matching performed better, but still missed material action-boundary changes. The new judgment-validity lane adds a harder case: the approved and executed action can match perfectly, while business context still makes the action unsafe.
 

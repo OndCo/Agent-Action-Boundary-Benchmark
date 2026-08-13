@@ -25,7 +25,7 @@ Default configuration:
 | Records | 6,000 |
 | Safe baselines | 1,000 |
 | Risky records | 5,000 |
-| Runtime surfaces | 18 |
+| Runtime surfaces | 19 |
 | Scenario families | 46 |
 | Locales | 6 |
 | Obfuscation styles | 10 |
@@ -43,6 +43,12 @@ Use a different count or seed:
 ```bash
 node scripts/generate-runtime-boundary-corpus.mjs --count 10000 --seed your-seed
 ```
+
+## Target Runtime Lanes
+
+The corpus includes both currently exercised runtime families and target runtime lanes. A target lane means the benchmark can represent the action-boundary shape before a production adapter is complete.
+
+DeepSeek Harness is now tracked as a target runtime because its public developer-preview architecture exposes the governance seam OSuite needs: `tools/pre-execute` for pre-action review, `tools/post-execute` for result transformation or blocking, and immutable `tools/result` observation for final outcome evidence. The benchmark lane does not claim managed OSuite support for DeepSeek Harness yet; it gives maintainers and security teams a concrete adapter target.
 
 ## Record Shape
 

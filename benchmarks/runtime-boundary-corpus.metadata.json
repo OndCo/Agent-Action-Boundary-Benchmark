@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T18:23:15.039Z",
+  "generated_at": "2026-08-13T15:52:08.224Z",
   "seed": "osuite-runtime-boundary-v1",
   "count": 6000,
   "output": "benchmarks/runtime-boundary-corpus.jsonl",
@@ -8,6 +8,7 @@
     "shell",
     "codex",
     "claude-code",
+    "deepseek-harness",
     "browser-agent",
     "mcp",
     "n8n",
