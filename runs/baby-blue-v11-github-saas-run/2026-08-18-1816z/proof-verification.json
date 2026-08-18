@@ -1,0 +1,114 @@
+{
+  "valid": true,
+  "checks": {
+    "id_integrity": true,
+    "signature_valid": true,
+    "issued_by_invinoveritas": true,
+    "is_proof_event": true,
+    "decision_ref_recomputes": true,
+    "artifact_hash_matches": true
+  },
+  "published_pubkey": "6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7",
+  "recompute_depth": {
+    "tier": "bounded@anchor",
+    "label": "recomputes from its own bytes + independently admitted by invinoveritas's published key; the external anchor (pre-outcome precedence) is the /ledger + OTS leg, not checked by /verify-proof"
+  },
+  "how_to_verify": "Recompute the Nostr event id = sha256(JSON [0,pubkey,created_at,kind,tags,content]); verify the schnorr sig over it against pubkey; confirm pubkey == published_pubkey. Standard NIP-01 — do it yourself. The content is RFC 8785 JCS (sorted keys, compact separators, raw UTF-8 / not \\uXXXX-escaped) so the canonical bytes recompute identically across implementations.",
+  "issued_by_invinoveritas": true,
+  "proof_payload": {
+    "artifact_hash": "d7f8744cfdbc955abc59a5f587028598cbe4e53613bfd9b3c0c186ad95ee5065",
+    "artifact_type": "agent_output",
+    "confidence": 0.9,
+    "conformance_suite": "https://github.com/babyblueviper1/preaction-governance-conformance",
+    "decision_ref": "sha256:a90a6f398e94129344549d36bd93cbefabd97f0f18a2fb7ca548ada24a089aaa",
+    "decision_ref_preimage_fields": [
+      "artifact_hash",
+      "artifact_type",
+      "policy_version",
+      "verdict",
+      "source_class",
+      "vantage_limitation",
+      "related_decision_ref",
+      "intended_audience",
+      "confidentiality_tier",
+      "disclosed_summary",
+      "intended_verifier",
+      "policy_commitment",
+      "verified_at",
+      "registry_as_of",
+      "registry_snapshot_sha256"
+    ],
+    "decision_ref_preimage_rule": "every name in decision_ref_preimage_fields is a key in the hashed preimage object, always -- absent fields (e.g. vantage_limitation when not applicable) are present as JSON null, never omitted from the object.",
+    "engine_generation": 1,
+    "execution_binding": "external",
+    "independent_nodes": [
+      "https://invinoveritas-castra.babyblueviper.workers.dev/verify",
+      "https://babyblueviper1--2aba75da693711f185891607ee4eb77e.web.val.run"
+    ],
+    "key_id": "6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7",
+    "mediator_evidence": {
+      "authority_basis": "Real live integration account (label 'osuite-checkpoint', created 2026-07-13, 17 calls). Verified 2026-07-18 that calls genuinely originate from OSuite's own infrastructure, not ours: nginx access log shows the most recent /review call (2026-07-18T08:45:49Z) from IP 104.43.193.12 (Microsoft Azure, Des Moines datacenter -- confirmed distinct from this VPS's own provider), User-Agent 'node' (a real backend client, not this fleet's own Python-based scripts). platform_revenue_ledger's 'internal' classification on these calls is a FUNDING axis, not a caller-identity axis (this account was credited a 30,000-sat prototyping grant rather than paying with real deposited sats -- confirmed via core/auth.py's classification logic: managed=False for this api_key/agent_id on every current check, classification only stayed 'internal' because treasury_amount was 0, unrelated to who is calling). OSuite's own public product claim (action envelope reviewed by OSuite before execution, binding approval to an action fingerprint) matches the structural bar: an independent runtime sitting between the agent and execution, not something the reviewed agent controls.",
+      "evidence_ref": "https://x.com/jw_ond/status/2078409858651721850",
+      "mediator_id": "osuite",
+      "registered_at": "2026-07-18",
+      "registry_snapshot_sha256": "ca7912e150d4e03f4c762f4d4b2a4718c1e56043c45756f6031578f84fcddbb5"
+    },
+    "mediator_name": "OSuite",
+    "platform": "invinoveritas",
+    "policy_commitment": "sha256:b0d29b374874515c8ffa392326fd05d80fcee28dc791fdbb5edbeb6fd50396dd",
+    "policy_commitment_inputs": {
+      "conformance_suite_commit": "62d32e519c39ba060950140ee7ceb5327371a0fe",
+      "conformance_suite_repo": "babyblueviper1/preaction-governance-conformance",
+      "rubric_doc_path": "docs/policy_spec/invinoveritas.review.v10.md",
+      "rubric_sha256": "a4af5917fb2d37a685476458a6e326e6cc870fc24e8b49b41243b685fb9eb1b5"
+    },
+    "policy_version": "invinoveritas.review.v11",
+    "registry_as_of": 1787077030,
+    "registry_snapshot_sha256": "ca7912e150d4e03f4c762f4d4b2a4718c1e56043c45756f6031578f84fcddbb5",
+    "requires_use_time_revalidation": true,
+    "review_model_hash": "deda3dc02a1d1575f15d5c9f9b3e31cf0c768a55508c31e7ff0f4fc8f33fc669",
+    "schema": "invinoveritas.verdict_proof.v1",
+    "source_class": "independent_mediator",
+    "state_hash": "sha256:bf20ca701b25455d379b0bc8d68d8be880c8fec08561106cbb72e59005f44aea",
+    "summary_hash": "8c25c5f195d7b90732152631969217137646ddb82580bca731eacbf76361a2e6",
+    "verdict": "approve_with_concerns",
+    "verified_at": 1787077030,
+    "verifier_keys": "https://api.babyblueviper.com/.well-known/verifier-keys.json",
+    "verifier_pubkey": "6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7",
+    "verify_how": "Easiest: install the offline verifier above and recompute locally. Or POST this proof's signed `event` to verify_url (or an independent_node), OR run NIP-01 yourself: recompute the Nostr event id = sha256([0,pubkey,created_at,kind,tags,content]), verify the schnorr signature against verifier_pubkey. valid ⇒ invinoveritas issued this, untampered. No trust required.",
+    "verify_offline": "npm i invinoveritas-verify  ·  pip install invinoveritas-verify  — recompute this proof on your own machine against verifier_pubkey; you never have to call us.",
+    "verify_url": "https://api.babyblueviper.com/verify-proof"
+  },
+  "source_class": "independent_mediator",
+  "execution_binding": "external",
+  "requires_use_time_revalidation": true,
+  "age_seconds": 1,
+  "scope_note": "A valid proof confirms invinoveritas issued this verdict — NOT that it's fresh or meant for YOUR interaction. Check `age_seconds` for recency and pass `expect_artifact_hash` to bind the proof to the exact output you received. `state_hash` is a COMMITMENT (what state this proof was about), not execution-binding (whether that's still the state you're about to act on) — see `execution_binding`/`requires_use_time_revalidation`. Recompute state_hash immediately before acting and compare; a TOCTOU window between that compare and the actual action still exists unless your own executor enforces it atomically (ELR-I9, per safal207/crewAIInc-crewAI#4877). Freshness is informational only this call (no expect_max_age_seconds supplied) -- check age_seconds yourself if staleness matters to you.",
+  "get_your_own": "Want your own output trusted like this? POST /review with {\"sign\": true} to get a portable signed verdict proof to attach to what you ship. The norm both ways: demand a proof on what you receive, attach one to what you ship — that's how trust spreads agent-to-agent. Skill: integrations/agentskills/verification-handshake.",
+  "event": {
+    "id": "ba6aef4ff80ab4c33b6e2d0e09a5d8af2e80284daa72ed96b71b46f165231c25",
+    "pubkey": "6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7",
+    "created_at": 1787077030,
+    "kind": 30078,
+    "tags": [
+      [
+        "d",
+        "invinoveritas-proof-d7f8744cfdbc955abc59a5f587028598cbe4e53613bfd9b3c0c186ad95ee5065-1787077030-a6d92b56"
+      ],
+      [
+        "t",
+        "invinoveritas"
+      ],
+      [
+        "t",
+        "proof"
+      ],
+      [
+        "schema",
+        "invinoveritas.verdict_proof.v1"
+      ]
+    ],
+    "content": "{\"artifact_hash\":\"d7f8744cfdbc955abc59a5f587028598cbe4e53613bfd9b3c0c186ad95ee5065\",\"artifact_type\":\"agent_output\",\"confidence\":0.9,\"conformance_suite\":\"https://github.com/babyblueviper1/preaction-governance-conformance\",\"decision_ref\":\"sha256:a90a6f398e94129344549d36bd93cbefabd97f0f18a2fb7ca548ada24a089aaa\",\"decision_ref_preimage_fields\":[\"artifact_hash\",\"artifact_type\",\"policy_version\",\"verdict\",\"source_class\",\"vantage_limitation\",\"related_decision_ref\",\"intended_audience\",\"confidentiality_tier\",\"disclosed_summary\",\"intended_verifier\",\"policy_commitment\",\"verified_at\",\"registry_as_of\",\"registry_snapshot_sha256\"],\"decision_ref_preimage_rule\":\"every name in decision_ref_preimage_fields is a key in the hashed preimage object, always -- absent fields (e.g. vantage_limitation when not applicable) are present as JSON null, never omitted from the object.\",\"engine_generation\":1,\"execution_binding\":\"external\",\"independent_nodes\":[\"https://invinoveritas-castra.babyblueviper.workers.dev/verify\",\"https://babyblueviper1--2aba75da693711f185891607ee4eb77e.web.val.run\"],\"key_id\":\"6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7\",\"mediator_evidence\":{\"authority_basis\":\"Real live integration account (label 'osuite-checkpoint', created 2026-07-13, 17 calls). Verified 2026-07-18 that calls genuinely originate from OSuite's own infrastructure, not ours: nginx access log shows the most recent /review call (2026-07-18T08:45:49Z) from IP 104.43.193.12 (Microsoft Azure, Des Moines datacenter -- confirmed distinct from this VPS's own provider), User-Agent 'node' (a real backend client, not this fleet's own Python-based scripts). platform_revenue_ledger's 'internal' classification on these calls is a FUNDING axis, not a caller-identity axis (this account was credited a 30,000-sat prototyping grant rather than paying with real deposited sats -- confirmed via core/auth.py's classification logic: managed=False for this api_key/agent_id on every current check, classification only stayed 'internal' because treasury_amount was 0, unrelated to who is calling). OSuite's own public product claim (action envelope reviewed by OSuite before execution, binding approval to an action fingerprint) matches the structural bar: an independent runtime sitting between the agent and execution, not something the reviewed agent controls.\",\"evidence_ref\":\"https://x.com/jw_ond/status/2078409858651721850\",\"mediator_id\":\"osuite\",\"registered_at\":\"2026-07-18\",\"registry_snapshot_sha256\":\"ca7912e150d4e03f4c762f4d4b2a4718c1e56043c45756f6031578f84fcddbb5\"},\"mediator_name\":\"OSuite\",\"platform\":\"invinoveritas\",\"policy_commitment\":\"sha256:b0d29b374874515c8ffa392326fd05d80fcee28dc791fdbb5edbeb6fd50396dd\",\"policy_commitment_inputs\":{\"conformance_suite_commit\":\"62d32e519c39ba060950140ee7ceb5327371a0fe\",\"conformance_suite_repo\":\"babyblueviper1/preaction-governance-conformance\",\"rubric_doc_path\":\"docs/policy_spec/invinoveritas.review.v10.md\",\"rubric_sha256\":\"a4af5917fb2d37a685476458a6e326e6cc870fc24e8b49b41243b685fb9eb1b5\"},\"policy_version\":\"invinoveritas.review.v11\",\"registry_as_of\":1787077030,\"registry_snapshot_sha256\":\"ca7912e150d4e03f4c762f4d4b2a4718c1e56043c45756f6031578f84fcddbb5\",\"requires_use_time_revalidation\":true,\"review_model_hash\":\"deda3dc02a1d1575f15d5c9f9b3e31cf0c768a55508c31e7ff0f4fc8f33fc669\",\"schema\":\"invinoveritas.verdict_proof.v1\",\"source_class\":\"independent_mediator\",\"state_hash\":\"sha256:bf20ca701b25455d379b0bc8d68d8be880c8fec08561106cbb72e59005f44aea\",\"summary_hash\":\"8c25c5f195d7b90732152631969217137646ddb82580bca731eacbf76361a2e6\",\"verdict\":\"approve_with_concerns\",\"verified_at\":1787077030,\"verifier_keys\":\"https://api.babyblueviper.com/.well-known/verifier-keys.json\",\"verifier_pubkey\":\"6786e18a864893a900bd9858e650f67ccc3513f248fed374b591e2ff6922fbb7\",\"verify_how\":\"Easiest: install the offline verifier above and recompute locally. Or POST this proof's signed `event` to verify_url (or an independent_node), OR run NIP-01 yourself: recompute the Nostr event id = sha256([0,pubkey,created_at,kind,tags,content]), verify the schnorr signature against verifier_pubkey. valid ⇒ invinoveritas issued this, untampered. No trust required.\",\"verify_offline\":\"npm i invinoveritas-verify  ·  pip install invinoveritas-verify  — recompute this proof on your own machine against verifier_pubkey; you never have to call us.\",\"verify_url\":\"https://api.babyblueviper.com/verify-proof\"}",
+    "sig": "ffcf2096dd8f20826c3f06463f8f258be60becd204ea2a292dc4b886a1d56ad8bdb4cce95856d4d994d85bcfd338228fa09c506378b789c8d00399d33f688c8e"
+  }
+}

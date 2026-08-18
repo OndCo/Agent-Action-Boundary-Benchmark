@@ -12,6 +12,8 @@ test('buildGithubSaasRunPacket creates an approval-bound SaaS side-effect packet
   const packet = buildGithubSaasRunPacket();
 
   assert.equal(packet.case.id, 'baby-blue-github-saas-operation');
+  assert.equal(packet.packet_version, 'osuite.baby-blue.github-saas-reference-run.v11');
+  assert.match(packet.case.issue.title, /v11 reference run/);
   assert.equal(packet.evaluation.actual.control, 'require_review');
   assert.deepEqual(packet.evaluation.actual.drift, ['none']);
   assert.equal(packet.evaluation.actual.judgment.verdict, 'approve_with_concerns');

@@ -1,0 +1,12 @@
+{
+  "valid": true,
+  "failures": [],
+  "recomputed": {
+    "action_fingerprint": "sha256:bf20ca701b25455d379b0bc8d68d8be880c8fec08561106cbb72e59005f44aea",
+    "executed_fingerprint": "sha256:bf20ca701b25455d379b0bc8d68d8be880c8fec08561106cbb72e59005f44aea",
+    "artifact_hash": "sha256:d7f8744cfdbc955abc59a5f587028598cbe4e53613bfd9b3c0c186ad95ee5065",
+    "artifact_hash_hex": "d7f8744cfdbc955abc59a5f587028598cbe4e53613bfd9b3c0c186ad95ee5065",
+    "judgment_verdict": "approve_with_concerns",
+    "control": "require_review"
+  }
+}

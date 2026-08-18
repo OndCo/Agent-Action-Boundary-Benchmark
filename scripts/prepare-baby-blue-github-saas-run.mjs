@@ -26,7 +26,7 @@ function parseArgs(argv) {
     baseUrl: process.env.BABYBLUE_BASE_URL || 'https://api.babyblueviper.com',
     owner: process.env.OSUITE_GITHUB_RUN_OWNER || 'OndCo',
     repo: process.env.OSUITE_GITHUB_RUN_REPO || 'Agent-Action-Boundary-Benchmark',
-    runId: process.env.OSUITE_GITHUB_RUN_ID || `bbv-github-saas-${new Date().toISOString().slice(0, 10)}`,
+    runId: process.env.OSUITE_GITHUB_RUN_ID || `bbv-v11-github-saas-${new Date().toISOString().slice(0, 10)}`,
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -118,6 +118,13 @@ async function callBabyBlueLedgerSubmit({ baseUrl, payload }) {
   return parseJsonResponse(response);
 }
 
+async function fetchBabyBlueLedgerEntry({ baseUrl, ledgerResponse }) {
+  const entry = ledgerResponse?.entry || ledgerResponse?.record?.entry || ledgerResponse?.ledger_entry || null;
+  if (!entry) return null;
+  const response = await fetch(`${baseUrl}/ledger/${entry}`);
+  return parseJsonResponse(response);
+}
+
 function buildReadme({
   args,
   verification,
@@ -151,6 +158,7 @@ Run ID: ${args.runId}
 - \`proof-verification.json\`: live \`/verify-proof\` result when available.
 - \`ledger-submit-payload.json\`: payload sent to Baby Blue \`/ledger/submit\` when available.
 - \`ledger-response.json\`: live ledger response when submitted.
+- \`ledger-entry.json\`: public ledger entry fetched back from Baby Blue after self-submit.
 - \`github-outcome.json\`: live GitHub issue outcome when executed.
 - \`verification.json\`: local recomputation result for action fingerprint, artifact hash, judgment, and outcome binding.
 
@@ -199,6 +207,9 @@ async function main() {
   const ledgerResponse = args.submitLedger
     ? await callBabyBlueLedgerSubmit({ baseUrl: args.baseUrl, payload: ledgerSubmitPayload })
     : null;
+  const ledgerEntry = ledgerResponse
+    ? await fetchBabyBlueLedgerEntry({ baseUrl: args.baseUrl, ledgerResponse })
+    : null;
 
   const createdIssue = args.executeGithub
     ? createGithubIssue({
@@ -228,6 +239,7 @@ async function main() {
   await writeFile(path.join(args.output, 'proof-verification.json'), `${JSON.stringify(proofVerification, null, 2)}\n`);
   await writeFile(path.join(args.output, 'ledger-submit-payload.json'), `${JSON.stringify(ledgerSubmitPayload, null, 2)}\n`);
   await writeFile(path.join(args.output, 'ledger-response.json'), `${JSON.stringify(ledgerResponse || { status: 'not_submitted' }, null, 2)}\n`);
+  await writeFile(path.join(args.output, 'ledger-entry.json'), `${JSON.stringify(ledgerEntry || { status: 'not_submitted' }, null, 2)}\n`);
   await writeFile(path.join(args.output, 'github-outcome.json'), `${JSON.stringify(githubOutcome || { status: 'not_executed' }, null, 2)}\n`);
   await writeFile(path.join(args.output, 'verification.json'), `${JSON.stringify(verification, null, 2)}\n`);
   await writeFile(path.join(args.output, 'README.md'), buildReadme({
