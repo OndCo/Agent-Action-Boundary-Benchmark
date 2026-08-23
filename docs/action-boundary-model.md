@@ -125,3 +125,20 @@ It supplies a missing runtime object:
 
 That object can then feed approval systems, external verifier layers, audit logs, proof bundles, and incident reviews.
 
+## Skill Boundary Contracts
+
+A reusable agent skill can also be treated as an upstream boundary source. In that mode, the skill declares a compact contract:
+
+- which operations it may perform;
+- which effects and destinations are allowed;
+- which resource prefixes and data classes are in scope;
+- which identities may invoke it;
+- which constraints, such as max record count, must hold.
+
+OSuite maps that contract into policy fields, then CAVA maps each runtime event into an action object. The same skill boundary can then be checked across MCP tools, SDK calls, shell commands, workflow nodes, or other runtime lanes.
+
+Run the current prototype with:
+
+```bash
+npm run skill-boundary
+```

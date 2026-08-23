@@ -42,6 +42,10 @@
       "required": ["policy_id", "allowed_effects", "allowed_destinations"],
       "properties": {
         "policy_id": { "type": "string" },
+        "allowed_operations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "allowed_effects": {
           "type": "array",
           "items": { "type": "string" }
@@ -61,7 +65,12 @@
         "allowed_identities": {
           "type": "array",
           "items": { "type": "string" }
-        }
+        },
+        "allowed_data_classes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "max_records": { "type": "number" }
       },
       "additionalProperties": true
     },

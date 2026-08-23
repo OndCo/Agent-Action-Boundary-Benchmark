@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osuite.ai/schemas/skill-boundary-contract.schema.json",
+  "title": "Skill Boundary Contract",
+  "type": "object",
+  "required": ["contract_id", "skill", "principals", "allowed", "constraints"],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "pattern": "^skill\\.[a-z0-9][a-z0-9.-]+\\.v[0-9]+$"
+    },
+    "skill": {
+      "type": "object",
+      "required": ["name", "version", "purpose"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "purpose": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "runtime_lanes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "principals": {
+      "type": "object",
+      "required": ["allowed_identities"],
+      "properties": {
+        "allowed_identities": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "allowed": {
+      "type": "object",
+      "required": ["operations", "effects", "destinations", "resource_prefixes", "data_classes"],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "effects": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "destinations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "resource_prefixes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "data_classes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "object",
+      "required": ["max_records", "external_egress", "approval_required", "risk_level"],
+      "properties": {
+        "max_records": { "type": "number" },
+        "external_egress": { "type": "boolean" },
+        "approval_required": { "type": "boolean" },
+        "risk_level": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

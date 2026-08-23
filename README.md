@@ -94,6 +94,19 @@ reports/latest-report.md
 reports/latest-report.json
 ```
 
+Run the skill-boundary contract experiment:
+
+```bash
+npm run skill-boundary
+```
+
+The experiment maps one minimal skill contract into OSuite policy fields and CAVA action fields, then checks equivalent and boundary-violating actions across MCP, SDK, and shell runtime lanes. Its reports are written to:
+
+```text
+reports/skill-boundary-experiment.md
+reports/skill-boundary-experiment.json
+```
+
 Generate and run the larger runtime-boundary corpus:
 
 ```bash
