@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osuite.ai/schemas/neutral-skill-boundary-contract-v2.schema.json",
+  "title": "Vendor-Neutral Skill Boundary Contract v2",
+  "description": "A small research contract for declaring the authority a reusable agent skill requests before a runtime authorization layer narrows or denies it.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "boundary_id",
+    "skill",
+    "runtime_lanes",
+    "principals",
+    "requested_authority",
+    "constraints",
+    "escalation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "skill-boundary-contract.v2"
+    },
+    "boundary_id": {
+      "type": "string",
+      "pattern": "^boundary\\.[a-z0-9][a-z0-9.-]+\\.v[0-9]+$"
+    },
+    "skill": {
+      "type": "object",
+      "required": ["name", "version", "purpose"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "purpose": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "runtime_lanes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "principals": {
+      "type": "object",
+      "required": ["requested_identities"],
+      "properties": {
+        "requested_identities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "requested_authority": {
+      "type": "object",
+      "required": [
+        "operations",
+        "effects",
+        "destinations",
+        "resource_prefixes",
+        "data_classes"
+      ],
+      "properties": {
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "effects": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "destinations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "resource_prefixes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "data_classes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "object",
+      "required": [
+        "max_records",
+        "external_egress",
+        "approval_required",
+        "risk_level"
+      ],
+      "properties": {
+        "max_records": { "type": "number", "minimum": 0 },
+        "max_amount_usd": { "type": "number", "minimum": 0 },
+        "amount_limited_operations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "external_egress": { "type": "boolean" },
+        "approval_required": { "type": "boolean" },
+        "risk_level": { "type": "number", "minimum": 0, "maximum": 100 }
+      },
+      "additionalProperties": false
+    },
+    "escalation": {
+      "type": "object",
+      "required": [
+        "missing_required_evidence",
+        "ambiguous_runtime_mapping"
+      ],
+      "properties": {
+        "missing_required_evidence": {
+          "enum": ["allow", "require_review", "require_dual_approval", "block"]
+        },
+        "ambiguous_runtime_mapping": {
+          "enum": ["allow", "require_review", "require_dual_approval", "block"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

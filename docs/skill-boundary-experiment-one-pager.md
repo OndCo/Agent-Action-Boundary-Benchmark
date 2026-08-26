@@ -46,6 +46,7 @@ The first prototype uses a small contract object:
 | `allowed.data_classes` | Data types the skill may touch. |
 | `principals.allowed_identities` | Agent, skill, or runtime identity allowed to act under the contract. |
 | `constraints.max_records` | Maximum records the skill may process in one action. |
+| `constraints.max_amount_usd` | Optional numeric ceiling for bounded monetary actions, such as refunds. |
 | `constraints.external_egress` | Whether the skill may send data outside the internal workspace. |
 
 ## OSuite / CAVA mapping
@@ -61,9 +62,12 @@ The experiment maps the contract into two OSuite layers:
 | `allowed.data_classes` | `policy.allowed_data_classes` | `action.parameters.data_classification` |
 | `principals.allowed_identities` | `policy.allowed_identities` | `action.identity` |
 | `constraints.max_records` | `policy.max_records` | `action.parameters.record_count` |
+| `constraints.max_amount_usd` | `policy.max_amount_usd` | `action.parameters.amount_usd` |
 | `contract_id` | `policy.policy_id` | `action.parameters.skill_contract_id` |
 
 The experiment also emits a `skill_boundary_key`: a stable hash over the contract-bound consequence fields. Unlike the full CAVA fingerprint, this key intentionally ignores the runtime lane, so equivalent MCP, SDK, and shell actions can be compared at the skill-boundary level.
+
+For bounded payment actions, the current evaluator treats the numeric threshold as a policy predicate over the CAVA action object. For example, a `refund $73` action satisfies `max_amount_usd = 100`, while `refund $125` is marked as policy drift and blocked. If the amount cannot be normalized, the action is not treated as safely inside the boundary.
 
 ## Runtime test matrix
 

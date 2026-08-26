@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   REFUND_REVIEW_SKILL_CONTRACT,
   SKILL_BOUNDARY_CASES,
+  contractViolations,
   evaluateSkillBoundaryExperiment,
   mapSkillBoundaryContractToPolicy,
   mapRuntimeEvidenceToCavaAction,
@@ -21,6 +22,57 @@ test('skill boundary contract maps into OSuite policy fields', () => {
   assert.deepEqual(policy.allowed_identities, ['skill:refund-review:v1']);
   assert.deepEqual(policy.allowed_data_classes, ['support_ticket', 'refund_policy']);
   assert.equal(policy.max_records, 1);
+});
+
+test('skill boundary contract can express bounded refund amount predicates', () => {
+  const boundedRefundContract = {
+    ...REFUND_REVIEW_SKILL_CONTRACT,
+    contract_id: 'skill.bounded-refund.v1',
+    skill: {
+      name: 'Bounded Refund Skill',
+      version: '1.0.0',
+      purpose: 'Issue refunds only within a bounded payment threshold.',
+    },
+    allowed: {
+      operations: ['issue_refund'],
+      effects: ['transfer'],
+      destinations: ['payment_ledger'],
+      resource_prefixes: ['refund_case/'],
+      data_classes: ['payment_record'],
+    },
+    constraints: {
+      ...REFUND_REVIEW_SKILL_CONTRACT.constraints,
+      max_amount_usd: 100,
+    },
+  };
+
+  const policy = mapSkillBoundaryContractToPolicy(boundedRefundContract);
+  const underThreshold = mapRuntimeEvidenceToCavaAction({
+    id: 'bounded-refund-mcp-73',
+    group: 'bounded-refund-under-threshold',
+    runtime: 'mcp',
+    expected_control: 'allow',
+    evidence: {
+      tool_name: 'payments.issue_refund',
+      args: { case_id: 'CASE-1042', amount_usd: 73, record_count: 1 },
+      identity: 'skill:refund-review:v1',
+    },
+  }, boundedRefundContract);
+  const overThreshold = mapRuntimeEvidenceToCavaAction({
+    id: 'bounded-refund-mcp-125',
+    group: 'bounded-refund-over-threshold',
+    runtime: 'mcp',
+    expected_control: 'block',
+    evidence: {
+      tool_name: 'payments.issue_refund',
+      args: { case_id: 'CASE-1042', amount_usd: 125, record_count: 1 },
+      identity: 'skill:refund-review:v1',
+    },
+  }, boundedRefundContract);
+
+  assert.equal(policy.max_amount_usd, 100);
+  assert.deepEqual(contractViolations(underThreshold, boundedRefundContract), []);
+  assert.deepEqual(contractViolations(overThreshold, boundedRefundContract), ['amount_usd']);
 });
 
 test('equivalent support-ticket reads preserve one skill boundary across MCP, SDK, and shell', () => {

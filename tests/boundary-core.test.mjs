@@ -188,6 +188,133 @@ test('evaluateCase can represent approval-bound critical actions without collaps
   assert.equal(result.pass, true);
 });
 
+test('evaluateCase enforces a numeric amount policy predicate', () => {
+  function refundAction(amountUsd) {
+    return {
+      ...baseAction,
+      runtime: 'payment-agent',
+      operation: 'issue_refund',
+      resource: 'refund_case/CASE-1042',
+      effect: 'transfer',
+      destination: 'payment_ledger',
+      identity: 'skill:bounded-refund:v1',
+      parameters: {
+        amount_usd: amountUsd,
+        data_classification: 'payment_record',
+        record_count: 1,
+      },
+      rollback: {
+        available: false,
+        method: 'external payment side effect cannot be fully rolled back',
+      },
+    };
+  }
+
+  const policy = {
+    policy_id: 'refund-under-100',
+    allowed_operations: ['issue_refund'],
+    allowed_effects: ['transfer'],
+    allowed_destinations: ['payment_ledger'],
+    allowed_resource_prefixes: ['refund_case/'],
+    allowed_identities: ['skill:bounded-refund:v1'],
+    allowed_data_classes: ['payment_record'],
+    max_amount_usd: 100,
+  };
+
+  const underThreshold = evaluateCase({
+    id: 'refund-amount-threshold-allowed',
+    title: 'Refund under policy threshold is allowed',
+    runtime: 'payment-agent',
+    approved_action: refundAction(73),
+    executed_action: refundAction(73),
+    policy,
+    expected: {
+      drift: ['none'],
+      control: 'allow',
+    },
+  });
+
+  const overThreshold = evaluateCase({
+    id: 'refund-amount-threshold-exceeded',
+    title: 'Refund over policy threshold is rejected',
+    runtime: 'payment-agent',
+    approved_action: refundAction(125),
+    executed_action: refundAction(125),
+    policy,
+    expected: {
+      drift: ['policy_drift'],
+      control: 'block',
+    },
+  });
+
+  assert.equal(underThreshold.actual.control, 'allow');
+  assert.deepEqual(underThreshold.actual.drift, ['none']);
+  assert.equal(underThreshold.pass, true);
+  assert.equal(overThreshold.actual.control, 'block');
+  assert.deepEqual(overThreshold.actual.drift, ['policy_drift']);
+  assert.equal(overThreshold.pass, true);
+});
+
+test('evaluateCase escalates when a bounded numeric predicate lacks evidence', () => {
+  const result = evaluateCase({
+    id: 'refund-amount-threshold-missing',
+    title: 'Refund missing amount requires review',
+    runtime: 'payment-agent',
+    approved_action: {
+      ...baseAction,
+      runtime: 'payment-agent',
+      operation: 'issue_refund',
+      resource: 'refund_case/CASE-1042',
+      effect: 'transfer',
+      destination: 'payment_ledger',
+      identity: 'skill:bounded-refund:v1',
+      parameters: {
+        data_classification: 'payment_record',
+        record_count: 1,
+      },
+      rollback: {
+        available: false,
+        method: 'external payment side effect cannot be fully rolled back',
+      },
+    },
+    executed_action: {
+      ...baseAction,
+      runtime: 'payment-agent',
+      operation: 'issue_refund',
+      resource: 'refund_case/CASE-1042',
+      effect: 'transfer',
+      destination: 'payment_ledger',
+      identity: 'skill:bounded-refund:v1',
+      parameters: {
+        data_classification: 'payment_record',
+        record_count: 1,
+      },
+      rollback: {
+        available: false,
+        method: 'external payment side effect cannot be fully rolled back',
+      },
+    },
+    policy: {
+      policy_id: 'refund-under-100',
+      allowed_operations: ['issue_refund'],
+      allowed_effects: ['transfer'],
+      allowed_destinations: ['payment_ledger'],
+      allowed_resource_prefixes: ['refund_case/'],
+      allowed_identities: ['skill:bounded-refund:v1'],
+      allowed_data_classes: ['payment_record'],
+      max_amount_usd: 100,
+    },
+    expected: {
+      drift: ['incomplete_evidence'],
+      control: 'require_review',
+    },
+  });
+
+  assert.equal(result.actual.control, 'require_review');
+  assert.deepEqual(result.actual.drift, ['incomplete_evidence']);
+  assert.equal(result.pass, true);
+});
+
 test('evaluateCase separates contextual judgment failure from boundary drift', () => {
   const action = {
     ...baseAction,

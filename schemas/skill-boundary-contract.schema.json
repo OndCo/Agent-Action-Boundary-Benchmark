@@ -66,6 +66,7 @@
       "required": ["max_records", "external_egress", "approval_required", "risk_level"],
       "properties": {
         "max_records": { "type": "number" },
+        "max_amount_usd": { "type": "number" },
         "external_egress": { "type": "boolean" },
         "approval_required": { "type": "boolean" },
         "risk_level": { "type": "number" }

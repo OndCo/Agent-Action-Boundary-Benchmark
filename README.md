@@ -98,13 +98,20 @@ Run the skill-boundary contract experiment:
 
 ```bash
 npm run skill-boundary
+npm run skill-boundary:v2
 ```
 
-The experiment maps one minimal skill contract into OSuite policy fields and CAVA action fields, then checks equivalent and boundary-violating actions across MCP, SDK, and shell runtime lanes. Its reports are written to:
+The first experiment maps one minimal skill contract into OSuite policy fields and CAVA action fields, then checks equivalent and boundary-violating actions across MCP, SDK, and shell runtime lanes.
+
+The v2 experiment is research-first and vendor-neutral. It keeps the skill boundary contract independent of OSuite, maps it into OSuite/CAVA as one reference implementation, and then tests whether runtime authorization can narrow or deny the requested skill authority across MCP, SDK, shell, and workflow lanes.
+
+Skill-boundary reports are written to:
 
 ```text
 reports/skill-boundary-experiment.md
 reports/skill-boundary-experiment.json
+reports/skill-boundary-v2-experiment.md
+reports/skill-boundary-v2-experiment.json
 ```
 
 Generate and run the larger runtime-boundary corpus:
@@ -146,6 +153,7 @@ Detected drift classes:
 - `effect_drift`: execution added write, publish, delete, transfer, or other side effect.
 - `identity_drift`: acting identity changed.
 - `policy_drift`: execution no longer matches the policy checked at approval time.
+- `incomplete_evidence`: a typed policy predicate cannot be evaluated because required runtime evidence is missing.
 
 Judgment-validity verdicts:
 
