@@ -1,6 +1,6 @@
 # OSuite Runtime Boundary Benchmark
 
-Generated: 2026-08-13T15:52:08.526Z
+Reference run timestamp (UTC): 2026-08-29T16:13:49.406Z
 
 Input: `benchmarks/runtime-boundary-corpus.jsonl`
 

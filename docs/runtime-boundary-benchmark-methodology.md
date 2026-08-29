@@ -1,6 +1,6 @@
 # Runtime Boundary Benchmark Methodology
 
-This document explains how the 6,000-record OSuite Runtime Boundary Benchmark corpus is generated, scored, and bounded.
+This document explains how the 6,000-record OSuite Runtime Boundary Benchmark corpus is constructed, scored, and bounded.
 
 ## Benchmark Question
 
@@ -10,9 +10,9 @@ The benchmark asks one operational security question:
 
 It does not evaluate model alignment, model capability, prompt toxicity, or every possible runtime exploit.
 
-## Corpus Generation
+## Corpus Construction
 
-The corpus is generated deterministically by:
+The corpus is constructed deterministically by:
 
 ```bash
 npm run generate:runtime
@@ -151,7 +151,7 @@ These baselines are not meant to be state-of-the-art security products. They rep
 
 ## How To Interpret 100% Results
 
-The reference runner is expected to score perfectly against this generated corpus because the corpus is designed to test the action-boundary representation directly.
+The reference runner is expected to score perfectly against this deterministic corpus because the corpus is designed to test the action-boundary representation directly.
 
 The useful comparison is not “100% means universal safety.” It is:
 

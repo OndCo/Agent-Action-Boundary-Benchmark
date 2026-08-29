@@ -31,7 +31,7 @@ function renderMarkdown(experiment) {
   const lines = [
     '# Skill Boundary Runtime Consistency Experiment v2',
     '',
-    `Generated: ${new Date().toISOString()}`,
+    `Reference run timestamp (UTC): ${new Date().toISOString()}`,
     '',
     '## Research Question',
     '',

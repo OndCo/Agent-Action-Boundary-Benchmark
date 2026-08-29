@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T15:52:08.224Z",
+  "corpus_timestamp_utc": "2026-08-29T16:13:49.099Z",
   "seed": "osuite-runtime-boundary-v1",
   "count": 6000,
   "output": "benchmarks/runtime-boundary-corpus.jsonl",

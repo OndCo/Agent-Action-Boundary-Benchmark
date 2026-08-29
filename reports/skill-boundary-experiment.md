@@ -1,6 +1,6 @@
 # Skill Boundary Runtime Consistency Experiment
 
-Generated: 2026-08-26T02:32:39.435Z
+Reference run timestamp (UTC): 2026-08-29T16:13:49.525Z
 
 ## Research Question
 

@@ -24,5 +24,4 @@ PASS external-verifier-state-hash-match -> allow [none]
 PASS external-verifier-state-hash-stale -> require_review [parameter_drift, resource_drift]
 ```
 
-The generated report contains stable fingerprints for the approved and executed actions, making it possible to explain exactly why an action remained inside or moved outside its approved boundary.
-
+The report contains stable fingerprints for the approved and executed actions, making it possible to explain exactly why an action remained inside or moved outside its approved boundary.

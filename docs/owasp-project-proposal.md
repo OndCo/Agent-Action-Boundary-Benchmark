@@ -23,10 +23,10 @@ Code / Tooling project with companion documentation
 The repository contains:
 
 - benchmark cases
-- a generated 6,000-record runtime boundary corpus
+- a deterministic 6,000-record runtime boundary corpus
 - action boundary schema
 - runnable Node.js reference runner
-- generated reports
+- runner-emitted reports
 - baseline comparison tables
 - guidance documents
 - demo flows for Codex, MCP, browser agents, Dify, and n8n
@@ -58,7 +58,7 @@ Traditional logs can record that something happened. This benchmark focuses on w
 
 1. Benchmark schema for approved and executed agent actions.
 2. Compact hand-written JSONL cases for walkthroughs and demos.
-3. Generated 6,000-record runtime boundary corpus covering 19 runtime surfaces, 46 scenario families, 6 locales, 10 obfuscation styles, and 750 judgment-validity records.
+3. Deterministic 6,000-record runtime boundary corpus covering 19 runtime surfaces, 46 scenario families, 6 locales, 10 obfuscation styles, and 750 judgment-validity records.
 4. Reference runner that canonicalizes actions, computes fingerprints, detects drift, and emits reports.
 5. Baseline comparisons for runtime-label, operation-only, effect/destination, and partial-resource matching.
 6. Documentation describing the action boundary model and methodology.
@@ -69,7 +69,7 @@ Traditional logs can record that something happened. This benchmark focuses on w
 ### Phase 1: Public Benchmark Baseline
 
 - Maintain the first benchmark corpus.
-- Maintain the 6,000-record generated runtime corpus.
+- Maintain the deterministic 6,000-record runtime corpus.
 - Add schema validation.
 - Add report examples and CI.
 - Maintain the judgment-validity lane for boundary-valid but contextually unsafe actions.

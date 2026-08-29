@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T15:52:08.475Z",
+  "run_timestamp_utc": "2026-08-29T16:13:49.354Z",
   "input": "benchmarks/runtime-boundary-corpus.jsonl",
   "scoring": {
     "summary": {

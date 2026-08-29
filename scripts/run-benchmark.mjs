@@ -142,7 +142,7 @@ function renderMarkdown({ inputFile, results, scoring, baselines, sampleLimit })
   const lines = [
     '# OSuite Runtime Boundary Benchmark',
     '',
-    `Generated: ${new Date().toISOString()}`,
+    `Reference run timestamp (UTC): ${new Date().toISOString()}`,
     '',
     `Input: \`${path.relative(rootDir, inputFile)}\``,
     '',
@@ -273,7 +273,7 @@ async function main() {
   if (args.writeReport) {
     await mkdir(reportDir, { recursive: true });
     const payload = {
-      generated_at: new Date().toISOString(),
+      run_timestamp_utc: new Date().toISOString(),
       input: path.relative(rootDir, args.input),
       scoring,
       baselines,

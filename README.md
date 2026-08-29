@@ -47,7 +47,7 @@ Current public corpus:
 | Judgment-validity records | 750 |
 | Contextual-risk records | 637 |
 
-The generated report compares the reference boundary runner against deliberately simple baselines:
+The runner-emitted report compares the reference boundary runner against deliberately simple baselines:
 
 | Model | Exact match | Risky protection | Safe baseline allow |
 | --- | ---: | ---: | ---: |
@@ -57,7 +57,7 @@ The generated report compares the reference boundary runner against deliberately
 | Effect/destination baseline | 60.8% | 53.0% | 100.0% |
 | Resource/effect/destination baseline | 71.9% | 68.8% | 100.0% |
 
-The point of this table is not that a reference runner beats its own generated labels. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
+The point of this table is not that a reference runner beats labels constructed for its own benchmark task. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
 
 The corpus now includes DeepSeek Harness as a target runtime lane. That does not mean OSuite is claiming a production DeepSeek Harness adapter is ready. It means the benchmark can already model the pre-tool and post-tool action boundary that a future `osuite-governance-plugin` should preserve.
 

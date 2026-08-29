@@ -40,14 +40,14 @@ async function main() {
   await mkdir(path.dirname(args.output), { recursive: true });
   await writeFile(args.output, `${cases.map((item) => JSON.stringify(item)).join('\n')}\n`);
   await writeFile(args.metadataOutput, `${JSON.stringify({
-    generated_at: new Date().toISOString(),
+    corpus_timestamp_utc: new Date().toISOString(),
     seed: args.seed,
     count: cases.length,
     output: path.relative(rootDir, args.output),
     ...runtimeBoundaryCorpusMetadata,
   }, null, 2)}\n`);
 
-  console.log(`Generated ${cases.length} records at ${path.relative(rootDir, args.output)}`);
+  console.log(`Wrote ${cases.length} records at ${path.relative(rootDir, args.output)}`);
   console.log(`Wrote metadata at ${path.relative(rootDir, args.metadataOutput)}`);
 }
 

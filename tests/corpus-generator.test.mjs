@@ -28,7 +28,7 @@ test('generateRuntimeBoundaryCorpus creates requested records with baselines and
   assert.ok(obfuscations.size >= 8, `expected obfuscation coverage, got ${obfuscations.size}`);
 });
 
-test('generated corpus is internally consistent with the reference boundary evaluator', () => {
+test('deterministic corpus is internally consistent with the reference boundary evaluator', () => {
   const cases = generateRuntimeBoundaryCorpus({ count: 720, seed: 'consistency-seed' });
   const { results, scoring } = evaluateCases(cases);
 
