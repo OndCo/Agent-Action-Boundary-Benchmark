@@ -12,6 +12,7 @@
     "report:runtime": "node scripts/run-benchmark.mjs --input benchmarks/runtime-boundary-corpus.jsonl --write-report --strict --prefix runtime-boundary-benchmark",
     "skill-boundary": "node scripts/run-skill-boundary-experiment.mjs",
     "skill-boundary:v2": "node scripts/run-skill-boundary-v2-experiment.mjs",
+    "skill-boundary:v3": "node scripts/run-skill-boundary-v3-experiment.mjs",
     "second-run:baby-blue": "node scripts/prepare-baby-blue-second-run.mjs",
     "second-run:baby-blue:live": "node scripts/prepare-baby-blue-second-run.mjs --live",
     "second-run:baby-blue:github": "node scripts/prepare-baby-blue-github-saas-run.mjs",

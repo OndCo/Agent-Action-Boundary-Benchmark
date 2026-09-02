@@ -7,8 +7,11 @@ This note collects the materials to send for the first asynchronous discussion w
 1. v2 research artifact note: `docs/skill-boundary-v2-research-artifact.md`
 2. Runnable v2 experiment report: `reports/skill-boundary-v2-experiment.md`
 3. Machine-readable v2 experiment output: `reports/skill-boundary-v2-experiment.json`
-4. Original one-page experiment brief: `docs/skill-boundary-experiment-one-pager.md`
-5. External verifier reference run: `runs/baby-blue-v11-github-saas-run/2026-08-18-1816z/README.md`
+4. v3 research artifact note: `docs/skill-boundary-v3-research-artifact.md`
+5. Runnable v3 experiment report: `reports/skill-boundary-v3-experiment.md`
+6. Machine-readable v3 experiment output: `reports/skill-boundary-v3-experiment.json`
+7. Original one-page experiment brief: `docs/skill-boundary-experiment-one-pager.md`
+8. External verifier reference run: `runs/baby-blue-v11-github-saas-run/2026-08-18-1816z/README.md`
 
 ## What the one-page brief covers
 
@@ -77,6 +80,30 @@ Violation block rate: 100.0%
 Escalation match rate: 100.0%
 Boundary consistency rate: 100.0%
 ```
+
+The v3 artifact responds to the next round of feedback by shrinking the neutral contract further. Runtime lanes, risk level, approval requirement, and escalation behavior are no longer part of the skill boundary. Requested authority is represented per operation, so operation, effect, destination, resource pattern, constraints, and required evidence are bound together. The runner separately reports runtime-to-action mapping accuracy and authorization-decision accuracy.
+
+Run it with:
+
+```bash
+npm run skill-boundary:v3
+```
+
+Expected current result:
+
+```text
+Skill boundary v3 experiment: 48 cases
+Skill families: 2
+Runtime lanes: 4
+Runtime-to-action mapping accuracy: 100.0%
+Authorization decision accuracy: 100.0%
+Correct review escalation rate: 100.0%
+False allow rate: 0.0%
+False block rate: 0.0%
+Cross-runtime consistency rate: 100.0%
+```
+
+The v3 run holds out procurement approval, calendar scheduling, cloud IAM change, browser-agent, DeepSeek Harness, Dify, and n8n mappings until after the core semantics are frozen. That keeps the next evaluation from being tuned only to the examples used while designing the contract.
 
 ## External verifier run to include as background
 

@@ -99,11 +99,14 @@ Run the skill-boundary contract experiment:
 ```bash
 npm run skill-boundary
 npm run skill-boundary:v2
+npm run skill-boundary:v3
 ```
 
 The first experiment maps one minimal skill contract into OSuite policy fields and CAVA action fields, then checks equivalent and boundary-violating actions across MCP, SDK, and shell runtime lanes.
 
 The v2 experiment is research-first and vendor-neutral. It keeps the skill boundary contract independent of OSuite, maps it into OSuite/CAVA as one reference implementation, and then tests whether runtime authorization can narrow or deny the requested skill authority across MCP, SDK, shell, and workflow lanes.
+
+The v3 experiment sharpens that split further. The core skill contract no longer contains runtime lanes, risk scores, approval requirements, or escalation behavior. Requested authority is expressed per operation, so `issue_refund` binds to `transfer`, `payment_ledger`, `refund_case/{case_id}`, and `amount_usd_lte=100` as one semantic unit rather than as independently composable fields. The runner reports runtime-to-action mapping accuracy separately from authorization-decision accuracy.
 
 Skill-boundary reports are written to:
 
@@ -112,6 +115,8 @@ reports/skill-boundary-experiment.md
 reports/skill-boundary-experiment.json
 reports/skill-boundary-v2-experiment.md
 reports/skill-boundary-v2-experiment.json
+reports/skill-boundary-v3-experiment.md
+reports/skill-boundary-v3-experiment.json
 ```
 
 Generate and run the larger runtime-boundary corpus:
