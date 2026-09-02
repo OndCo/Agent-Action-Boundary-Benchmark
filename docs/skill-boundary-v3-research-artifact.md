@@ -120,6 +120,18 @@ Cross-runtime consistency rate: 100.0%
 
 These numbers describe only this controlled working artifact. They should not be presented as a population-scale claim.
 
+## Anticipated Review Questions
+
+**Why are the current scores 100%?** Because v3 is a controlled semantics artifact, not a generalization benchmark. The point of this run is to check whether the proposed contract structure, runtime mappings, and evaluator agree on the same frozen examples. Generalization should be tested only after the contract semantics are jointly frozen.
+
+**Who defines the expected outcomes?** In this version, expected outcomes are encoded in the case fixtures before the evaluator runs. For the next phase, the expectation is that OSuite and the academic collaborators jointly freeze the schema, threat model, held-out families, runtime mappings, and expected allow/block/review outcomes before running the expanded benchmark.
+
+**Why only two skill families?** The small scope is intentional. Refund operations and document review exercise transfer, read, write, missing-evidence, runtime-narrowing, runtime-denial, and cross-runtime equivalence without expanding the vocabulary too early.
+
+**Is this still OSuite-specific?** The contract schema avoids OSuite and CAVA field names. OSuite/CAVA appears only as one reference implementation for mapping runtime evidence and producing replayable proof.
+
+**What should not be concluded yet?** v3 does not prove that the schema generalizes to every skill, every runtime, or every enterprise policy. It establishes a cleaner object for joint critique before a larger held-out evaluation.
+
 ## Held-Out Plan
 
 The following skill families are held out until after the core semantics are frozen:
