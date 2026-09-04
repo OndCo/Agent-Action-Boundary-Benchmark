@@ -25,7 +25,7 @@ Default configuration:
 | Records | 6,000 |
 | Safe baselines | 1,000 |
 | Risky records | 5,000 |
-| Runtime surfaces | 19 |
+| Runtime surfaces | 20 |
 | Scenario families | 46 |
 | Locales | 6 |
 | Obfuscation styles | 10 |
@@ -49,6 +49,8 @@ node scripts/generate-runtime-boundary-corpus.mjs --count 10000 --seed your-seed
 The corpus includes both currently exercised runtime families and target runtime lanes. A target lane means the benchmark can represent the action-boundary shape before a production adapter is complete.
 
 DeepSeek Harness is now tracked as a target runtime because its public developer-preview architecture exposes the governance seam OSuite needs: `tools/pre-execute` for pre-action review, `tools/post-execute` for result transformation or blocking, and immutable `tools/result` observation for final outcome evidence. The benchmark lane does not claim managed OSuite support for DeepSeek Harness yet; it gives maintainers and security teams a concrete adapter target.
+
+Agent 365-style registry records are tracked as a target runtime lane for the adjacent enterprise-control-plane problem. A registry can tell the organization which agents exist, who owns them, what lifecycle state they are in, and which policies are attached. The benchmark tests the separate question: whether that registry context is enough to bind a concrete approved action to the concrete action that later executes. In OSuite terms, registry metadata is evidence input; CAVA action identity and replayable approval proof are the governed output.
 
 ## Record Shape
 

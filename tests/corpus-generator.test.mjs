@@ -23,6 +23,8 @@ test('generateRuntimeBoundaryCorpus creates requested records with baselines and
   const obfuscations = new Set(cases.map((item) => item.obfuscation));
 
   assert.ok(runtimes.size >= 10, `expected broad runtime coverage, got ${runtimes.size}`);
+  assert.ok(runtimes.has('agent365-registry'), 'expected Agent 365-style registry lane coverage');
+  assert.ok(runtimes.has('deepseek-harness'), 'expected DeepSeek Harness target lane coverage');
   assert.ok(families.size >= 20, `expected broad family coverage, got ${families.size}`);
   assert.ok(locales.size >= 5, `expected multilingual coverage, got ${locales.size}`);
   assert.ok(obfuscations.size >= 8, `expected obfuscation coverage, got ${obfuscations.size}`);

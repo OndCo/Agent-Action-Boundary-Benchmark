@@ -1,5 +1,5 @@
 {
-  "corpus_timestamp_utc": "2026-08-29T16:13:49.099Z",
+  "corpus_timestamp_utc": "2026-09-04T04:34:59.287Z",
   "seed": "osuite-runtime-boundary-v1",
   "count": 6000,
   "output": "benchmarks/runtime-boundary-corpus.jsonl",
@@ -9,6 +9,7 @@
     "codex",
     "claude-code",
     "deepseek-harness",
+    "agent365-registry",
     "browser-agent",
     "mcp",
     "n8n",

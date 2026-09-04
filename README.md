@@ -39,7 +39,7 @@ Current public corpus:
 | Total records | 6,000 |
 | Safe baseline records | 1,000 |
 | Risky records | 5,000 |
-| Runtime surfaces | 19 |
+| Runtime surfaces | 20 |
 | Scenario families | 46 |
 | Locales | 6 |
 | Obfuscation styles | 10 |
@@ -59,7 +59,7 @@ The runner-emitted report compares the reference boundary runner against deliber
 
 The point of this table is not that a reference runner beats labels constructed for its own benchmark task. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
 
-The corpus now includes DeepSeek Harness as a target runtime lane. That does not mean OSuite is claiming a production DeepSeek Harness adapter is ready. It means the benchmark can already model the pre-tool and post-tool action boundary that a future `osuite-governance-plugin` should preserve.
+The corpus now includes DeepSeek Harness and Agent 365-style registry records as target runtime lanes. That does not mean OSuite is claiming production adapters are ready for either lane. It means the benchmark can already model the action-boundary shapes those systems expose: pre-tool/post-tool seams for Harness, and registry/lifecycle/control-plane metadata for Agent 365-style enterprise agent management.
 
 ## Repository Status
 
