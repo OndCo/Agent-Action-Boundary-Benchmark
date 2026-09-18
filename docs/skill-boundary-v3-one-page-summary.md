@@ -77,20 +77,20 @@ These are not population-scale claims. They show that the proposed v3 semantics,
 
 The following skill families are intentionally held out until after the core semantics and evaluation protocol are frozen:
 
-| Held-out skill family | Why useful |
-| --- | --- |
-| Procurement approval | Tests approval, purchase authority, vendor/resource scope, and amount limits. |
-| Calendar scheduling | Tests delegated scheduling, participant scope, external invitation boundaries, and reversible/non-reversible effects. |
-| Cloud IAM change | Tests high-risk identity, permission widening, infrastructure mutation, and least-privilege constraints. |
+| Held-out skill family | Identifier | Why useful |
+| --- | --- | --- |
+| Procurement approval | `procurement_approval` | Tests approval, purchase authority, vendor/resource scope, and amount limits. |
+| Calendar scheduling | `calendar_scheduling` | Tests delegated scheduling, participant scope, external invitation boundaries, and reversible/non-reversible effects. |
+| Cloud IAM change | `cloud_iam_change` | Tests high-risk identity, permission widening, infrastructure mutation, and least-privilege constraints. |
 
 The following runtime mappings are also held out:
 
-| Held-out runtime mapping |
-| --- |
-| Browser agent |
-| DeepSeek Harness |
-| Dify workflow |
-| n8n workflow |
+| Held-out runtime mapping | Identifier |
+| --- | --- |
+| Browser agent | `browser_agent` |
+| DeepSeek Harness | `deepseek_harness` |
+| Dify workflow | `dify_workflow` |
+| n8n workflow | `n8n_workflow` |
 
 The goal is to reduce circularity: the schema and reference mapper should not be tuned only to the families and runtimes used while designing the contract.
 
