@@ -1,0 +1,39 @@
+{
+  "release": "zerogate-v0.1",
+  "title": "ZeroGate Action Pass Research Release",
+  "date": "2026-09-21",
+  "claim_boundary": "Research artifact and local evaluator evidence. Not a hosted customer production SLA claim.",
+  "paper": "papers/zerogate-v0.1/zerogate-action-pass.pdf",
+  "docs": {
+    "release_note": "docs/zerogate-v0.1/research-release.md",
+    "dataset_audit": "docs/zerogate-v0.1/dataset-audit.md",
+    "schema_note": "docs/zerogate-v0.1/action-pass-schema.md",
+    "felica_suica_notes": "docs/zerogate-v0.1/felica-suica-design-notes.md",
+    "landscape_notes": "docs/zerogate-v0.1/agent-governance-landscape-notes.md"
+  },
+  "reports": {
+    "fast_slow_benchmark": "reports/zerogate-v0.1/fast-slow-benchmark.json",
+    "load_study": "reports/zerogate-v0.1/load-study.json",
+    "public_runtime_corpus": "reports/zerogate-v0.1/public-runtime-corpus.json",
+    "labeling_pack": "reports/zerogate-v0.1/labeling-pack.json",
+    "multi_runtime_fixture": "reports/zerogate-v0.1/multi-runtime-fixture.json",
+    "live_studio_smoke": "reports/zerogate-v0.1/live-studio-smoke.json"
+  },
+  "headline_metrics": {
+    "weighted_common_case_observations": 5760,
+    "adversarial_stress_cases": 360,
+    "weighted_exact_lane_match": 1,
+    "weighted_false_allow_or_violation_rate": 0,
+    "weighted_fast_path_coverage": 0.75,
+    "zero_wait_ratio": 0.8771,
+    "public_workflow_files": 302,
+    "public_action_like_records": 2500,
+    "public_canonicalization_coverage": 0.8236,
+    "multi_runtime_fixture_cases": 528,
+    "runtime_surfaces": 12,
+    "concurrent_load_study_operations": 700000,
+    "concurrent_load_study_throughput_ops_per_second": 64925.28,
+    "load_study_false_allow_rate": 0,
+    "partial_commits_without_receipt": 0
+  }
+}

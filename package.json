@@ -13,6 +13,8 @@
     "skill-boundary": "node scripts/run-skill-boundary-experiment.mjs",
     "skill-boundary:v2": "node scripts/run-skill-boundary-v2-experiment.mjs",
     "skill-boundary:v3": "node scripts/run-skill-boundary-v3-experiment.mjs",
+    "action-pass:lanes": "node scripts/run-action-pass-lanes.mjs",
+    "zerogate:v0.1:verify": "node scripts/verify-zerogate-v0.1-release.mjs",
     "second-run:baby-blue": "node scripts/prepare-baby-blue-second-run.mjs",
     "second-run:baby-blue:live": "node scripts/prepare-baby-blue-second-run.mjs --live",
     "second-run:baby-blue:github": "node scripts/prepare-baby-blue-github-saas-run.mjs",

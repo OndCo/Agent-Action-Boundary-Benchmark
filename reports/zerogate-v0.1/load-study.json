@@ -1,0 +1,191 @@
+{
+  "schema_version": "osuite.action_pass.load_study.v1",
+  "generated_at": "2026-09-21T05:46:01.822Z",
+  "methodology": {
+    "mocked": false,
+    "real_code_path": "packages/cava-core/src/action-pass.js buildActionPass + evaluateActionPassCommit",
+    "workload_inputs": "deterministic synthetic runtime observations covering common passage, policy drift, revocation drift, state-predicate drift, same-slot conflict, action mismatch, replayed nonce, pass revocation, missing receipt sink, receipt persistence failure, holder/session mismatch, missing authority evidence, aggregate budget exhaustion, privacy-boundary exposure, and authority widening",
+    "pass_construction_timing": "excluded from per-operation commit latency; pass construction is used to create the consumed object before the boundary",
+    "production_traffic_claim": false,
+    "interpretation": "This is a real implementation load study under concurrent workers, not live customer production traffic."
+  },
+  "configuration": {
+    "workers": 14,
+    "operations_per_worker": 50000,
+    "workload_families": [
+      "refund_under_limit",
+      "github_issue_create",
+      "crm_record_update",
+      "web3_transfer_prepare",
+      "database_export_prepare",
+      "kubernetes_restart"
+    ],
+    "workload_mutations": [
+      {
+        "id": "common_passage",
+        "weight": 780,
+        "expected_lane": "fast"
+      },
+      {
+        "id": "policy_digest_changed",
+        "weight": 55,
+        "expected_lane": "slow"
+      },
+      {
+        "id": "revocation_epoch_stale",
+        "weight": 20,
+        "expected_lane": "slow"
+      },
+      {
+        "id": "state_predicate_drift",
+        "weight": 20,
+        "expected_lane": "slow"
+      },
+      {
+        "id": "same_slot_resource_conflict",
+        "weight": 65,
+        "expected_lane": "slow"
+      },
+      {
+        "id": "action_fingerprint_mismatch",
+        "weight": 40,
+        "expected_lane": "block"
+      },
+      {
+        "id": "replayed_nonce",
+        "weight": 25,
+        "expected_lane": "block"
+      },
+      {
+        "id": "pass_revoked",
+        "weight": 18,
+        "expected_lane": "block"
+      },
+      {
+        "id": "receipt_sink_down",
+        "weight": 20,
+        "expected_lane": "block"
+      },
+      {
+        "id": "receipt_not_persisted",
+        "weight": 15,
+        "expected_lane": "block"
+      },
+      {
+        "id": "authority_widening",
+        "weight": 15,
+        "expected_lane": "block"
+      },
+      {
+        "id": "aggregate_budget_exhausted",
+        "weight": 12,
+        "expected_lane": "block"
+      },
+      {
+        "id": "authority_evidence_missing",
+        "weight": 15,
+        "expected_lane": "slow"
+      },
+      {
+        "id": "holder_identity_mismatch",
+        "weight": 10,
+        "expected_lane": "block"
+      },
+      {
+        "id": "runtime_session_mismatch",
+        "weight": 10,
+        "expected_lane": "block"
+      },
+      {
+        "id": "privacy_boundary_exposed",
+        "weight": 10,
+        "expected_lane": "slow"
+      }
+    ]
+  },
+  "environment": {
+    "node": "v22.18.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu_model": "Apple M4 Pro",
+    "cpu_count": 14
+  },
+  "summary": {
+    "total_operations": 700000,
+    "elapsed_ms": 10781.624,
+    "throughput_ops_per_second": 64925.28,
+    "expected_lane_match": 1,
+    "false_allow_rate": 0,
+    "receipt_object_constructed_rate": 1,
+    "receipt_persisted_before_commit_rate": 0.986723,
+    "receipt_completeness": 0.986723,
+    "partial_commit_without_receipt": 0,
+    "duplicate_nonce_block_rate": 1,
+    "slot_conflict_slow_rate": 1,
+    "receipt_sink_block_rate": 1,
+    "receipt_persistence_block_rate": 1,
+    "authority_evidence_missing_slow_rate": 1,
+    "holder_mismatch_block_rate": 1,
+    "runtime_session_mismatch_block_rate": 1,
+    "pass_revoked_block_rate": 1,
+    "revocation_epoch_slow_rate": 1,
+    "state_predicate_slow_rate": 1,
+    "aggregate_budget_block_rate": 1,
+    "privacy_boundary_slow_rate": 1,
+    "lane_counts": {
+      "fast": 483183,
+      "slow": 114605,
+      "block": 102212
+    },
+    "mutation_counts": {
+      "common_passage": 483183,
+      "same_slot_resource_conflict": 40268,
+      "aggregate_budget_exhausted": 7435,
+      "receipt_sink_down": 12390,
+      "policy_digest_changed": 34072,
+      "action_fingerprint_mismatch": 24775,
+      "runtime_session_mismatch": 6195,
+      "authority_widening": 9289,
+      "state_predicate_drift": 12389,
+      "pass_revoked": 11149,
+      "holder_identity_mismatch": 6196,
+      "receipt_not_persisted": 9294,
+      "replayed_nonce": 15489,
+      "authority_evidence_missing": 9291,
+      "revocation_epoch_stale": 12391,
+      "privacy_boundary_exposed": 6194
+    },
+    "mutation_mismatches": {},
+    "commit_latency_ms_per_operation": {
+      "min": 0.057833,
+      "p50": 0.08025,
+      "p95": 0.18375,
+      "p99": 0.475083,
+      "max": 36.425584,
+      "mean": 0.104555,
+      "stddev": 0.131446
+    }
+  },
+  "felica_suica_design_mapping": [
+    {
+      "source_design": "fast polling before gate contact",
+      "zerogate_mapping": "mint and refresh bounded passes before the action boundary"
+    },
+    {
+      "source_design": "time-slot collision detection and avoidance",
+      "zerogate_mapping": "route same-slot resource conflicts to slow review before execution"
+    },
+    {
+      "source_design": "fewer synchronous transaction steps",
+      "zerogate_mapping": "local fingerprint/policy/state/nonce/receipt checks instead of remote governance calls on the common path"
+    },
+    {
+      "source_design": "anti-tear transaction integrity",
+      "zerogate_mapping": "block commit when a synchronous receipt sink is unavailable"
+    },
+    {
+      "source_design": "post-passage settlement without reopening the gate decision",
+      "zerogate_mapping": "defer proof enrichment while preserving the local receipt and pass hash"
+    }
+  ]
+}

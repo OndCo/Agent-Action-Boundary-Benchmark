@@ -1,0 +1,31 @@
+{
+  "scope": "hosted_osuite_studio_action_recording_smoke",
+  "studio_base_url": "https://studio.osuite.ai",
+  "runtime_adapter": "codex_hooks",
+  "agent_id": "codex-runtime",
+  "operation": "create_and_read_back_completed_low_risk_research_action",
+  "external_side_effect": "internal_osuite_action_record_only",
+  "auth_material": "redacted_osuite_api_key",
+  "result": {
+    "studio_health": "HTTP 200",
+    "create_status": 201,
+    "get_status": 200,
+    "action_id": "act_86a9196a-e40d-463f-8a4d-5fff1a0b4070",
+    "persisted_status": "completed",
+    "persisted_type": "research",
+    "persisted_agent_id": "codex-runtime"
+  },
+  "claim_boundary": {
+    "does_prove": [
+      "hosted Studio action-recording path is reachable",
+      "configured runtime can create a low-risk action record",
+      "created record can be read back from the hosted API"
+    ],
+    "does_not_prove": [
+      "customer production throughput",
+      "end-to-end external SaaS execution",
+      "network-free fast-lane latency",
+      "third-party runtime enforcement"
+    ]
+  }
+}

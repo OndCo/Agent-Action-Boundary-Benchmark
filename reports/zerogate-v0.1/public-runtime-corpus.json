@@ -1,0 +1,1018 @@
+{
+  "schema_version": "osuite.action_pass.public_runtime_corpus.v1",
+  "generated_at": "2026-09-21T05:45:37.807Z",
+  "source_kind": "public_github_actions_workflows",
+  "synthetic": false,
+  "dataset_card": {
+    "purpose": "Measure parser coverage, abstention, unsupported surfaces, and lane distribution over real public GitHub Actions runtime artifacts.",
+    "non_claims": [
+      "No semantic accuracy claim without independent labels.",
+      "No false-allow claim without independent labels.",
+      "No production SLA claim.",
+      "No claim that GitHub Actions distribution represents all agent runtimes."
+    ],
+    "inclusion_rule": ".github/workflows/*.yml and *.yaml files from the configured public repository list, capped per repository for reproducibility and reviewability.",
+    "exclusion_rule": "Private repositories, customer logs, generated secrets, and runtime records requiring non-public credentials are excluded.",
+    "record_limit": 2500,
+    "file_limit_per_repo": 12
+  },
+  "source_snapshot": {
+    "file": "source-workflows.json",
+    "sha256": "349b3b7b233e929fc32b27341af194a5542feefe797dba867305caca946c0239",
+    "fetched_at": "2026-09-20T22:38:25.301Z",
+    "source_repositories_requested": 30,
+    "source_repositories_with_files": 28,
+    "workflow_files": 302,
+    "fetch_errors": []
+  },
+  "records_sha256": "7a9db3e06e4f67c2c4892f1b6676769d6741bbd29341d7378b640a2cc1733fea",
+  "labeling_pack": {
+    "status": "pending_independent_annotation",
+    "records": 240,
+    "files": {
+      "json": "labeling-pack.json",
+      "markdown": "labeling-pack.md"
+    },
+    "sha256": "6ff7b7493928b3bd1d807800838ba40d0968de922368307c67903d5337811083",
+    "evaluation_plan_after_labels": {
+      "runtime_to_action_mapping_accuracy": "Compare independently labeled intended action fields with parser output.",
+      "authorization_decision_accuracy": "Compare independently labeled expected boundary outcome with lane decision after mapping.",
+      "agreement_metric": "Use Cohen kappa for two annotators or Krippendorff alpha for three or more annotators before reporting accuracy.",
+      "freeze_rule": "Labels should be frozen before parser or evaluator updates are made against this pack."
+    }
+  },
+  "summary": {
+    "source_repositories": 28,
+    "workflow_files": 302,
+    "action_like_records": 2500,
+    "canonicalized_records": 2059,
+    "abstain_or_unsupported_records": 441,
+    "canonicalization_success_rate": 0.8236,
+    "abstain_or_unsupported_rate": 0.1764,
+    "fast_lane_rate": 0.3848,
+    "slow_lane_rate": 0.4372,
+    "block_lane_rate": 0.0016,
+    "unsupported_lane_rate": 0.1764,
+    "mutable_external_action_rate": 0.0976,
+    "high_risk_shell_rate": 0.0336,
+    "complex_shell_abstention_rate": 0.1196,
+    "measured_semantic_accuracy": null,
+    "measured_false_allow_rate": null,
+    "interpretation": "Real public workflow records provide parser coverage, abstention, and routing distribution evidence. They do not provide semantic accuracy or false-allow ground truth without independent labels."
+  },
+  "confidence_intervals": {
+    "method": "Wilson score interval, z=1.96, over observed public-runtime corpus counts; these intervals describe parser/routing proportions, not semantic correctness",
+    "canonicalization_success_rate": {
+      "low": 0.808165,
+      "high": 0.838042
+    },
+    "abstain_or_unsupported_rate": {
+      "low": 0.161958,
+      "high": 0.191835
+    },
+    "fast_lane_rate": {
+      "low": 0.365918,
+      "high": 0.404036
+    },
+    "slow_lane_rate": {
+      "low": 0.417866,
+      "high": 0.456726
+    },
+    "unsupported_lane_rate": {
+      "low": 0.161958,
+      "high": 0.191835
+    }
+  },
+  "repository_split": {
+    "split_policy": "deterministic repository-level split by sha256(osuite-public-corpus-split-v1:repository) mod 5; held-out repositories are not used to tune parser rules in this artifact",
+    "split_seed": "osuite-public-corpus-split-v1",
+    "reference_repositories": [
+      "apache/airflow",
+      "getsentry/sentry",
+      "grafana/grafana",
+      "hashicorp/terraform",
+      "langchain-ai/langchain",
+      "microsoft/autogen",
+      "microsoft/vscode",
+      "n8n-io/n8n",
+      "nodejs/node",
+      "prometheus/prometheus",
+      "python/cpython",
+      "pytorch/pytorch",
+      "rust-lang/rust",
+      "supabase/supabase",
+      "tensorflow/tensorflow",
+      "vercel/next.js"
+    ],
+    "heldout_repositories": [
+      "facebook/react",
+      "home-assistant/core",
+      "huggingface/transformers",
+      "langchain-ai/langchainjs",
+      "microsoft/semantic-kernel",
+      "modelcontextprotocol/servers"
+    ],
+    "reference": {
+      "source_repositories": 16,
+      "workflow_files": 170,
+      "action_like_records": 1785,
+      "canonicalization_success_rate": 0.807843,
+      "abstain_or_unsupported_rate": 0.192157,
+      "fast_lane_rate": 0.367507,
+      "slow_lane_rate": 0.438655,
+      "block_lane_rate": 0.001681,
+      "unsupported_lane_rate": 0.192157
+    },
+    "heldout": {
+      "source_repositories": 6,
+      "workflow_files": 59,
+      "action_like_records": 715,
+      "canonicalization_success_rate": 0.862937,
+      "abstain_or_unsupported_rate": 0.137063,
+      "fast_lane_rate": 0.427972,
+      "slow_lane_rate": 0.433566,
+      "block_lane_rate": 0.001399,
+      "unsupported_lane_rate": 0.137063
+    }
+  },
+  "repository_coverage": [
+    {
+      "repository": "apache/airflow",
+      "workflow_files": 12,
+      "action_like_records": 7,
+      "canonicalization_success_rate": 0.714286,
+      "abstain_or_unsupported_rate": 0.285714,
+      "lanes": {
+        "slow": 3,
+        "fast": 2,
+        "unsupported": 2
+      },
+      "action_families": {
+        "contextual_destructive_shell": 2,
+        "external_action_pinned": 2,
+        "local_action": 2,
+        "general_shell": 1
+      }
+    },
+    {
+      "repository": "facebook/react",
+      "workflow_files": 12,
+      "action_like_records": 114,
+      "canonicalization_success_rate": 0.95614,
+      "abstain_or_unsupported_rate": 0.04386,
+      "lanes": {
+        "slow": 104,
+        "fast": 5,
+        "unsupported": 5
+      },
+      "action_families": {
+        "general_shell": 45,
+        "external_action_pinned": 4,
+        "external_action_mutable": 53,
+        "complex_shell": 5,
+        "build_test_lint_shell": 1,
+        "mutation_or_secret_shell": 6
+      }
+    },
+    {
+      "repository": "getsentry/sentry",
+      "workflow_files": 12,
+      "action_like_records": 164,
+      "canonicalization_success_rate": 0.768293,
+      "abstain_or_unsupported_rate": 0.231707,
+      "lanes": {
+        "fast": 89,
+        "slow": 37,
+        "unsupported": 38
+      },
+      "action_families": {
+        "external_action_pinned": 78,
+        "general_shell": 33,
+        "local_action": 20,
+        "build_test_lint_shell": 11,
+        "complex_shell": 18,
+        "mutation_or_secret_shell": 2,
+        "contextual_destructive_shell": 2
+      }
+    },
+    {
+      "repository": "grafana/grafana",
+      "workflow_files": 12,
+      "action_like_records": 86,
+      "canonicalization_success_rate": 0.627907,
+      "abstain_or_unsupported_rate": 0.372093,
+      "lanes": {
+        "fast": 17,
+        "slow": 37,
+        "unsupported": 32
+      },
+      "action_families": {
+        "external_action_pinned": 16,
+        "mutation_or_secret_shell": 1,
+        "complex_shell": 16,
+        "external_action_mutable": 18,
+        "local_action": 16,
+        "general_shell": 18,
+        "build_test_lint_shell": 1
+      }
+    },
+    {
+      "repository": "hashicorp/terraform",
+      "workflow_files": 11,
+      "action_like_records": 83,
+      "canonicalization_success_rate": 0.795181,
+      "abstain_or_unsupported_rate": 0.204819,
+      "lanes": {
+        "slow": 16,
+        "fast": 50,
+        "unsupported": 17
+      },
+      "action_families": {
+        "general_shell": 14,
+        "external_action_pinned": 48,
+        "complex_shell": 6,
+        "local_action": 11,
+        "mutation_or_secret_shell": 2,
+        "build_test_lint_shell": 2
+      }
+    },
+    {
+      "repository": "home-assistant/core",
+      "workflow_files": 12,
+      "action_like_records": 323,
+      "canonicalization_success_rate": 0.829721,
+      "abstain_or_unsupported_rate": 0.170279,
+      "lanes": {
+        "fast": 169,
+        "slow": 98,
+        "unsupported": 55,
+        "block": 1
+      },
+      "action_families": {
+        "external_action_pinned": 164,
+        "external_action_mutable": 5,
+        "complex_shell": 32,
+        "general_shell": 91,
+        "destructive_shell": 1,
+        "container_action": 1,
+        "external_action": 23,
+        "build_test_lint_shell": 5,
+        "contextual_destructive_shell": 1
+      }
+    },
+    {
+      "repository": "huggingface/transformers",
+      "workflow_files": 12,
+      "action_like_records": 71,
+      "canonicalization_success_rate": 0.901408,
+      "abstain_or_unsupported_rate": 0.098592,
+      "lanes": {
+        "fast": 50,
+        "slow": 14,
+        "unsupported": 7
+      },
+      "action_families": {
+        "external_action_pinned": 49,
+        "contextual_destructive_shell": 1,
+        "general_shell": 13,
+        "complex_shell": 7,
+        "build_test_lint_shell": 1
+      }
+    },
+    {
+      "repository": "langchain-ai/langchain",
+      "workflow_files": 12,
+      "action_like_records": 108,
+      "canonicalization_success_rate": 0.75,
+      "abstain_or_unsupported_rate": 0.25,
+      "lanes": {
+        "fast": 47,
+        "unsupported": 27,
+        "slow": 34
+      },
+      "action_families": {
+        "external_action_pinned": 39,
+        "local_action": 12,
+        "general_shell": 20,
+        "build_test_lint_shell": 8,
+        "complex_shell": 15,
+        "mutation_or_secret_shell": 14
+      }
+    },
+    {
+      "repository": "langchain-ai/langchainjs",
+      "workflow_files": 12,
+      "action_like_records": 69,
+      "canonicalization_success_rate": 0.971014,
+      "abstain_or_unsupported_rate": 0.028986,
+      "lanes": {
+        "fast": 42,
+        "slow": 25,
+        "unsupported": 2
+      },
+      "action_families": {
+        "external_action_pinned": 37,
+        "general_shell": 18,
+        "build_test_lint_shell": 5,
+        "complex_shell": 1,
+        "mutation_or_secret_shell": 7,
+        "local_action": 1
+      }
+    },
+    {
+      "repository": "microsoft/autogen",
+      "workflow_files": 12,
+      "action_like_records": 226,
+      "canonicalization_success_rate": 0.955752,
+      "abstain_or_unsupported_rate": 0.044248,
+      "lanes": {
+        "slow": 212,
+        "fast": 4,
+        "unsupported": 10
+      },
+      "action_families": {
+        "external_action_mutable": 122,
+        "general_shell": 71,
+        "build_test_lint_shell": 4,
+        "complex_shell": 10,
+        "mutation_or_secret_shell": 18,
+        "contextual_destructive_shell": 1
+      }
+    },
+    {
+      "repository": "microsoft/semantic-kernel",
+      "workflow_files": 12,
+      "action_like_records": 77,
+      "canonicalization_success_rate": 0.714286,
+      "abstain_or_unsupported_rate": 0.285714,
+      "lanes": {
+        "fast": 37,
+        "unsupported": 22,
+        "slow": 18
+      },
+      "action_families": {
+        "external_action_pinned": 37,
+        "local_action": 3,
+        "complex_shell": 19,
+        "general_shell": 15,
+        "external_action_mutable": 3
+      }
+    },
+    {
+      "repository": "microsoft/vscode",
+      "workflow_files": 12,
+      "action_like_records": 293,
+      "canonicalization_success_rate": 0.716724,
+      "abstain_or_unsupported_rate": 0.283276,
+      "lanes": {
+        "fast": 87,
+        "slow": 121,
+        "unsupported": 83,
+        "block": 2
+      },
+      "action_families": {
+        "external_action_pinned": 77,
+        "general_shell": 112,
+        "build_test_lint_shell": 10,
+        "complex_shell": 51,
+        "contextual_destructive_shell": 9,
+        "destructive_shell": 2,
+        "local_action": 32
+      }
+    },
+    {
+      "repository": "modelcontextprotocol/servers",
+      "workflow_files": 5,
+      "action_like_records": 61,
+      "canonicalization_success_rate": 0.885246,
+      "abstain_or_unsupported_rate": 0.114754,
+      "lanes": {
+        "slow": 51,
+        "unsupported": 7,
+        "fast": 3
+      },
+      "action_families": {
+        "external_action_mutable": 30,
+        "complex_shell": 7,
+        "general_shell": 12,
+        "build_test_lint_shell": 3,
+        "mutation_or_secret_shell": 9
+      }
+    },
+    {
+      "repository": "n8n-io/n8n",
+      "workflow_files": 12,
+      "action_like_records": 50,
+      "canonicalization_success_rate": 0.64,
+      "abstain_or_unsupported_rate": 0.36,
+      "lanes": {
+        "fast": 25,
+        "unsupported": 18,
+        "slow": 7
+      },
+      "action_families": {
+        "external_action_pinned": 25,
+        "local_action": 10,
+        "general_shell": 5,
+        "complex_shell": 8,
+        "mutation_or_secret_shell": 2
+      }
+    },
+    {
+      "repository": "nodejs/node",
+      "workflow_files": 12,
+      "action_like_records": 75,
+      "canonicalization_success_rate": 0.693333,
+      "abstain_or_unsupported_rate": 0.306667,
+      "lanes": {
+        "unsupported": 23,
+        "fast": 36,
+        "slow": 16
+      },
+      "action_families": {
+        "complex_shell": 21,
+        "external_action_pinned": 35,
+        "general_shell": 16,
+        "external_action": 2,
+        "build_test_lint_shell": 1
+      }
+    },
+    {
+      "repository": "prometheus/prometheus",
+      "workflow_files": 12,
+      "action_like_records": 129,
+      "canonicalization_success_rate": 0.945736,
+      "abstain_or_unsupported_rate": 0.054264,
+      "lanes": {
+        "fast": 68,
+        "slow": 54,
+        "unsupported": 7
+      },
+      "action_families": {
+        "external_action_pinned": 59,
+        "general_shell": 44,
+        "mutation_or_secret_shell": 5,
+        "build_test_lint_shell": 9,
+        "complex_shell": 7,
+        "contextual_destructive_shell": 2,
+        "container_action": 3
+      }
+    },
+    {
+      "repository": "python/cpython",
+      "workflow_files": 12,
+      "action_like_records": 155,
+      "canonicalization_success_rate": 0.909677,
+      "abstain_or_unsupported_rate": 0.090323,
+      "lanes": {
+        "fast": 55,
+        "slow": 86,
+        "unsupported": 14
+      },
+      "action_families": {
+        "external_action_pinned": 53,
+        "general_shell": 74,
+        "complex_shell": 14,
+        "contextual_destructive_shell": 11,
+        "mutation_or_secret_shell": 1,
+        "build_test_lint_shell": 2
+      }
+    },
+    {
+      "repository": "pytorch/pytorch",
+      "workflow_files": 12,
+      "action_like_records": 78,
+      "canonicalization_success_rate": 0.730769,
+      "abstain_or_unsupported_rate": 0.269231,
+      "lanes": {
+        "fast": 23,
+        "unsupported": 21,
+        "slow": 34
+      },
+      "action_families": {
+        "external_action_pinned": 23,
+        "complex_shell": 19,
+        "general_shell": 21,
+        "external_action_mutable": 12,
+        "local_action": 2,
+        "contextual_destructive_shell": 1
+      }
+    },
+    {
+      "repository": "rust-lang/rust",
+      "workflow_files": 3,
+      "action_like_records": 44,
+      "canonicalization_success_rate": 0.886364,
+      "abstain_or_unsupported_rate": 0.113636,
+      "lanes": {
+        "fast": 7,
+        "slow": 32,
+        "unsupported": 5
+      },
+      "action_families": {
+        "external_action_pinned": 6,
+        "build_test_lint_shell": 1,
+        "general_shell": 30,
+        "complex_shell": 5,
+        "mutation_or_secret_shell": 2
+      }
+    },
+    {
+      "repository": "supabase/supabase",
+      "workflow_files": 12,
+      "action_like_records": 83,
+      "canonicalization_success_rate": 0.86747,
+      "abstain_or_unsupported_rate": 0.13253,
+      "lanes": {
+        "fast": 47,
+        "slow": 25,
+        "unsupported": 11
+      },
+      "action_families": {
+        "external_action_pinned": 46,
+        "general_shell": 21,
+        "build_test_lint_shell": 1,
+        "mutation_or_secret_shell": 4,
+        "complex_shell": 11
+      }
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "workflow_files": 12,
+      "action_like_records": 38,
+      "canonicalization_success_rate": 0.815789,
+      "abstain_or_unsupported_rate": 0.184211,
+      "lanes": {
+        "unsupported": 7,
+        "slow": 11,
+        "fast": 20
+      },
+      "action_families": {
+        "complex_shell": 7,
+        "contextual_destructive_shell": 4,
+        "external_action_pinned": 20,
+        "mutation_or_secret_shell": 1,
+        "general_shell": 6
+      }
+    },
+    {
+      "repository": "vercel/next.js",
+      "workflow_files": 12,
+      "action_like_records": 166,
+      "canonicalization_success_rate": 0.831325,
+      "abstain_or_unsupported_rate": 0.168675,
+      "lanes": {
+        "fast": 79,
+        "slow": 58,
+        "unsupported": 28,
+        "block": 1
+      },
+      "action_families": {
+        "external_action_pinned": 77,
+        "general_shell": 44,
+        "mutation_or_secret_shell": 10,
+        "complex_shell": 20,
+        "build_test_lint_shell": 2,
+        "local_action": 8,
+        "contextual_destructive_shell": 3,
+        "destructive_shell": 1,
+        "external_action_mutable": 1
+      }
+    }
+  ],
+  "distributions": {
+    "record_types": {
+      "uses_action": 1285,
+      "shell_run": 1215
+    },
+    "lanes": {
+      "fast": 962,
+      "slow": 1093,
+      "unsupported": 441,
+      "block": 4
+    },
+    "canonicalization_status": {
+      "canonicalized": 2059,
+      "abstained": 299,
+      "unsupported": 142
+    },
+    "action_families": {
+      "external_action_pinned": 895,
+      "general_shell": 724,
+      "build_test_lint_shell": 67,
+      "complex_shell": 299,
+      "contextual_destructive_shell": 37,
+      "destructive_shell": 4,
+      "local_action": 117,
+      "external_action": 25,
+      "mutation_or_secret_shell": 84,
+      "external_action_mutable": 244,
+      "container_action": 4
+    },
+    "risks": {
+      "low": 962,
+      "medium": 972,
+      "unknown": 441,
+      "high": 121,
+      "critical": 4
+    }
+  },
+  "sample_records": [
+    {
+      "id": "c28350a3b7b3d715",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-lib-package.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-lib-package.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"
+    },
+    {
+      "id": "76d2a364556943bc",
+      "repository": "nodejs/node",
+      "workflow_path": ".github/workflows/auto-start-ci.yml",
+      "source_url": "https://github.com/nodejs/node/blob/main/.github/workflows/auto-start-ci.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/setup-node@820762786026740c76f36085b0efc47a31fe5020"
+    },
+    {
+      "id": "10a699b9ed794e92",
+      "repository": "python/cpython",
+      "workflow_path": ".github/workflows/add-issue-header.yml",
+      "source_url": "https://github.com/python/cpython/blob/main/.github/workflows/add-issue-header.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3"
+    },
+    {
+      "id": "c72cb853f8ae4d06",
+      "repository": "rust-lang/rust",
+      "workflow_path": ".github/workflows/ci.yml",
+      "source_url": "https://github.com/rust-lang/rust/blob/main/.github/workflows/ci.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"
+    },
+    {
+      "id": "69751bc8185947ff",
+      "repository": "vercel/next.js",
+      "workflow_path": ".github/workflows/automated_code_review.yml",
+      "source_url": "https://github.com/vercel/next.js/blob/canary/.github/workflows/automated_code_review.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd"
+    },
+    {
+      "id": "3e3146cba823ddac",
+      "repository": "facebook/react",
+      "workflow_path": ".github/workflows/compiler_discord_notify.yml",
+      "source_url": "https://github.com/facebook/react/blob/main/.github/workflows/compiler_discord_notify.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "tsickert/discord-webhook@86dc739f3f165f16dadc5666051c367efa1692f4"
+    },
+    {
+      "id": "440c4c0c65f32a9b",
+      "repository": "pytorch/pytorch",
+      "workflow_path": ".github/workflows/_binary-build-flash-attention-wheel-linux.yml",
+      "source_url": "https://github.com/pytorch/pytorch/blob/main/.github/workflows/_binary-build-flash-attention-wheel-linux.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683"
+    },
+    {
+      "id": "57a6fbe102e34d02",
+      "repository": "tensorflow/tensorflow",
+      "workflow_path": ".github/workflows/arm-cd.yml",
+      "source_url": "https://github.com/tensorflow/tensorflow/blob/master/.github/workflows/arm-cd.yml",
+      "record_type": "uses_action",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "external_action_pinned",
+      "risk": "low",
+      "reason": "external action uses immutable sha ref",
+      "raw_preview": "actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8"
+    },
+    {
+      "id": "f31e8725a1c14204",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-lib-package.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-lib-package.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "npm ci && npm run extract-chat-lib && rm -rf node_modules"
+    },
+    {
+      "id": "26e6740c7b229ef3",
+      "repository": "nodejs/node",
+      "workflow_path": ".github/workflows/auto-start-ci.yml",
+      "source_url": "https://github.com/nodejs/node/blob/main/.github/workflows/auto-start-ci.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "npm install -g @node-core/utils"
+    },
+    {
+      "id": "a16b2a09e4d1cee9",
+      "repository": "python/cpython",
+      "workflow_path": ".github/workflows/build.yml",
+      "source_url": "https://github.com/python/cpython/blob/main/.github/workflows/build.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "apt update && apt install git -yq && git config --global --add safe.directory \"$GITHUB_WORKSPACE\""
+    },
+    {
+      "id": "f2722eac672ddafd",
+      "repository": "rust-lang/rust",
+      "workflow_path": ".github/workflows/ci.yml",
+      "source_url": "https://github.com/rust-lang/rust/blob/main/.github/workflows/ci.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "cd src/ci/citool && CARGO_INCREMENTAL=0 cargo run --locked calculate-job-matrix >> $GITHUB_OUTPUT"
+    },
+    {
+      "id": "f94e8665d11204db",
+      "repository": "vercel/next.js",
+      "workflow_path": ".github/workflows/build_and_deploy.yml",
+      "source_url": "https://github.com/vercel/next.js/blob/canary/.github/workflows/build_and_deploy.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "echo \"${{ github.event.after }}\""
+    },
+    {
+      "id": "5899f7026a29693c",
+      "repository": "facebook/react",
+      "workflow_path": ".github/workflows/compiler_discord_notify.yml",
+      "source_url": "https://github.com/facebook/react/blob/main/.github/workflows/compiler_discord_notify.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "echo ${{ github.event.pull_request.author_association }}"
+    },
+    {
+      "id": "4754a2cb3a3896a7",
+      "repository": "pytorch/pytorch",
+      "workflow_path": ".github/workflows/_binary-build-flash-attention-wheel-windows.yml",
+      "source_url": "https://github.com/pytorch/pytorch/blob/main/.github/workflows/_binary-build-flash-attention-wheel-windows.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "general_shell",
+      "risk": "medium",
+      "reason": "shell command is action-like but not confidently low-risk",
+      "raw_preview": "git config --global core.longpaths true && git config --global core.symlinks true && git config --global core.ignorecase"
+    },
+    {
+      "id": "ba501aa1db599f00",
+      "repository": "tensorflow/tensorflow",
+      "workflow_path": ".github/workflows/arm-cd.yml",
+      "source_url": "https://github.com/tensorflow/tensorflow/blob/master/.github/workflows/arm-cd.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "contextual_destructive_shell",
+      "risk": "high",
+      "reason": "context-dependent destructive-looking shell command requires review rather than automatic block",
+      "raw_preview": "find /home/ubuntu/actions-runner/_work/tensorflow/tensorflow/. -name . -o -prune -exec sudo rm -rf -- {} + || true"
+    },
+    {
+      "id": "a8e0644718d4119a",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-perf.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-perf.yml",
+      "record_type": "shell_run",
+      "lane": "block",
+      "canonicalization_status": "canonicalized",
+      "action_family": "destructive_shell",
+      "risk": "critical",
+      "reason": "literal destructive shell command requires fail-closed handling",
+      "raw_preview": "# Clean up tmp dirs used by VS Code instances && rm -rf /tmp/vscode-chat-simulation 2>/dev/null || true && # Remove the "
+    },
+    {
+      "id": "35950594df0ac494",
+      "repository": "vercel/next.js",
+      "workflow_path": ".github/workflows/build_reusable.yml",
+      "source_url": "https://github.com/vercel/next.js/blob/canary/.github/workflows/build_reusable.yml",
+      "record_type": "shell_run",
+      "lane": "block",
+      "canonicalization_status": "canonicalized",
+      "action_family": "destructive_shell",
+      "risk": "critical",
+      "reason": "literal destructive shell command requires fail-closed handling",
+      "raw_preview": "git clean -xdf && rm -rf /tmp/next-repo-*; rm -rf /tmp/next-install-* /tmp/yarn-* /tmp/ncc-cache target"
+    },
+    {
+      "id": "83b65a00ed98567a",
+      "repository": "home-assistant/core",
+      "workflow_path": ".github/workflows/check-requirements.lock.yml",
+      "source_url": "https://github.com/home-assistant/core/blob/dev/.github/workflows/check-requirements.lock.yml",
+      "record_type": "shell_run",
+      "lane": "block",
+      "canonicalization_status": "canonicalized",
+      "action_family": "destructive_shell",
+      "risk": "critical",
+      "reason": "literal destructive shell command requires fail-closed handling",
+      "raw_preview": "rm -rf /tmp/gh-aw/sandbox/firewall/logs && rm -rf /tmp/gh-aw/sandbox/firewall/audit"
+    },
+    {
+      "id": "564127ddcca098c2",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-perf.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-perf.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "INPUT=\"$TEST_BUILD_INPUT\" && if [[ -z \"$INPUT\" ]]; then && echo \"is_version=false\" >> \"$GITHUB_OUTPUT\" && echo \"build_ar"
+    },
+    {
+      "id": "73cf541418fc0e21",
+      "repository": "nodejs/node",
+      "workflow_path": ".github/workflows/author-ready-conflicts.yml",
+      "source_url": "https://github.com/nodejs/node/blob/main/.github/workflows/author-ready-conflicts.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "# Requesting the mergeable field makes GitHub compute the merge state, && # pull requests still reported as UNKNOWN are "
+    },
+    {
+      "id": "77ee32b18ab4a43c",
+      "repository": "python/cpython",
+      "workflow_path": ".github/workflows/build.yml",
+      "source_url": "https://github.com/python/cpython/blob/main/.github/workflows/build.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "git add -u && changes=$(git status --porcelain) && # Check for changes in regenerated files && if test -n \"$changes\"; th"
+    },
+    {
+      "id": "ad0f8b9b327401a9",
+      "repository": "rust-lang/rust",
+      "workflow_path": ".github/workflows/ci.yml",
+      "source_url": "https://github.com/rust-lang/rust/blob/main/.github/workflows/ci.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "# Check if cargo is installed && if ! command -v cargo &> /dev/null; then && echo \"Cargo not found, installing Rust...\" "
+    },
+    {
+      "id": "3a7ef5a33fae9e60",
+      "repository": "vercel/next.js",
+      "workflow_path": ".github/workflows/build_and_deploy.yml",
+      "source_url": "https://github.com/vercel/next.js/blob/canary/.github/workflows/build_and_deploy.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "echo STORE_PATH=$(pnpm store path) >> $GITHUB_OUTPUT"
+    },
+    {
+      "id": "dafb0644d221d9d1",
+      "repository": "facebook/react",
+      "workflow_path": ".github/workflows/compiler_playground.yml",
+      "source_url": "https://github.com/facebook/react/blob/main/.github/workflows/compiler_playground.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "echo \"playwright_version=$(npm ls @playwright/test | grep @playwright | sed 's/.*@//' | head -1)\" >> \"$GITHUB_OUTPUT\""
+    },
+    {
+      "id": "f640171bbd40e896",
+      "repository": "pytorch/pytorch",
+      "workflow_path": ".github/workflows/_binary-build-flash-attention-wheel-linux.yml",
+      "source_url": "https://github.com/pytorch/pytorch/blob/main/.github/workflows/_binary-build-flash-attention-wheel-linux.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "set -x && mkdir -p \"${RUNNER_TEMP}/artifacts/\" && PYTHON_EXECUTABLE=\"/opt/python/cp${PYTHON_VERSION//./}-cp${PYTHON_VERS"
+    },
+    {
+      "id": "fc8d5eed932128e7",
+      "repository": "tensorflow/tensorflow",
+      "workflow_path": ".github/workflows/arm-cd.yml",
+      "source_url": "https://github.com/tensorflow/tensorflow/blob/master/.github/workflows/arm-cd.yml",
+      "record_type": "shell_run",
+      "lane": "unsupported",
+      "canonicalization_status": "abstained",
+      "action_family": "complex_shell",
+      "risk": "unknown",
+      "reason": "complex shell control flow needs a stronger shell parser before safe local pass consumption",
+      "raw_preview": "running_containers=$(docker ps -q) && \\ && if [[ $running_containers == \"\" ]]; then && echo \"No running containers\"; && "
+    },
+    {
+      "id": "8f96d60ecbe00b99",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-lib-package.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-lib-package.yml",
+      "record_type": "shell_run",
+      "lane": "fast",
+      "canonicalization_status": "canonicalized",
+      "action_family": "build_test_lint_shell",
+      "risk": "low",
+      "reason": "build/test/lint command is locally classifiable and has no obvious external mutation signal",
+      "raw_preview": "npm run build"
+    },
+    {
+      "id": "99b423333f85f7a8",
+      "repository": "prometheus/prometheus",
+      "workflow_path": ".github/workflows/prombench.yml",
+      "source_url": "https://github.com/prometheus/prometheus/blob/main/.github/workflows/prombench.yml",
+      "record_type": "uses_action",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "container_action",
+      "risk": "medium",
+      "reason": "container action needs supply-chain and image-digest review",
+      "raw_preview": "docker://prominfra/prombench:master"
+    },
+    {
+      "id": "e731edd1d6a78d63",
+      "repository": "microsoft/vscode",
+      "workflow_path": ".github/workflows/chat-perf.yml",
+      "source_url": "https://github.com/microsoft/vscode/blob/main/.github/workflows/chat-perf.yml",
+      "record_type": "shell_run",
+      "lane": "slow",
+      "canonicalization_status": "canonicalized",
+      "action_family": "contextual_destructive_shell",
+      "risk": "high",
+      "reason": "context-dependent destructive-looking shell command requires review rather than automatic block",
+      "raw_preview": "sudo apt update -y && sudo apt install -y \\ && build-essential pkg-config \\ && libx11-dev libx11-xcb-dev libxkbfile-dev "
+    }
+  ],
+  "claim_boundary": {
+    "semantic_accuracy": "not measured without independent labels",
+    "false_allow_rate": "not measured without independent labels",
+    "production_sla": false,
+    "use_in_paper": "Use as real-public-corpus coverage and abstention evidence, not as an accuracy table."
+  }
+}

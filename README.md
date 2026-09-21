@@ -119,6 +119,37 @@ reports/skill-boundary-v3-experiment.md
 reports/skill-boundary-v3-experiment.json
 ```
 
+Run the Action Pass lane benchmark:
+
+```bash
+npm run action-pass:lanes
+```
+
+The Action Pass benchmark defines a bounded, consumable execution pass for AI agent actions, then compares fast-lane, slow-lane, and fail-closed outcomes across local commit conditions. It is the Suica-style benchmark path: the agent does not ask for permission from scratch every time; it presents a scoped pass, the local runtime gate consumes it, and the full proof can settle after the minimum receipt is emitted.
+
+Action Pass reports are written to:
+
+```text
+reports/action-pass-lane-benchmark.md
+reports/action-pass-lane-benchmark.json
+```
+
+Verify the ZeroGate v0.1 research release snapshot:
+
+```bash
+npm run zerogate:v0.1:verify
+```
+
+The ZeroGate release adds the paper-facing artifact set for Action Passes: 5,760 weighted common-case observations, 360 adversarial stress cases, a 2,500-record public GitHub Actions corpus, a 528-case multi-runtime fixture corpus, a 700,000-operation concurrent load study, dataset-audit notes, and the paper PDF. Start here:
+
+```text
+docs/zerogate-v0.1/research-release.md
+papers/zerogate-v0.1/zerogate-action-pass.pdf
+reports/zerogate-v0.1/
+```
+
+The public corpus reports parser coverage and abstention, not semantic accuracy. The load study reports the local evaluator path, not hosted customer SLA. Those boundaries are explicit in `docs/zerogate-v0.1/dataset-audit.md`.
+
 Generate and run the larger runtime-boundary corpus:
 
 ```bash

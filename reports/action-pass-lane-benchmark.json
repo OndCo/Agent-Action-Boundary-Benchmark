@@ -1,0 +1,736 @@
+{
+  "benchmark": "osuite-action-pass-lane-benchmark",
+  "schema_version": "osuite.action-pass.v0.1",
+  "description": "Reference benchmark for classifying OSuite Action Pass decisions into fast lane, slow lane, or fail-closed outcomes.",
+  "boundary": "Lane classification and critical-path model. Not a production latency claim.",
+  "action_pass_schema": "schemas/action-pass.schema.json",
+  "cases": 16,
+  "scoring": {
+    "total_cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "exact_match_rate": 1,
+    "fast_path_coverage": 0.25,
+    "slow_path_rate": 0.3125,
+    "fail_closed_rate": 0.4375,
+    "zero_wait_ratio": 0.25,
+    "safety_preserving_fast_path_coverage": 1,
+    "false_fast_allow_rate": 0,
+    "minimum_receipt_only_rate": 0.0625,
+    "receipt_emission_rate": 1,
+    "distributions": {
+      "lanes": {
+        "block": 7,
+        "fast": 4,
+        "slow": 5
+      },
+      "controls": {
+        "allow": 4,
+        "block": 7,
+        "require_review": 5
+      },
+      "receipt_states": {
+        "complete": 3,
+        "minimum_receipt_only": 1,
+        "not_committed": 12
+      },
+      "blockers": {
+        "action_hash_mismatch": 1,
+        "budget_exhausted": 1,
+        "destination_out_of_scope": 1,
+        "effect_out_of_scope": 1,
+        "identity_revoked": 1,
+        "invalid_signature": 1,
+        "minimum_receipt_unavailable": 1,
+        "nonce_replay": 1,
+        "none": 9,
+        "pass_expired": 1
+      },
+      "slow_reasons": {
+        "external_verifier_not_prepared": 1,
+        "high_risk_requires_review": 1,
+        "missing_required_evidence:amount_usd": 1,
+        "none": 11,
+        "not_fast_path_eligible": 1,
+        "policy_digest_drift": 1,
+        "tool_schema_drift": 1
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "fast-mcp-read-support-ticket",
+      "title": "MCP support read consumes a fresh bounded pass",
+      "pass": true,
+      "expected": {
+        "lane": "fast",
+        "control": "allow",
+        "receipt_state": "complete"
+      },
+      "actual": {
+        "lane": "fast",
+        "control": "allow",
+        "blockers": [],
+        "slow_reasons": [],
+        "receipt_state": "complete",
+        "receipt": {
+          "pass_id": "ap_support_1042_fast_lane",
+          "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+          "policy_digest": "sha256:afd0aceff4776c793681eba22f4f8bb8b10990ee6f13ba96b2ea35756c1b066e",
+          "state_digest": "sha256:05f7b6fd5e021dec547d8f823d916ebd9c73f7b460ead344ebe5758493318330",
+          "nonce": "nonce:read_support_ticket:1042",
+          "commit_result": "allow",
+          "receipt_sequence": 1,
+          "receipt_state": "complete",
+          "receipt_hash": "sha256:4276fec02fb7e8184c0862a09e1fae637bba803698fd163f60da16105317b30d"
+        }
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "fast-sdk-bounded-refund",
+      "title": "SDK refund action uses a preapproved bounded pass",
+      "pass": true,
+      "expected": {
+        "lane": "fast",
+        "control": "allow",
+        "receipt_state": "complete"
+      },
+      "actual": {
+        "lane": "fast",
+        "control": "allow",
+        "blockers": [],
+        "slow_reasons": [],
+        "receipt_state": "complete",
+        "receipt": {
+          "pass_id": "ap_refund_1042_73usd",
+          "action_hash": "sha256:29614683eaf1b5e13e536905f902f9b5a7e8dae6cfaa5bc93c71506364f930d0",
+          "policy_digest": "sha256:8f20d6b54a89a16c69e2286d8407cfbb4013020beaa32dde1d14f3ecb4a9f2ec",
+          "state_digest": "sha256:d22e14df67dbeecd6716c61fc2f6536300218e8618d32952c5f212d2b08fdcbd",
+          "nonce": "nonce:issue_refund:1042",
+          "commit_result": "allow",
+          "receipt_sequence": 1,
+          "receipt_state": "complete",
+          "receipt_hash": "sha256:cb796a6d1c441ad9d907663e43f1512f83d0c436a736637cd5d47c131f81c117"
+        }
+      },
+      "action": {
+        "runtime": "sdk",
+        "operation": "issue_refund",
+        "resource": "refund_case/CASE-1042",
+        "effect": "transfer",
+        "destination": "payment_ledger",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "amount_usd": 73,
+          "data_classification": "payment_record",
+          "record_count": 1
+        },
+        "rollback": {
+          "available": true,
+          "method": "finance reversal"
+        }
+      },
+      "action_hash": "sha256:29614683eaf1b5e13e536905f902f9b5a7e8dae6cfaa5bc93c71506364f930d0",
+      "pass_id": "ap_refund_1042_73usd",
+      "runtime": "sdk"
+    },
+    {
+      "id": "fast-workflow-note-proof-enrichment-down",
+      "title": "Workflow note commits with a minimum receipt while proof enrichment is delayed",
+      "pass": true,
+      "expected": {
+        "lane": "fast",
+        "control": "allow",
+        "receipt_state": "minimum_receipt_only"
+      },
+      "actual": {
+        "lane": "fast",
+        "control": "allow",
+        "blockers": [],
+        "slow_reasons": [],
+        "receipt_state": "minimum_receipt_only",
+        "receipt": {
+          "pass_id": "ap_internal_note_1042",
+          "action_hash": "sha256:f7b4e5764c7107d9d8cb63770ffa8f48a961d8e1920864b706795985c5ab0534",
+          "policy_digest": "sha256:2e504e0e8d1cc24cb494da340ace2394f6a4dc0af00683e00f228a7d7aa9d0f6",
+          "state_digest": "sha256:05f7b6fd5e021dec547d8f823d916ebd9c73f7b460ead344ebe5758493318330",
+          "nonce": "nonce:draft_internal_refund_note:1042",
+          "commit_result": "allow",
+          "receipt_sequence": 1,
+          "receipt_state": "minimum_receipt_only",
+          "receipt_hash": "sha256:bb54a23deebbb585d5eb86a5efea8d867c2ccd73a60fe70c6b0befd1f9103ad5"
+        }
+      },
+      "action": {
+        "runtime": "workflow",
+        "operation": "draft_internal_refund_note",
+        "resource": "ticket/CASE-1042",
+        "effect": "write",
+        "destination": "internal_ticket_note",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "delete internal note"
+        }
+      },
+      "action_hash": "sha256:f7b4e5764c7107d9d8cb63770ffa8f48a961d8e1920864b706795985c5ab0534",
+      "pass_id": "ap_internal_note_1042",
+      "runtime": "workflow"
+    },
+    {
+      "id": "fast-a2a-internal-handoff",
+      "title": "A2A handoff carries the pass but OSuite gates the action",
+      "pass": true,
+      "expected": {
+        "lane": "fast",
+        "control": "allow",
+        "receipt_state": "complete"
+      },
+      "actual": {
+        "lane": "fast",
+        "control": "allow",
+        "blockers": [],
+        "slow_reasons": [],
+        "receipt_state": "complete",
+        "receipt": {
+          "pass_id": "ap_a2a_internal_handoff_1042",
+          "action_hash": "sha256:f8f1158fa6addac57db5b60dbee4bd0462197d6374b592d254950ee6c79b73d1",
+          "policy_digest": "sha256:ce6de1279d23ed0d36154def72df2584de963b60216b32ebff7c55ee29c8b9c2",
+          "state_digest": "sha256:05f7b6fd5e021dec547d8f823d916ebd9c73f7b460ead344ebe5758493318330",
+          "nonce": "nonce:handoff_support_context:1042",
+          "commit_result": "allow",
+          "receipt_sequence": 1,
+          "receipt_state": "complete",
+          "receipt_hash": "sha256:99c2f5afb47e7fbb4126d6ae21ee974c90f4bcacd21d5f22feee5a71eaa90734"
+        }
+      },
+      "action": {
+        "runtime": "a2a",
+        "operation": "handoff_support_context",
+        "resource": "ticket/CASE-1042",
+        "effect": "notify",
+        "destination": "internal_agent:refund-reviewer",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "cancel internal handoff"
+        }
+      },
+      "action_hash": "sha256:f8f1158fa6addac57db5b60dbee4bd0462197d6374b592d254950ee6c79b73d1",
+      "pass_id": "ap_a2a_internal_handoff_1042",
+      "runtime": "a2a"
+    },
+    {
+      "id": "slow-policy-digest-drift",
+      "title": "Policy digest drift moves the action to the slow lane",
+      "pass": true,
+      "expected": {
+        "lane": "slow",
+        "control": "require_review",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "slow",
+        "control": "require_review",
+        "blockers": [],
+        "slow_reasons": [
+          "policy_digest_drift"
+        ],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "slow-tool-schema-drift",
+      "title": "Tool schema drift requires pass refresh before local commit",
+      "pass": true,
+      "expected": {
+        "lane": "slow",
+        "control": "require_review",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "slow",
+        "control": "require_review",
+        "blockers": [],
+        "slow_reasons": [
+          "tool_schema_drift"
+        ],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "slow-missing-required-evidence",
+      "title": "Missing amount evidence prevents bounded refund from local commit",
+      "pass": true,
+      "expected": {
+        "lane": "slow",
+        "control": "require_review",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "slow",
+        "control": "require_review",
+        "blockers": [],
+        "slow_reasons": [
+          "missing_required_evidence:amount_usd"
+        ],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "sdk",
+        "operation": "issue_refund",
+        "resource": "refund_case/CASE-1042",
+        "effect": "transfer",
+        "destination": "payment_ledger",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "payment_record",
+          "record_count": 1
+        },
+        "rollback": {
+          "available": true,
+          "method": "finance reversal"
+        }
+      },
+      "action_hash": "sha256:376315301804edf7a157d6bf996509278d80bbacbe0f8ca5e6929db7958ec7b8",
+      "pass_id": "ap_refund_missing_amount",
+      "runtime": "sdk"
+    },
+    {
+      "id": "slow-external-verifier-not-warmed",
+      "title": "Verifier-required action waits when the verifier is not prepared",
+      "pass": true,
+      "expected": {
+        "lane": "slow",
+        "control": "require_review",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "slow",
+        "control": "require_review",
+        "blockers": [],
+        "slow_reasons": [
+          "external_verifier_not_prepared"
+        ],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "sdk",
+        "operation": "issue_refund",
+        "resource": "refund_case/CASE-1042",
+        "effect": "transfer",
+        "destination": "payment_ledger",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "amount_usd": 73,
+          "data_classification": "payment_record",
+          "record_count": 1
+        },
+        "rollback": {
+          "available": true,
+          "method": "finance reversal"
+        }
+      },
+      "action_hash": "sha256:29614683eaf1b5e13e536905f902f9b5a7e8dae6cfaa5bc93c71506364f930d0",
+      "pass_id": "ap_refund_verifier_required",
+      "runtime": "sdk"
+    },
+    {
+      "id": "slow-critical-not-fast-eligible",
+      "title": "Critical action without a fast-lane profile routes to slow governance",
+      "pass": true,
+      "expected": {
+        "lane": "slow",
+        "control": "require_review",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "slow",
+        "control": "require_review",
+        "blockers": [],
+        "slow_reasons": [
+          "not_fast_path_eligible",
+          "high_risk_requires_review"
+        ],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "sdk",
+        "operation": "issue_refund",
+        "resource": "refund_case/CASE-1042",
+        "effect": "transfer",
+        "destination": "payment_ledger",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "amount_usd": 5000,
+          "data_classification": "payment_record",
+          "record_count": 1
+        },
+        "rollback": {
+          "available": true,
+          "method": "finance reversal"
+        }
+      },
+      "action_hash": "sha256:3f20d5a60568f303c6c13ce219c2029b9c71d45772267b0a7df15c636b8f6dfc",
+      "pass_id": "ap_critical_refund_no_fast_lane",
+      "runtime": "sdk"
+    },
+    {
+      "id": "block-action-hash-mismatch",
+      "title": "Changed destination invalidates the pass",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "effect_out_of_scope",
+          "destination_out_of_scope",
+          "action_hash_mismatch"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "notify",
+        "destination": "external_email",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:44e88901d2c7ed8c7b479978b0c2866f9735dcdd94fdb0b7dd6668ba9d305a67",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "block-expired-pass",
+      "title": "Expired pass fails closed instead of asking the agent again",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "pass_expired"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_expired_support_read",
+      "runtime": "mcp"
+    },
+    {
+      "id": "block-consumed-nonce",
+      "title": "Duplicate pass consumption fails closed",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "nonce_replay"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_duplicate_support_read",
+      "runtime": "mcp"
+    },
+    {
+      "id": "block-identity-revoked",
+      "title": "Revoked agent identity fails closed at the gate",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "identity_revoked"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "block-budget-exhausted",
+      "title": "Budget exhaustion fails closed before a transfer can commit",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "budget_exhausted"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "sdk",
+        "operation": "issue_refund",
+        "resource": "refund_case/CASE-1042",
+        "effect": "transfer",
+        "destination": "payment_ledger",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "amount_usd": 73,
+          "data_classification": "payment_record",
+          "record_count": 1
+        },
+        "rollback": {
+          "available": true,
+          "method": "finance reversal"
+        }
+      },
+      "action_hash": "sha256:29614683eaf1b5e13e536905f902f9b5a7e8dae6cfaa5bc93c71506364f930d0",
+      "pass_id": "ap_refund_budget_exhausted",
+      "runtime": "sdk"
+    },
+    {
+      "id": "block-receipt-sink-down",
+      "title": "Minimum receipt failure blocks execution",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "minimum_receipt_unavailable"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_support_1042_fast_lane",
+      "runtime": "mcp"
+    },
+    {
+      "id": "block-invalid-signature",
+      "title": "Invalid issuer signature fails closed",
+      "pass": true,
+      "expected": {
+        "lane": "block",
+        "control": "block",
+        "receipt_state": "not_committed"
+      },
+      "actual": {
+        "lane": "block",
+        "control": "block",
+        "blockers": [
+          "invalid_signature"
+        ],
+        "slow_reasons": [],
+        "receipt_state": "not_committed",
+        "receipt": null
+      },
+      "action": {
+        "runtime": "mcp",
+        "operation": "read_support_ticket",
+        "resource": "ticket/CASE-1042",
+        "effect": "read",
+        "destination": "support_workspace",
+        "identity": "agent:support-copilot",
+        "parameters": {
+          "data_classification": "support_ticket",
+          "record_count": 1,
+          "ticket_id": "CASE-1042"
+        },
+        "rollback": {
+          "available": true,
+          "method": "read-only action"
+        }
+      },
+      "action_hash": "sha256:9d590a9dfc064ecb6439a00fcb225ad8dbd3c743d1e9b0db9cc6dff0f3eff4a7",
+      "pass_id": "ap_invalid_signature",
+      "runtime": "mcp"
+    }
+  ]
+}

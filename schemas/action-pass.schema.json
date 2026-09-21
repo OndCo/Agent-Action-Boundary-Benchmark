@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osuite.ai/schemas/action-pass.schema.json",
+  "title": "OSuite Action Pass",
+  "description": "A bounded, consumable execution pass for an AI agent action. The pass is issued by a runtime authorization layer and consumed by a local runtime gate before side effects occur.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pass_id",
+    "issuer",
+    "issued_at",
+    "expires_at",
+    "subject",
+    "canonical_action",
+    "authority",
+    "commit_conditions",
+    "receipt",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "osuite.action-pass.v0.1"
+    },
+    "pass_id": {
+      "type": "string",
+      "pattern": "^ap_[a-z0-9][a-z0-9_-]+$"
+    },
+    "issuer": {
+      "type": "object",
+      "required": ["issuer_id", "issuer_type", "key_id"],
+      "properties": {
+        "issuer_id": { "type": "string" },
+        "issuer_type": {
+          "enum": ["osuite_workspace", "enterprise_policy_service", "independent_mediator"]
+        },
+        "key_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subject": {
+      "type": "object",
+      "required": ["workspace_id", "agent_id", "principal", "runtime_session_id"],
+      "properties": {
+        "workspace_id": { "type": "string" },
+        "agent_id": { "type": "string" },
+        "principal": { "type": "string" },
+        "runtime_session_id": { "type": "string" },
+        "delegated_by": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "canonical_action": {
+      "type": "object",
+      "required": ["profile", "action_hash", "operation", "effect", "resource", "destination"],
+      "properties": {
+        "profile": { "type": "string" },
+        "action_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "operation": { "type": "string" },
+        "effect": { "type": "string" },
+        "resource": { "type": "string" },
+        "destination": { "type": "string" },
+        "data_boundary": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "policy_version",
+        "policy_digest",
+        "approval_state",
+        "risk_class",
+        "scope",
+        "constraints"
+      ],
+      "properties": {
+        "policy_id": { "type": "string" },
+        "policy_version": { "type": "string" },
+        "policy_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "approval_id": { "type": "string" },
+        "approval_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "approval_state": {
+          "enum": ["preapproved", "approved", "observed", "requires_review", "denied"]
+        },
+        "risk_class": {
+          "enum": ["baseline", "low", "medium", "high", "critical"]
+        },
+        "scope": {
+          "type": "object",
+          "required": ["operations", "effects", "destinations", "resource_prefixes", "principals"],
+          "properties": {
+            "operations": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "effects": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "destinations": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "resource_prefixes": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "principals": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "constraints": {
+          "type": "object",
+          "properties": {
+            "max_amount_usd": { "type": "number" },
+            "max_records": { "type": "number" },
+            "max_consumptions": { "type": "integer", "minimum": 1 },
+            "requires_local_receipt": { "type": "boolean" },
+            "requires_external_verifier": { "type": "boolean" },
+            "allows_async_proof_enrichment": { "type": "boolean" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "commit_conditions": {
+      "type": "object",
+      "required": ["state_digest", "state_version", "nonce", "replay_scope"],
+      "properties": {
+        "state_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "state_version": { "type": "string" },
+        "nonce": { "type": "string" },
+        "replay_scope": {
+          "enum": ["single_use", "idempotent_retry", "bounded_session"]
+        },
+        "fast_path_eligible": { "type": "boolean" },
+        "local_commit_profile": { "type": "string" },
+        "slow_path_reason_if_failed": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "required": ["receipt_profile", "minimum_fields", "async_enrichment"],
+      "properties": {
+        "receipt_profile": { "type": "string" },
+        "minimum_fields": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "async_enrichment": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "signature": {
+      "type": "object",
+      "required": ["algorithm", "key_id", "value"],
+      "properties": {
+        "algorithm": { "type": "string" },
+        "key_id": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
