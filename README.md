@@ -59,6 +59,8 @@ The runner-emitted report compares the reference boundary runner against deliber
 
 The point of this table is not that a reference runner beats labels constructed for its own benchmark task. The point is more specific: tool name, runtime label, operation text, and partial resource matching are not reliable substitutes for an action-boundary object.
 
+Current scoring definitions, missing-observation rules, and conditional denominators are documented in the [Metric Contract v2](docs/metrics-contract-v2.md). The 6,000-record result is a controlled consistency check, not independent semantic accuracy or customer-production evidence. Archived reports retain their original metric versions.
+
 The corpus now includes DeepSeek Harness and Agent 365-style registry records as target runtime lanes. That does not mean OSuite is claiming production adapters are ready for either lane. It means the benchmark can already model the action-boundary shapes those systems expose: pre-tool/post-tool seams for Harness, and registry/lifecycle/control-plane metadata for Agent 365-style enterprise agent management.
 
 ## Repository Status
@@ -139,6 +141,8 @@ Verify the ZeroGate v0.1 research release snapshot:
 ```bash
 npm run zerogate:v0.1:verify
 ```
+
+Historical snapshot only: this command does not rerun every experiment below. Some legacy comparison values were preset model values rather than execution-derived measurements. A passing snapshot check must not be presented as current empirical validation; see the [historical-evidence limits](docs/metrics-contract-v2.md#historical-evidence).
 
 The ZeroGate release adds the paper-facing artifact set for Action Passes: 5,760 weighted common-case observations, 360 adversarial stress cases, a 2,500-record public GitHub Actions corpus, a 528-case multi-runtime fixture corpus, a 700,000-operation concurrent load study, dataset-audit notes, and the paper PDF. Start here:
 

@@ -266,6 +266,9 @@ function renderConsole(results, scoring) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cases = await loadCases(args.input);
+  if (args.strict && cases.length === 0) {
+    throw new Error('Strict benchmark requires at least one case');
+  }
   const { results, scoring } = evaluateCases(cases);
   const baselines = baselineTable(cases, scoring);
   renderConsole(results, scoring);
