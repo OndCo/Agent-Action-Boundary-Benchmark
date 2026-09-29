@@ -1,0 +1,5 @@
+cohort,mode,trials,first_executed,receiver_deliveries,second_executed
+revocation-legacy,osuite_slow,5,0,0,0
+revocation-legacy,osuite_fast,5,5,5,0
+revocation-current,osuite_slow,5,0,0,0
+revocation-current,osuite_fast,5,0,0,0

@@ -1,0 +1,100 @@
+{
+  "schema": "zerogate.process-study.summary.v1",
+  "cases": [
+    {
+      "id": "shared-store-race",
+      "classification": "composition_control",
+      "admissions": 1,
+      "refusals": 1,
+      "killed": 0,
+      "completed_workers": 2,
+      "arrivals": 1,
+      "acknowledged": 1,
+      "admission_without_arrival": 0,
+      "protection_claim": true
+    },
+    {
+      "id": "kill-before-consume",
+      "classification": "crash_recovery",
+      "admissions": 1,
+      "refusals": 0,
+      "killed": 1,
+      "completed_workers": 1,
+      "arrivals": 1,
+      "acknowledged": 1,
+      "admission_without_arrival": 0,
+      "protection_claim": true
+    },
+    {
+      "id": "kill-after-commit-before-dispatch",
+      "classification": "admission_without_effect",
+      "admissions": 1,
+      "refusals": 1,
+      "killed": 1,
+      "completed_workers": 1,
+      "arrivals": 0,
+      "acknowledged": 0,
+      "admission_without_arrival": 1,
+      "protection_claim": true
+    },
+    {
+      "id": "kill-after-receiver-commit-before-ack",
+      "classification": "effect_without_acknowledgement",
+      "admissions": 1,
+      "refusals": 1,
+      "killed": 1,
+      "completed_workers": 1,
+      "arrivals": 1,
+      "acknowledged": 0,
+      "admission_without_arrival": 0,
+      "protection_claim": true
+    },
+    {
+      "id": "revoke-before-replacement-read",
+      "classification": "revocation_before_read",
+      "admissions": 0,
+      "refusals": 1,
+      "killed": 1,
+      "completed_workers": 1,
+      "arrivals": 0,
+      "acknowledged": 0,
+      "admission_without_arrival": 0,
+      "protection_claim": true
+    },
+    {
+      "id": "post-commit-revocation-before-dispatch",
+      "classification": "unprotected_revocation_boundary",
+      "admissions": 1,
+      "refusals": 0,
+      "killed": 0,
+      "completed_workers": 1,
+      "arrivals": 1,
+      "acknowledged": 1,
+      "admission_without_arrival": 0,
+      "protection_claim": false
+    },
+    {
+      "id": "separate-store-negative-control",
+      "classification": "unprotected_store_boundary",
+      "admissions": 2,
+      "refusals": 0,
+      "killed": 0,
+      "completed_workers": 2,
+      "arrivals": 2,
+      "acknowledged": 2,
+      "admission_without_arrival": 0,
+      "protection_claim": false
+    }
+  ],
+  "totals": {
+    "admissions": 7,
+    "refusals": 4,
+    "killed": 4,
+    "arrivals": 6,
+    "acknowledged": 5,
+    "admission_without_arrival": 1
+  },
+  "unknown_runs": 0,
+  "negative_controls_are_protected": false,
+  "exactly_once_claim": false
+}

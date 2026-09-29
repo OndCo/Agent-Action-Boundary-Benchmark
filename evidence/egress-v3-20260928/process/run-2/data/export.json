@@ -1,0 +1,8 @@
+{
+  "schema": "zerogate.process-study.public.v1",
+  "representation": "sanitized_logical_records",
+  "raw_checksums_sha256": "0ecb865f2f84515aacaa17041fc2cb3cc84409a178d2a4e0ef84c54a973d975c",
+  "independent_execution_verified": false,
+  "raw_sqlite_exported": false,
+  "publication_authorized": false
+}

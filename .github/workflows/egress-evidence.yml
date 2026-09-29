@@ -1,0 +1,32 @@
+name: Egress public evidence replay
+
+on:
+  push:
+    paths:
+      - 'evidence/egress-v3-20260928/**'
+      - '.github/workflows/egress-evidence.yml'
+  pull_request:
+    paths:
+      - 'evidence/egress-v3-20260928/**'
+      - '.github/workflows/egress-evidence.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: evidence/egress-v3-20260928
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.18.0'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 verify.py .
+      - run: python3 -m unittest test_verify.py
+      - run: node test-mutations.mjs .

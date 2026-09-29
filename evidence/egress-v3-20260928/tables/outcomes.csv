@@ -1,0 +1,7 @@
+mode,records,attempts,unauthorized_deliveries,legitimate_completed,legitimate_expected,unknown_records,decision_matches,decision_checks,designed_timeouts,infrastructure_errors
+transport,390,500,280,210,210,10,210,500,20,0
+network,390,500,200,140,210,10,210,500,20,0
+launch,390,500,280,210,210,10,210,500,20,0
+application,390,500,0,210,210,10,450,500,20,0
+osuite_slow,390,500,0,210,210,10,450,500,20,0
+osuite_fast,390,500,0,210,210,10,450,500,20,0

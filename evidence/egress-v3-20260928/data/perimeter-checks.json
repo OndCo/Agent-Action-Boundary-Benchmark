@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "connected": true,
+      "error": null,
+      "expected": true,
+      "host": "10.203.0.1",
+      "matched": true,
+      "ms": 1.215511999816954,
+      "port": 19090
+    },
+    {
+      "connected": false,
+      "error": "TimeoutError",
+      "expected": false,
+      "host": "10.203.0.1",
+      "matched": true,
+      "ms": 200.33832299986898,
+      "port": 18081
+    },
+    {
+      "connected": false,
+      "error": "TimeoutError",
+      "expected": false,
+      "host": "10.203.0.1",
+      "matched": true,
+      "ms": 200.4251739999745,
+      "port": 5432
+    },
+    {
+      "connected": false,
+      "error": "OSError",
+      "expected": false,
+      "host": "169.254.169.254",
+      "matched": true,
+      "ms": 0.13334699997358257,
+      "port": 80
+    }
+  ],
+  "credential_readable": false,
+  "gid": 65534,
+  "passed": true,
+  "uid": 65534
+}

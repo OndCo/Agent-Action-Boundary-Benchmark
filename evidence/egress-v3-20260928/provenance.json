@@ -1,0 +1,31 @@
+{
+  "internal_archive_sha256": "8e645ff3bcd95db208d5b2e0e75c60e59dc96f8469667ab640255ac1ce8139a4",
+  "meaning": "Offline recomputation of captured evidence, not independent execution or attestation of capture.",
+  "original_protocol_sha256": "9812fce155d44274a3c9b966119b048215a22a1c1dc86d82d6012baa22d3483c",
+  "original_snapshot_sha256": "5a22ecbbcab7c47d535fe724e1ed2072fdac017e83c215699082c514938bd11b",
+  "projection": "Unchanged primary record and raw receiver JSON values; allowlisted gate approval bindings/receipts, worker timeout fields and broker event identities. No application envelopes, database files, credentials, private keys or model trajectories.",
+  "released_minimal_sources": {
+    "lib/protocol.py": {
+      "original_path": "scripts/egress-v2/protocol.py",
+      "sha256": "919605f2efaaf66b7fea78384ae4705edff37c147a79061097e392894f9e8664",
+      "transformation": "byte-identical"
+    },
+    "lib/score.py": {
+      "original_path": "scripts/egress-v2/score.py",
+      "sha256": "09ecd2dad64a1cbb1bba30c7077cd99a19d5d0b886878d538f04c0c47ef05fa1",
+      "transformation": "byte-identical"
+    },
+    "lib/summarize.py": {
+      "original_path": "scripts/egress-v2/summarize.py",
+      "sha256": "f18c3209882433ced25e2dfc49ad4b685e7237c78d152c7b727a42e14f349501",
+      "transformation": "byte-identical"
+    },
+    "lib/verify-crypto-core.mjs": {
+      "original_path": "scripts/egress-v2/verify-crypto.mjs",
+      "sha256": "7959122d3a51ce4c68b9157fa85bfa2aafcd7f5ca92aa43a2f5c1decb1b16824",
+      "transformation": "byte-identical"
+    }
+  },
+  "schema": "osuite.egress.public-export.v1",
+  "study": "egress-v3-20260928"
+}

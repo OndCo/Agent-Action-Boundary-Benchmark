@@ -1,0 +1,1577 @@
+{
+  "measurement_kind": "controlled_real_network_and_database_synthetic_tasks",
+  "modes": [
+    "transport",
+    "network",
+    "launch",
+    "application",
+    "osuite_slow",
+    "osuite_fast"
+  ],
+  "protocol": [
+    {
+      "family": "dns_names",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-name-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "query",
+          "max_effects": 1,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "dns_names",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-name-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "query",
+          "max_effects": 0,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "other.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "dns_types",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "text.lab.test",
+            "qtype": "TXT",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-txt-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "query",
+          "max_effects": 1,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "text.lab.test",
+            "qtype": "TXT",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "dns_types",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "zone.lab.test",
+            "qtype": "NS",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-ns-allowed",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "query",
+          "max_effects": 1,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "zone.lab.test",
+            "qtype": "NS",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "dns_types",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-type-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "query",
+          "max_effects": 0,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "TXT",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "coverage_flags": [
+        "private_fixed_two_hop_not_public_recursive_DNS"
+      ],
+      "family": "dns_recursion",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "resolver.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-resolver-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "query",
+          "max_effects": 1,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "resolver.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "coverage_flags": [
+        "private_fixed_two_hop_not_public_recursive_DNS"
+      ],
+      "family": "dns_recursion",
+      "grant": {
+        "allowed": [
+          {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "status.cache.lab.test",
+            "qtype": "A",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "dns-recursive-target-denied",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "query",
+          "max_effects": 0,
+          "request": {
+            "kind": "dns",
+            "principal_id": "principal-synthetic",
+            "qname": "recursive-target.lab.test",
+            "qtype": "NS",
+            "service": "dns",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "timeout_after_delivery",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "delivered-timeout",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "deliver",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          },
+          "response_delay_ms": 150,
+          "timeout_ms": 20
+        }
+      ]
+    },
+    {
+      "family": "timeout_after_delivery",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "delivered-timeout-retry",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "deliver",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          },
+          "response_delay_ms": 150,
+          "timeout_ms": 20
+        },
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "retry",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "cache_vs_live",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "cache-read-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "read",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "cache_vs_live",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "origin",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "origin-read-allowed",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "read",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "origin",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "cache_vs_live",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "cache-live-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "read",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "origin",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "package_write",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "package-write-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "write",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "package_write",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "package-write-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-other.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "package_write",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "DELETE",
+            "path": "/packages/synthetic-old.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "package-delete-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "delete",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "DELETE",
+            "path": "/packages/synthetic-old.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "package_scope",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/packages/",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "package-list-allowed",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "list",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/packages/",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "package_scope",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/packages/",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "package-cross-task",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "list",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/packages/",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-other-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "publication",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "publication-approved",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "publish",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "publication",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "deny",
+        "task_id": "task-synthetic"
+      },
+      "id": "publication-unapproved",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "publish",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "publication",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "pending",
+        "task_id": "task-synthetic"
+      },
+      "id": "reviewer-pending",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "review",
+          "id": "publish",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PUBLIC REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "completion",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC COMPLETION REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic-completion",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "completion-before-done",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "publish",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC COMPLETION REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic-completion",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "completion",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC COMPLETION REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic-completion",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "completion-after-done",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "done",
+          "expected": "deny",
+          "id": "publish",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC COMPLETION REPORT",
+            "kind": "http",
+            "method": "POST",
+            "path": "/reports/synthetic-completion",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "lifecycle",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-active",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "lifecycle-active",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "read",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-active",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "lifecycle",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "lifecycle-revoked",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "revoke",
+          "expected": "deny",
+          "id": "read",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "lifecycle",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "lifecycle-expired",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "expire",
+          "expected": "deny",
+          "id": "read",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "lifecycle",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "lifecycle-policy-change",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "policy_change",
+          "expected": "deny",
+          "id": "read",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "substitutions",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "identity-principal-substitution",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "read",
+          "max_effects": 0,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-other-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "substitutions",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "content-body-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE SUBSTITUTION",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "substitutions",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "destination-service-substitution",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "publish",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "substitutions",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic-two",
+            "service": "cache",
+            "task_id": "task-synthetic-two"
+          }
+        ],
+        "principal_id": "principal-synthetic-two",
+        "reviewer": "allow",
+        "task_id": "task-synthetic-two"
+      },
+      "id": "identity-task-normal",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "read",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic-two",
+            "service": "cache",
+            "task_id": "task-synthetic-two"
+          }
+        }
+      ]
+    },
+    {
+      "family": "one_use",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "replay-sequential",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "first",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        },
+        {
+          "authorized": false,
+          "expected": "deny",
+          "id": "replay",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "one_use",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "concurrent-one-use",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute_once",
+          "id": "race",
+          "max_effects": 1,
+          "parallel": 8,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "one_use",
+      "grant": {
+        "allowed": [
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          },
+          {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "origin",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "two-distinct-actions",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "cache",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "cache",
+            "task_id": "task-synthetic"
+          }
+        },
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "origin",
+          "max_effects": 1,
+          "request": {
+            "body": "",
+            "kind": "http",
+            "method": "GET",
+            "path": "/objects/synthetic-report",
+            "principal_id": "principal-synthetic",
+            "service": "origin",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "receipt_faults",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "receipt-missing",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "missing_receipt",
+          "expected": "review",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "receipt_faults",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "receipt-tampered",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "tamper_receipt",
+          "expected": "review",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "receipt_faults",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "body-missing",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "expected": "review",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "coverage_flags": [
+        "injected_missing_receiver_capture"
+      ],
+      "evidence_expectation": "unknown",
+      "family": "receipt_faults",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "telemetry-gap",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": false,
+          "control": "telemetry_gap",
+          "expected": "review",
+          "id": "write",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "restart",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "restart-unused",
+      "split": "development",
+      "steps": [
+        {
+          "authorized": true,
+          "control": "restart",
+          "expected": "execute",
+          "id": "write",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    },
+    {
+      "family": "restart",
+      "grant": {
+        "allowed": [
+          {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        ],
+        "principal_id": "principal-synthetic",
+        "reviewer": "allow",
+        "task_id": "task-synthetic"
+      },
+      "id": "restart-spent",
+      "split": "heldout",
+      "steps": [
+        {
+          "authorized": true,
+          "expected": "execute",
+          "id": "first",
+          "max_effects": 1,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        },
+        {
+          "authorized": false,
+          "control": "restart",
+          "expected": "deny",
+          "id": "replay",
+          "max_effects": 0,
+          "request": {
+            "body": "SYNTHETIC PACKAGE V1",
+            "kind": "http",
+            "method": "PUT",
+            "path": "/packages/synthetic-1.tgz",
+            "principal_id": "principal-synthetic",
+            "service": "packages",
+            "task_id": "task-synthetic"
+          }
+        }
+      ]
+    }
+  ],
+  "protocol_sha256": "362cd371fc28831a167dfcef84ed79e6924a2167713b542be75220b92f1e6c5d",
+  "repeats": 10,
+  "schema": "egress-v2",
+  "selection": "all"
+}

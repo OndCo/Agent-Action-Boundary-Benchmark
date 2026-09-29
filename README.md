@@ -28,6 +28,24 @@ The security question is different:
 
 This benchmark gives security teams, researchers, and tool builders a compact way to test those questions against agent actions.
 
+## Captured Egress Study: Public Replay
+
+The [egress v3 evidence package](evidence/egress-v3-20260928) publishes 2,340 captured
+episode records and 3,000 request attempts from an isolated Azure experiment,
+plus separately labelled revocation, model-utility and process-fault cohorts.
+It is distinct from the synthetic corpus below. Readers can recompute receiver
+outcomes, latency tables and proof consistency offline, without an OSuite or cloud
+account. It does not rerun the private product deployment.
+
+The conventional exact-action grant and both OSuite paths each recorded zero
+observed out-of-grant deliveries and completed 210/210 authorized effects;
+ten capture-gap episodes per mode remain unknown. The package retains the old
+revocation failure, post-admission revocation effects and independent-store
+reuse limits, rather than treating them as successful containment.
+
+See the [report content manuscript](reports/egress-v3-report-content-for-designer.md)
+for the full explanation, tables and reporting boundaries.
+
 ## Runtime Boundary Benchmark
 
 The repository now includes a larger synthetic stress corpus for evaluating whether an action-boundary runner can separate safe baselines, review-bound drift, dual-approval actions, and blocked runtime boundary violations.

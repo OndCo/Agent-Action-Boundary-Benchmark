@@ -1,0 +1,24 @@
+{
+  "schema": "zerogate.process-study.run.v1",
+  "kind": "measured",
+  "status": "complete",
+  "run_id": "09d49888-e3f0-4539-ba5e-6d0931598e02",
+  "authority_kind": "actual_studio_guard_repository_and_postgres_lab",
+  "started_at": "2026-09-29T01:32:24.220Z",
+  "finished_at": "2026-09-29T01:32:26.592Z",
+  "cases": [
+    "shared-store-race",
+    "kill-before-consume",
+    "kill-after-commit-before-dispatch",
+    "kill-after-receiver-commit-before-ack",
+    "revoke-before-replacement-read",
+    "post-commit-revocation-before-dispatch",
+    "separate-store-negative-control"
+  ],
+  "environment": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "node": "v22.18.0",
+    "controller_pid": 7619
+  }
+}

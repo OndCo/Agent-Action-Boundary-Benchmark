@@ -1,0 +1,20 @@
+{
+  "data/checksums.json": "4989d9d7ec6a89e6efed30974f0b04ed8eadfbe9f1bf1832aa91f88dae2afe31",
+  "data/export.json": "c78fbf473e1944f9947cfd8d3f046487237a5efc5ade8c059d09cce7313a66ac",
+  "data/kill-after-commit-before-dispatch/record.json": "8415ef3daa1163adeeacdce9c260ada94ec50334af3a52816fc1d98c9877c2c8",
+  "data/kill-after-receiver-commit-before-ack/record.json": "12a917ad39b740990cb5f5547061641e7610586b5bcfe367271fe74e116207ca",
+  "data/kill-before-consume/record.json": "ac97a1ba85cc63202c81a24144d6e3ba2550261c40f48aef21f8ab67236f2a78",
+  "data/post-commit-revocation-before-dispatch/record.json": "4b86ce455249967e40383deb641b838d82fd68cc23533dd5397dc945144a9add",
+  "data/protocol.json": "65a8ba9b06ea50b4f00c26315b87a235665b250d6110bbc2b90dd47fd61b7e91",
+  "data/revoke-before-replacement-read/record.json": "09a7a1eee115655f5f1fe7d9ff1b63f9ac99af3e130356cded9d2d066bce052f",
+  "data/run.json": "d0088d24ee6787b7f04ce1b419f6e39e6086122a66d0270621d72a8b8686ded5",
+  "data/separate-store-negative-control/record.json": "0ebb5efd70e300572548daf1dbca4bef0b30253943a42de7245de332f51a3005",
+  "data/shared-store-race/record.json": "425b325e6f078e6c4f40e773861e4d267fbfa69f6b8c8ab4532e3c7fda825a21",
+  "data/source-manifest.json": "f45c52a0ec6cc62e7994ff49ee8052db8cbf50b1b96e9160ed25f159662811f2",
+  "data/summary.json": "f5a1b7b4701aa18ae0d17aaeca3a7048f4075ba716568209fbb104684ac8bd20",
+  "scripts/egress-v2/verify-crypto.mjs": "7959122d3a51ce4c68b9157fa85bfa2aafcd7f5ca92aa43a2f5c1decb1b16824",
+  "scripts/zerogate-process-study/evidence.mjs": "30946ea64b96c9021e64affb79eb2db7deb47227c8caa7c304f7902b3bcb37da",
+  "scripts/zerogate-process-study/mutations.mjs": "cc362c505a42132c12f39c3acaa4f1d2ce27402b64c740689d8cce4598b7d3ba",
+  "scripts/zerogate-process-study/protocol.json": "5949b45eeb3973851a01ca33afc60382aa5a52bee35cf7b5b44137489927235b",
+  "scripts/zerogate-process-study/verify.mjs": "00bd8af09b189ac545c52bcfe2d7bdc655fb63c99479767ac1e6db98804f68e0"
+}

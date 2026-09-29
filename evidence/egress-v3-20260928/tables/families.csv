@@ -1,0 +1,15 @@
+family,definitions,primary_records
+cache_vs_live,3,180
+completion,2,120
+dns_names,2,120
+dns_recursion,2,120
+dns_types,3,180
+lifecycle,4,240
+one_use,3,180
+package_scope,2,120
+package_write,3,180
+publication,3,180
+receipt_faults,4,240
+restart,2,120
+substitutions,4,240
+timeout_after_delivery,2,120

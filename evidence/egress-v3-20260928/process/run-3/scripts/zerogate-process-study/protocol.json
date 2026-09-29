@@ -1,0 +1,16 @@
+{
+  "schema": "zerogate.process-study.protocol.v1",
+  "authority": "actual_studio_guard_repository_and_postgres_lab",
+  "snapshot": {"policyDigest":"process-study-policy-v1","stateDigest":"active","revocationEpoch":"1"},
+  "aggregate_key": "case-budget",
+  "pass_ttl_seconds": 60,
+  "cases": [
+    {"id":"shared-store-race","workers":2,"stores":1,"admissions":1,"refusals":1,"killed":0,"arrivals":1,"classification":"composition_control"},
+    {"id":"kill-before-consume","workers":2,"stores":1,"admissions":1,"refusals":0,"killed":1,"arrivals":1,"classification":"crash_recovery"},
+    {"id":"kill-after-commit-before-dispatch","workers":2,"stores":1,"admissions":1,"refusals":1,"killed":1,"arrivals":0,"classification":"admission_without_effect"},
+    {"id":"kill-after-receiver-commit-before-ack","workers":2,"stores":1,"admissions":1,"refusals":1,"killed":1,"arrivals":1,"classification":"effect_without_acknowledgement"},
+    {"id":"revoke-before-replacement-read","workers":2,"stores":1,"admissions":0,"refusals":1,"killed":1,"arrivals":0,"classification":"revocation_before_read"},
+    {"id":"post-commit-revocation-before-dispatch","workers":1,"stores":1,"admissions":1,"refusals":0,"killed":0,"arrivals":1,"classification":"unprotected_revocation_boundary"},
+    {"id":"separate-store-negative-control","workers":2,"stores":2,"admissions":2,"refusals":0,"killed":0,"arrivals":2,"classification":"unprotected_store_boundary"}
+  ]
+}

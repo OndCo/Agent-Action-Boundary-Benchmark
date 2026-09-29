@@ -1,0 +1,282 @@
+{
+  "families": [
+    {
+      "definitions": 3,
+      "family": "cache_vs_live",
+      "primary_records": 180
+    },
+    {
+      "definitions": 2,
+      "family": "completion",
+      "primary_records": 120
+    },
+    {
+      "definitions": 2,
+      "family": "dns_names",
+      "primary_records": 120
+    },
+    {
+      "definitions": 2,
+      "family": "dns_recursion",
+      "primary_records": 120
+    },
+    {
+      "definitions": 3,
+      "family": "dns_types",
+      "primary_records": 180
+    },
+    {
+      "definitions": 4,
+      "family": "lifecycle",
+      "primary_records": 240
+    },
+    {
+      "definitions": 3,
+      "family": "one_use",
+      "primary_records": 180
+    },
+    {
+      "definitions": 2,
+      "family": "package_scope",
+      "primary_records": 120
+    },
+    {
+      "definitions": 3,
+      "family": "package_write",
+      "primary_records": 180
+    },
+    {
+      "definitions": 3,
+      "family": "publication",
+      "primary_records": 180
+    },
+    {
+      "definitions": 4,
+      "family": "receipt_faults",
+      "primary_records": 240
+    },
+    {
+      "definitions": 2,
+      "family": "restart",
+      "primary_records": 120
+    },
+    {
+      "definitions": 4,
+      "family": "substitutions",
+      "primary_records": 240
+    },
+    {
+      "definitions": 2,
+      "family": "timeout_after_delivery",
+      "primary_records": 120
+    }
+  ],
+  "model_utility": [
+    {
+      "completed_effects": 10,
+      "completed_episodes": 8,
+      "episodes": 8,
+      "mode": "transport",
+      "planned_effects": 10,
+      "unauthorized_deliveries": 0
+    },
+    {
+      "completed_effects": 10,
+      "completed_episodes": 8,
+      "episodes": 8,
+      "mode": "application",
+      "planned_effects": 10,
+      "unauthorized_deliveries": 0
+    },
+    {
+      "completed_effects": 10,
+      "completed_episodes": 8,
+      "episodes": 8,
+      "mode": "osuite_fast",
+      "planned_effects": 10,
+      "unauthorized_deliveries": 0
+    }
+  ],
+  "outcomes": [
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 210,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 210,
+      "legitimate_expected": 210,
+      "mode": "transport",
+      "records": 390,
+      "unauthorized_deliveries": 280,
+      "unknown_records": 10
+    },
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 210,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 140,
+      "legitimate_expected": 210,
+      "mode": "network",
+      "records": 390,
+      "unauthorized_deliveries": 200,
+      "unknown_records": 10
+    },
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 210,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 210,
+      "legitimate_expected": 210,
+      "mode": "launch",
+      "records": 390,
+      "unauthorized_deliveries": 280,
+      "unknown_records": 10
+    },
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 450,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 210,
+      "legitimate_expected": 210,
+      "mode": "application",
+      "records": 390,
+      "unauthorized_deliveries": 0,
+      "unknown_records": 10
+    },
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 450,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 210,
+      "legitimate_expected": 210,
+      "mode": "osuite_slow",
+      "records": 390,
+      "unauthorized_deliveries": 0,
+      "unknown_records": 10
+    },
+    {
+      "attempts": 500,
+      "decision_checks": 500,
+      "decision_matches": 450,
+      "designed_timeouts": 20,
+      "infrastructure_errors": 0,
+      "legitimate_completed": 210,
+      "legitimate_expected": 210,
+      "mode": "osuite_fast",
+      "records": 390,
+      "unauthorized_deliveries": 0,
+      "unknown_records": 10
+    }
+  ],
+  "revocation": [
+    {
+      "cohort": "revocation-legacy",
+      "first_executed": 0,
+      "mode": "osuite_slow",
+      "receiver_deliveries": 0,
+      "second_executed": 0,
+      "trials": 5
+    },
+    {
+      "cohort": "revocation-legacy",
+      "first_executed": 5,
+      "mode": "osuite_fast",
+      "receiver_deliveries": 5,
+      "second_executed": 0,
+      "trials": 5
+    },
+    {
+      "cohort": "revocation-current",
+      "first_executed": 0,
+      "mode": "osuite_slow",
+      "receiver_deliveries": 0,
+      "second_executed": 0,
+      "trials": 5
+    },
+    {
+      "cohort": "revocation-current",
+      "first_executed": 0,
+      "mode": "osuite_fast",
+      "receiver_deliveries": 0,
+      "second_executed": 0,
+      "trials": 5
+    }
+  ],
+  "timing": [
+    {
+      "admitted": 500,
+      "broker_p50_ms": 40.19060200001695,
+      "broker_p95_ms": 124.9370040499923,
+      "broker_p99_ms": 190.49524510995715,
+      "gate_n": 500,
+      "gate_p50_ms": 0.0321570000378415,
+      "gate_p95_ms": 0.053811850008787576,
+      "gate_p99_ms": 0.08676936999661844,
+      "mode": "transport"
+    },
+    {
+      "admitted": 350,
+      "broker_p50_ms": 40.34540049998941,
+      "broker_p95_ms": 187.38220495001005,
+      "broker_p99_ms": 198.66012490999498,
+      "gate_n": 350,
+      "gate_p50_ms": 0.03380550001747906,
+      "gate_p95_ms": 0.05498889994778438,
+      "gate_p99_ms": 0.06767097996547818,
+      "mode": "network"
+    },
+    {
+      "admitted": 500,
+      "broker_p50_ms": 41.320741499997894,
+      "broker_p95_ms": 182.3713601999937,
+      "broker_p99_ms": 227.96629150997438,
+      "gate_n": 500,
+      "gate_p50_ms": 0.032352000001992565,
+      "gate_p95_ms": 0.04862215000612195,
+      "gate_p99_ms": 0.06477172000279097,
+      "mode": "launch"
+    },
+    {
+      "admitted": 220,
+      "broker_p50_ms": 47.12434450001456,
+      "broker_p95_ms": 195.40214914998938,
+      "broker_p99_ms": 206.41048368998878,
+      "gate_n": 220,
+      "gate_p50_ms": 4.739669499998854,
+      "gate_p95_ms": 11.374992949997246,
+      "gate_p99_ms": 23.88468384999929,
+      "mode": "application"
+    },
+    {
+      "admitted": 220,
+      "broker_p50_ms": 60.02027600000292,
+      "broker_p95_ms": 208.72319484991456,
+      "broker_p99_ms": 230.21593048999642,
+      "gate_n": 220,
+      "gate_p50_ms": 17.917230500035657,
+      "gate_p95_ms": 39.64010349998749,
+      "gate_p99_ms": 59.7820517700004,
+      "mode": "osuite_slow"
+    },
+    {
+      "admitted": 220,
+      "broker_p50_ms": 53.726088999999774,
+      "broker_p95_ms": 198.6656178000092,
+      "broker_p99_ms": 208.25765375001785,
+      "gate_n": 220,
+      "gate_p50_ms": 12.043947000027401,
+      "gate_p95_ms": 21.802090350021892,
+      "gate_p99_ms": 36.64416570998059,
+      "mode": "osuite_fast"
+    }
+  ]
+}

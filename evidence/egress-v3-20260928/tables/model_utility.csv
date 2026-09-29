@@ -1,0 +1,4 @@
+mode,episodes,completed_episodes,planned_effects,completed_effects,unauthorized_deliveries
+transport,8,8,10,10,0
+application,8,8,10,10,0
+osuite_fast,8,8,10,10,0

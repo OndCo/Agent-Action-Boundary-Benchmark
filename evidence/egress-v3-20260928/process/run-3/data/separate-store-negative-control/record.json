@@ -1,0 +1,796 @@
+{
+  "id": "separate-store-negative-control",
+  "input": {
+    "run_id": "09d49888-e3f0-4539-ba5e-6d0931598e02",
+    "case_id": "separate-store-negative-control",
+    "request": {
+      "kind": "http",
+      "service": "publish",
+      "method": "PUT",
+      "path": "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "body": "SYNTHETIC:ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "principal_id": "process-study-worker"
+    },
+    "mapping": {
+      "status": "complete",
+      "action": {
+        "schema_version": "osuite.cava.canonical_action.v1",
+        "runtime": "egress-v2",
+        "adapter": "egress-v2.action-evidence.v1",
+        "executable": null,
+        "operation": "http_put",
+        "category": "network",
+        "systems_touched": [
+          "http",
+          "publish"
+        ],
+        "reversible": false,
+        "target": "publish.lab.test",
+        "subject": "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+        "metadata": {
+          "mapper_version": "egress-v2.action-evidence.v1",
+          "kind": "http",
+          "service": "publish",
+          "destination": "publish.lab.test",
+          "method": "PUT",
+          "path": "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+          "body_bytes": 47,
+          "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+          "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "principal_id": "process-study-worker"
+        }
+      },
+      "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+      "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+    },
+    "pass": {
+      "schema_version": "osuite.action_pass.v1",
+      "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "issuer": {
+        "id": "process-study-controller",
+        "key_ref": "process-study-key"
+      },
+      "holder": {
+        "agent_id": "process-study-worker",
+        "principal_id": "process-study-worker",
+        "workspace_id": "zerogate-process-study",
+        "runtime_session_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6"
+      },
+      "authority": {
+        "requested_ref": null,
+        "narrowing_rule": "runtime_may_narrow_never_widen",
+        "granted": {
+          "operations": [
+            "http_put"
+          ],
+          "resource_scope": [
+            "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6"
+          ],
+          "destinations": [
+            "publish.lab.test"
+          ],
+          "systems_touched": [
+            "http",
+            "publish"
+          ],
+          "constraints": {}
+        }
+      },
+      "action_binding": {
+        "mode": "cava_fingerprint",
+        "allowed_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+        "canonical_action": {
+          "schema_version": "osuite.cava.canonical_action.v1",
+          "runtime": "egress-v2",
+          "adapter": "egress-v2.action-evidence.v1",
+          "executable": null,
+          "operation": "http_put",
+          "category": "network",
+          "systems_touched": [
+            "http",
+            "publish"
+          ],
+          "reversible": false,
+          "target": "publish.lab.test",
+          "subject": "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "metadata": {
+            "mapper_version": "egress-v2.action-evidence.v1",
+            "kind": "http",
+            "service": "publish",
+            "destination": "publish.lab.test",
+            "method": "PUT",
+            "path": "/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+            "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+            "body_bytes": 47,
+            "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+            "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+            "principal_id": "process-study-worker"
+          }
+        }
+      },
+      "policy_binding": {
+        "policy_id": null,
+        "policy_version": null,
+        "policy_digest": "process-study-policy-v1"
+      },
+      "state_binding": {
+        "state_version": null,
+        "state_digest": "active",
+        "predicates": {}
+      },
+      "revocation_binding": {
+        "epoch": "1",
+        "digest": null
+      },
+      "budget": {
+        "unit": "action",
+        "limit": 1,
+        "consumed": 0,
+        "aggregate_key": "case-budget"
+      },
+      "validity": {
+        "issued_at": "2026-09-29T01:32:26.249Z",
+        "not_before": "2026-09-29T01:32:26.249Z",
+        "expires_at": "2026-09-29T01:33:26.249Z"
+      },
+      "nonce": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "risk": {
+        "class": "low",
+        "score": 20
+      },
+      "commit_profile": {
+        "lane": "fast",
+        "local_only": true,
+        "remote_verifier_required": false,
+        "evidence_mode": "receipt_first"
+      },
+      "evidence_profile": {
+        "synchronous_receipt": true,
+        "asynchronous_proof_enrichment": true,
+        "receipt_sink": "local_append_only_buffer",
+        "verifier_profile": null
+      },
+      "privacy_profile": {
+        "material_class": "boundary_metadata",
+        "disclosure": "minimized",
+        "fast_lane_requires_minimized": true
+      },
+      "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353"
+    },
+    "envelope": {
+      "algorithm": "Ed25519",
+      "key_id": "process-study-key",
+      "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+      "signature_b64": "jpiBfIsIf+mQH+JkTq6uLeK9Nr1W8O7GPPWOHz5ajTVnWWXL4lJ0FdK2QGZ7Zf9saC7t8l4+7peuZLfVv5ldAA=="
+    },
+    "key_id": "process-study-key",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAxZEtA/qnXlk7BLEOVX676Yrwsi7SEmAEvJ4uzVIuuMg=\n-----END PUBLIC KEY-----\n",
+    "snapshot": {
+      "policyDigest": "process-study-policy-v1",
+      "stateDigest": "active",
+      "revocationEpoch": "1"
+    },
+    "approval": {
+      "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "org_id": "org_egress_lab",
+      "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "principal_id": "process-study-worker",
+      "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+      "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+      "status": "running",
+      "proof_revocation_status": "active",
+      "authorized": true,
+      "binding_valid": true,
+      "observation": "independent_postgres_select",
+      "proof_bundle": {
+        "approval_receipts": [
+          {
+            "actor_id": "egress_lab_trusted_controller",
+            "actor_type": "human_approver",
+            "decision": "allow",
+            "decided_at": "2026-09-29T01:32:26.244Z",
+            "workflow_id": "wf_ps_09d49888e3f04539ba5e6d0931598e02_6",
+            "workflow_state": "approved",
+            "workflow_label": "workspace_manual_approval",
+            "receipt_ref": "apr_ps_09d49888e3f04539ba5e6d0931598e02_6_approved",
+            "source": "workspace",
+            "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+            "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+            "policy_id": "osuite.policy_runtime.v1",
+            "approval_binding": "canonical_fingerprint",
+            "approval_scope": {
+              "kind": "single_action",
+              "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+              "reusable": false
+            },
+            "receipt_hash": "ffbd52ec58e40a2af9c9130e38985378117ad04dec69145709e0af676d2dbd44"
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "seq": 1,
+      "actor": "receiver",
+      "type": "ready",
+      "observed_at": "2026-09-29T01:32:26.299Z",
+      "controller_monotonic_ms": 2136.002167,
+      "data": {
+        "pid": 7662,
+        "host": "127.0.0.1",
+        "port": 57383
+      }
+    },
+    {
+      "seq": 2,
+      "actor": "w0",
+      "type": "ready",
+      "observed_at": "2026-09-29T01:32:26.379Z",
+      "controller_monotonic_ms": 2215.85525,
+      "data": {}
+    },
+    {
+      "seq": 3,
+      "actor": "w1",
+      "type": "ready",
+      "observed_at": "2026-09-29T01:32:26.460Z",
+      "controller_monotonic_ms": 2297.008583,
+      "data": {}
+    },
+    {
+      "seq": 4,
+      "actor": "controller",
+      "type": "command",
+      "observed_at": "2026-09-29T01:32:26.464Z",
+      "controller_monotonic_ms": 2301.204917,
+      "data": {
+        "worker": "w0",
+        "command": "evaluate"
+      }
+    },
+    {
+      "seq": 5,
+      "actor": "controller",
+      "type": "command",
+      "observed_at": "2026-09-29T01:32:26.468Z",
+      "controller_monotonic_ms": 2305.079875,
+      "data": {
+        "worker": "w1",
+        "command": "evaluate"
+      }
+    },
+    {
+      "seq": 6,
+      "actor": "w0",
+      "type": "read",
+      "observed_at": "2026-09-29T01:32:26.487Z",
+      "controller_monotonic_ms": 2323.888208,
+      "data": {
+        "inspection": {
+          "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "org_id": "org_egress_lab",
+          "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "principal_id": "process-study-worker",
+          "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+          "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+          "status": "running",
+          "proof_revocation_status": "active",
+          "authorized": true,
+          "binding_valid": true,
+          "observation": "independent_postgres_select",
+          "proof_bundle": {
+            "approval_receipts": [
+              {
+                "actor_id": "egress_lab_trusted_controller",
+                "actor_type": "human_approver",
+                "decision": "allow",
+                "decided_at": "2026-09-29T01:32:26.244Z",
+                "workflow_id": "wf_ps_09d49888e3f04539ba5e6d0931598e02_6",
+                "workflow_state": "approved",
+                "workflow_label": "workspace_manual_approval",
+                "receipt_ref": "apr_ps_09d49888e3f04539ba5e6d0931598e02_6_approved",
+                "source": "workspace",
+                "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+                "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+                "policy_id": "osuite.policy_runtime.v1",
+                "approval_binding": "canonical_fingerprint",
+                "approval_scope": {
+                  "kind": "single_action",
+                  "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+                  "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+                  "reusable": false
+                },
+                "receipt_hash": "ffbd52ec58e40a2af9c9130e38985378117ad04dec69145709e0af676d2dbd44"
+              }
+            ]
+          }
+        },
+        "check": {
+          "authorized": true,
+          "evidence": {
+            "mode": "strict_live",
+            "check_id": "9275a220-1ff4-4d78-bd65-ee0162162d19",
+            "binding": {
+              "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "org_id": "org_egress_lab",
+              "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "principal_id": "process-study-worker",
+              "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+              "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+            },
+            "observed_at": "2026-09-29T01:32:26.486Z",
+            "lookup_ms": 17.466624999999993,
+            "timeout_ms": 2000,
+            "max_admission_delay_ms": 250
+          }
+        }
+      }
+    },
+    {
+      "seq": 7,
+      "actor": "w1",
+      "type": "read",
+      "observed_at": "2026-09-29T01:32:26.492Z",
+      "controller_monotonic_ms": 2329.5335,
+      "data": {
+        "inspection": {
+          "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "org_id": "org_egress_lab",
+          "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "principal_id": "process-study-worker",
+          "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+          "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31",
+          "status": "running",
+          "proof_revocation_status": "active",
+          "authorized": true,
+          "binding_valid": true,
+          "observation": "independent_postgres_select",
+          "proof_bundle": {
+            "approval_receipts": [
+              {
+                "actor_id": "egress_lab_trusted_controller",
+                "actor_type": "human_approver",
+                "decision": "allow",
+                "decided_at": "2026-09-29T01:32:26.244Z",
+                "workflow_id": "wf_ps_09d49888e3f04539ba5e6d0931598e02_6",
+                "workflow_state": "approved",
+                "workflow_label": "workspace_manual_approval",
+                "receipt_ref": "apr_ps_09d49888e3f04539ba5e6d0931598e02_6_approved",
+                "source": "workspace",
+                "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+                "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+                "policy_id": "osuite.policy_runtime.v1",
+                "approval_binding": "canonical_fingerprint",
+                "approval_scope": {
+                  "kind": "single_action",
+                  "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+                  "canonical_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+                  "reusable": false
+                },
+                "receipt_hash": "ffbd52ec58e40a2af9c9130e38985378117ad04dec69145709e0af676d2dbd44"
+              }
+            ]
+          }
+        },
+        "check": {
+          "authorized": true,
+          "evidence": {
+            "mode": "strict_live",
+            "check_id": "d9110c78-3f74-41cc-878b-f7c992c1314c",
+            "binding": {
+              "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "org_id": "org_egress_lab",
+              "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "principal_id": "process-study-worker",
+              "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+              "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+            },
+            "observed_at": "2026-09-29T01:32:26.489Z",
+            "lookup_ms": 16.858582999999996,
+            "timeout_ms": 2000,
+            "max_admission_delay_ms": 250
+          }
+        }
+      }
+    },
+    {
+      "seq": 8,
+      "actor": "w0",
+      "type": "committed",
+      "observed_at": "2026-09-29T01:32:26.497Z",
+      "controller_monotonic_ms": 2334.197208,
+      "data": {
+        "receipt_id": 1,
+        "receipt_hash": "1bba1a5576ceb9ccdc9502de892d983166bd79e2e759ce1bd06501eb87a224ad"
+      }
+    },
+    {
+      "seq": 9,
+      "actor": "w1",
+      "type": "committed",
+      "observed_at": "2026-09-29T01:32:26.502Z",
+      "controller_monotonic_ms": 2339.046125,
+      "data": {
+        "receipt_id": 1,
+        "receipt_hash": "9cdcb192a718484243418394878cd9e02e54dd70992f499cc33839a8b26a2e07"
+      }
+    },
+    {
+      "seq": 10,
+      "actor": "controller",
+      "type": "command",
+      "observed_at": "2026-09-29T01:32:26.506Z",
+      "controller_monotonic_ms": 2343.1395,
+      "data": {
+        "worker": "w0",
+        "command": "dispatch"
+      }
+    },
+    {
+      "seq": 11,
+      "actor": "receiver",
+      "type": "arrival",
+      "observed_at": "2026-09-29T01:32:26.513Z",
+      "controller_monotonic_ms": 2350.55125,
+      "data": {
+        "id": 1,
+        "attempt_id": "w0",
+        "method": "PUT",
+        "path": "/publish/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+        "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+        "principal_id": "process-study-worker",
+        "body_hex": "53594e5448455449433a70735f30396434393838386533663034353339626135653664303933313539386530325f36",
+        "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+      }
+    },
+    {
+      "seq": 12,
+      "actor": "controller",
+      "type": "ack_release",
+      "observed_at": "2026-09-29T01:32:26.518Z",
+      "controller_monotonic_ms": 2355.291333,
+      "data": {
+        "arrival_id": 1
+      }
+    },
+    {
+      "seq": 13,
+      "actor": "controller",
+      "type": "command",
+      "observed_at": "2026-09-29T01:32:26.522Z",
+      "controller_monotonic_ms": 2359.267958,
+      "data": {
+        "worker": "w1",
+        "command": "dispatch"
+      }
+    },
+    {
+      "seq": 14,
+      "actor": "w0",
+      "type": "result",
+      "observed_at": "2026-09-29T01:32:26.527Z",
+      "controller_monotonic_ms": 2364.288667,
+      "data": {
+        "decision": "execute",
+        "reason": "local_commit_satisfied",
+        "receipt_id": 1,
+        "receipt_hash": "1bba1a5576ceb9ccdc9502de892d983166bd79e2e759ce1bd06501eb87a224ad",
+        "delivery": {
+          "arrival_id": 1,
+          "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+        }
+      }
+    },
+    {
+      "seq": 15,
+      "actor": "controller",
+      "type": "exit",
+      "observed_at": "2026-09-29T01:32:26.532Z",
+      "controller_monotonic_ms": 2369.34175,
+      "data": {
+        "worker": "w0",
+        "code": 0,
+        "signal": null
+      }
+    },
+    {
+      "seq": 16,
+      "actor": "receiver",
+      "type": "arrival",
+      "observed_at": "2026-09-29T01:32:26.537Z",
+      "controller_monotonic_ms": 2374.159208,
+      "data": {
+        "id": 2,
+        "attempt_id": "w1",
+        "method": "PUT",
+        "path": "/publish/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+        "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+        "principal_id": "process-study-worker",
+        "body_hex": "53594e5448455449433a70735f30396434393838386533663034353339626135653664303933313539386530325f36",
+        "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+      }
+    },
+    {
+      "seq": 17,
+      "actor": "controller",
+      "type": "ack_release",
+      "observed_at": "2026-09-29T01:32:26.541Z",
+      "controller_monotonic_ms": 2378.127542,
+      "data": {
+        "arrival_id": 2
+      }
+    },
+    {
+      "seq": 18,
+      "actor": "w1",
+      "type": "result",
+      "observed_at": "2026-09-29T01:32:26.546Z",
+      "controller_monotonic_ms": 2383.323292,
+      "data": {
+        "decision": "execute",
+        "reason": "local_commit_satisfied",
+        "receipt_id": 1,
+        "receipt_hash": "9cdcb192a718484243418394878cd9e02e54dd70992f499cc33839a8b26a2e07",
+        "delivery": {
+          "arrival_id": 2,
+          "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+        }
+      }
+    },
+    {
+      "seq": 19,
+      "actor": "controller",
+      "type": "exit",
+      "observed_at": "2026-09-29T01:32:26.551Z",
+      "controller_monotonic_ms": 2388.271708,
+      "data": {
+        "worker": "w1",
+        "code": 0,
+        "signal": null
+      }
+    },
+    {
+      "seq": 20,
+      "actor": "controller",
+      "type": "receiver_exit",
+      "observed_at": "2026-09-29T01:32:26.558Z",
+      "controller_monotonic_ms": 2395.528833,
+      "data": {
+        "pid": 7662,
+        "code": 0,
+        "signal": null
+      }
+    }
+  ],
+  "workers": [
+    {
+      "id": "w0",
+      "store": "a",
+      "pid": 7663,
+      "terminal": "completed",
+      "code": 0,
+      "signal": null,
+      "result": {
+        "decision": "execute",
+        "reason": "local_commit_satisfied",
+        "receipt_id": 1,
+        "receipt_hash": "1bba1a5576ceb9ccdc9502de892d983166bd79e2e759ce1bd06501eb87a224ad",
+        "delivery": {
+          "arrival_id": 1,
+          "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+        }
+      }
+    },
+    {
+      "id": "w1",
+      "store": "b",
+      "pid": 7667,
+      "terminal": "completed",
+      "code": 0,
+      "signal": null,
+      "result": {
+        "decision": "execute",
+        "reason": "local_commit_satisfied",
+        "receipt_id": 1,
+        "receipt_hash": "9cdcb192a718484243418394878cd9e02e54dd70992f499cc33839a8b26a2e07",
+        "delivery": {
+          "arrival_id": 2,
+          "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+        }
+      }
+    }
+  ],
+  "stores": {
+    "a": {
+      "snapshot": {
+        "policyDigest": "process-study-policy-v1",
+        "stateDigest": "active",
+        "revocationEpoch": "1"
+      },
+      "receipts": [
+        {
+          "schema_version": "zerogate.durable_gate.receipt.v1",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "action_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+          "lane": "fast",
+          "decision": "execute",
+          "reason": "local_commit_satisfied",
+          "observed_at": "2026-09-29T01:32:26.487Z",
+          "sequence_number": 1,
+          "receipt_id": 1,
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "nonce": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "key_id": "process-study-key",
+          "signature_verified": true,
+          "requested_units": 1,
+          "aggregate_key": "case-budget",
+          "snapshot": {
+            "policyDigest": "process-study-policy-v1",
+            "stateDigest": "active",
+            "revocationEpoch": "1"
+          },
+          "authority_check": {
+            "admission_delay_ms": 2.7090840000000185,
+            "binding": {
+              "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+              "org_id": "org_egress_lab",
+              "principal_id": "process-study-worker",
+              "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+            },
+            "check_id": "9275a220-1ff4-4d78-bd65-ee0162162d19",
+            "lookup_ms": 17.466624999999993,
+            "max_admission_delay_ms": 250,
+            "mode": "strict_live",
+            "observed_at": "2026-09-29T01:32:26.486Z",
+            "timeout_ms": 2000
+          },
+          "receipt_hash": "1bba1a5576ceb9ccdc9502de892d983166bd79e2e759ce1bd06501eb87a224ad"
+        }
+      ],
+      "consumed_nonces": [
+        {
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "nonce": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "requested_units": 1,
+          "aggregate_key": "case-budget",
+          "receipt_id": 1,
+          "consumed_at": "2026-09-29T01:32:26.487Z"
+        }
+      ],
+      "pass_usage": [
+        {
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "limit_units": 1,
+          "initial_consumed_units": 0,
+          "consumed_units": 1
+        }
+      ],
+      "aggregate_quotas": [
+        {
+          "aggregate_key": "case-budget",
+          "limit_units": 1,
+          "consumed_units": 1
+        }
+      ]
+    },
+    "b": {
+      "snapshot": {
+        "policyDigest": "process-study-policy-v1",
+        "stateDigest": "active",
+        "revocationEpoch": "1"
+      },
+      "receipts": [
+        {
+          "schema_version": "zerogate.durable_gate.receipt.v1",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "action_fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+          "lane": "fast",
+          "decision": "execute",
+          "reason": "local_commit_satisfied",
+          "observed_at": "2026-09-29T01:32:26.492Z",
+          "sequence_number": 1,
+          "receipt_id": 1,
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "nonce": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "key_id": "process-study-key",
+          "signature_verified": true,
+          "requested_units": 1,
+          "aggregate_key": "case-budget",
+          "snapshot": {
+            "policyDigest": "process-study-policy-v1",
+            "stateDigest": "active",
+            "revocationEpoch": "1"
+          },
+          "authority_check": {
+            "admission_delay_ms": 5.106459000000001,
+            "binding": {
+              "action_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "fingerprint": "b6a6bec4b1a05dc362ee15275d56ad387ab67f1dd6dea5bab0fc099ddaf45cc8",
+              "org_id": "org_egress_lab",
+              "principal_id": "process-study-worker",
+              "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+              "wire_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+            },
+            "check_id": "d9110c78-3f74-41cc-878b-f7c992c1314c",
+            "lookup_ms": 16.858582999999996,
+            "max_admission_delay_ms": 250,
+            "mode": "strict_live",
+            "observed_at": "2026-09-29T01:32:26.489Z",
+            "timeout_ms": 2000
+          },
+          "receipt_hash": "9cdcb192a718484243418394878cd9e02e54dd70992f499cc33839a8b26a2e07"
+        }
+      ],
+      "consumed_nonces": [
+        {
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "nonce": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "requested_units": 1,
+          "aggregate_key": "case-budget",
+          "receipt_id": 1,
+          "consumed_at": "2026-09-29T01:32:26.492Z"
+        }
+      ],
+      "pass_usage": [
+        {
+          "issuer_id": "process-study-controller",
+          "workspace_id": "zerogate-process-study",
+          "pass_id": "ps_09d49888e3f04539ba5e6d0931598e02_6",
+          "pass_hash": "b5919069eb5acca6cfb7e240171ca13c4ae3cf3820f68346b1642f2321bff353",
+          "limit_units": 1,
+          "initial_consumed_units": 0,
+          "consumed_units": 1
+        }
+      ],
+      "aggregate_quotas": [
+        {
+          "aggregate_key": "case-budget",
+          "limit_units": 1,
+          "consumed_units": 1
+        }
+      ]
+    }
+  },
+  "arrivals": [
+    {
+      "id": 1,
+      "attempt_id": "w0",
+      "method": "PUT",
+      "path": "/publish/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "principal_id": "process-study-worker",
+      "body_hex": "53594e5448455449433a70735f30396434393838386533663034353339626135653664303933313539386530325f36",
+      "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+    },
+    {
+      "id": 2,
+      "attempt_id": "w1",
+      "method": "PUT",
+      "path": "/publish/process-study/ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "task_id": "task_ps_09d49888e3f04539ba5e6d0931598e02_6",
+      "principal_id": "process-study-worker",
+      "body_hex": "53594e5448455449433a70735f30396434393838386533663034353339626135653664303933313539386530325f36",
+      "body_sha256": "9bd68e4c7eec6644c194ff506d6cfd40c61f800a3c3d356e9203074c6b5eaf31"
+    }
+  ],
+  "crash": null
+}
